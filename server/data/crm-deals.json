@@ -1,0 +1,140 @@
+[
+  {
+    "id": "deal_101",
+    "clientName": "Manuel Quaresma",
+    "company": "Supermercado Alvalade, Lda",
+    "value": 3850000,
+    "stage": "negociacao",
+    "probability": 80,
+    "primaryChannel": "whatsapp",
+    "contactPhone": "+244 923 881 229",
+    "contactEmail": "m.quaresma@alvalade.co.ao",
+    "expectedCloseDate": "2026-11-15",
+    "assignedAgent": "Joel Gaspar",
+    "productInterest": "POS SAF-T Angola (3 Caixas)",
+    "interactions": [
+      {
+        "id": "int_1",
+        "channel": "whatsapp",
+        "type": "Reunião de Alinhamento",
+        "note": "Cliente confirmou orçamento de 3.850.000 Kz. Aguarda minuta final de contrato.",
+        "timestamp": "2026-11-09T10:19:50.309Z",
+        "agent": "Joel Gaspar"
+      },
+      {
+        "id": "int_2",
+        "channel": "email",
+        "type": "Envio de Proposta",
+        "note": "Enviada minuta técnica com arquitetura de backup offline para Luanda.",
+        "timestamp": "2026-11-08T10:19:50.309Z",
+        "agent": "Joel Gaspar"
+      }
+    ],
+    "createdAt": "2026-11-06T10:19:50.309Z",
+    "updatedAt": "2026-11-10T10:19:50.309Z"
+  },
+  {
+    "id": "deal_102",
+    "clientName": "Dra. Luísa Furtado",
+    "company": "Complexo Escolar Milénio",
+    "value": 5200000,
+    "stage": "proposta",
+    "probability": 60,
+    "primaryChannel": "email",
+    "contactPhone": "+244 912 340 991",
+    "contactEmail": "luisa.furtado@colegiomilenio.ao",
+    "expectedCloseDate": "2026-11-22",
+    "assignedAgent": "Helena Kiala",
+    "productInterest": "Portal Acadêmico Cloud + Propinas GPO",
+    "interactions": [
+      {
+        "id": "int_3",
+        "channel": "email",
+        "type": "Apresentação Comercial",
+        "note": "Diretoria analisou o plano de 5.200.000 Kz para 2.400 alunos matriculados.",
+        "timestamp": "2026-11-08T10:19:50.309Z",
+        "agent": "Helena Kiala"
+      }
+    ],
+    "createdAt": "2026-11-05T10:19:50.309Z",
+    "updatedAt": "2026-11-10T10:19:50.309Z"
+  },
+  {
+    "id": "deal_103",
+    "clientName": "Eng. António Silva",
+    "company": "Logística & Navegação Luanda",
+    "value": 7800000,
+    "stage": "ganho",
+    "probability": 100,
+    "primaryChannel": "whatsapp",
+    "contactPhone": "+244 942 775 559",
+    "contactEmail": "antonio.silva@logluanda.ao",
+    "expectedCloseDate": "2026-11-09",
+    "assignedAgent": "Joel Gaspar",
+    "productInterest": "Assistente IA Omnicanal + GPS Mobile",
+    "interactions": [
+      {
+        "id": "int_4",
+        "channel": "whatsapp",
+        "type": "Contrato Assinado",
+        "note": "Primeira tranche de pagamento liquidada via transferência bancária BFA.",
+        "timestamp": "2026-11-09T10:19:50.309Z",
+        "agent": "Joel Gaspar"
+      }
+    ],
+    "createdAt": "2026-10-31T10:19:50.309Z",
+    "updatedAt": "2026-11-10T10:19:50.309Z"
+  },
+  {
+    "id": "deal_104",
+    "clientName": "Dr. Paulo Kassoma",
+    "company": "Clínica Sagrada Esperança Parceiros",
+    "value": 4100000,
+    "stage": "demonstracao",
+    "probability": 40,
+    "primaryChannel": "whatsapp",
+    "contactPhone": "+244 931 100 240",
+    "contactEmail": "paulo.k@clinicasagrada.co.ao",
+    "expectedCloseDate": "2026-11-28",
+    "assignedAgent": "Mauro dos Santos",
+    "productInterest": "Agendamento Clínico com Bot WhatsApp",
+    "interactions": [
+      {
+        "id": "int_5",
+        "channel": "whatsapp",
+        "type": "Demonstração Agendada",
+        "note": "Demonstração ao vivo agendada para sexta-feira às 14h30.",
+        "timestamp": "2026-11-10T06:19:50.309Z",
+        "agent": "Mauro dos Santos"
+      }
+    ],
+    "createdAt": "2026-11-08T10:19:50.309Z",
+    "updatedAt": "2026-11-10T10:19:50.309Z"
+  },
+  {
+    "id": "deal_105",
+    "clientName": "Kátia dos Remédios",
+    "company": "Grupo Hoteleiro Baía de Luanda",
+    "value": 6400000,
+    "stage": "novo_lead",
+    "probability": 20,
+    "primaryChannel": "sms",
+    "contactPhone": "+244 928 554 112",
+    "contactEmail": "remedios@hotelbaia.ao",
+    "expectedCloseDate": "2026-12-05",
+    "assignedAgent": "Joel Gaspar",
+    "productInterest": "Suite Completa Hotelaria & POS Restaurante",
+    "interactions": [
+      {
+        "id": "int_6",
+        "channel": "sms",
+        "type": "Lead Recebido",
+        "note": "Contacto recebido através de campanha SMS em massa.",
+        "timestamp": "2026-11-09T10:19:50.309Z",
+        "agent": "Joel Gaspar"
+      }
+    ],
+    "createdAt": "2026-11-10T10:19:50.309Z",
+    "updatedAt": "2026-11-10T10:19:50.309Z"
+  }
+]

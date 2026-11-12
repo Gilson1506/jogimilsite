@@ -1,0 +1,51 @@
+[
+  {
+    "id": "tick_101",
+    "contactName": "Carlos Mendonça",
+    "company": "Supermercados Luanda Sul",
+    "phone": "+244 923 445 566",
+    "email": "carlos.mendonca@sul.ao",
+    "channel": "whatsapp",
+    "subject": "Dúvida sobre parametrização da taxa IVA no POS",
+    "status": "open",
+    "assignedAgent": "Esperança Domingos",
+    "updatedAt": "2026-11-09T23:30:24.893Z",
+    "messages": [
+      {
+        "id": "msg_1",
+        "sender": "client",
+        "content": "Boa tarde, equipa JOGIMIL. Gostaria de saber como atualizar a taxa de IVA nos novos artigos que inserimos hoje no POS.",
+        "timestamp": "2026-11-09T22:30:24.895Z",
+        "channel": "whatsapp"
+      },
+      {
+        "id": "msg_2",
+        "sender": "agent",
+        "content": "Boa tarde, Sr. Carlos! No menu Definições > Artigos do POS, pode alterar a taxa diretamente e gravar. O sistema valida automaticamente o SAF-T.",
+        "timestamp": "2026-11-09T23:00:24.895Z",
+        "channel": "whatsapp"
+      }
+    ]
+  },
+  {
+    "id": "tick_102",
+    "contactName": "Dra. Luísa Fernandes",
+    "company": "Colégio Nova Esperança",
+    "phone": "+244 931 778 899",
+    "email": "secretaria@novaesperanca.edu.ao",
+    "channel": "email",
+    "subject": "Pedido de demonstração do módulo de Propinas Online",
+    "status": "open",
+    "assignedAgent": "Ana Costa",
+    "updatedAt": "2026-11-09T21:30:24.895Z",
+    "messages": [
+      {
+        "id": "msg_3",
+        "sender": "client",
+        "content": "Prezados, gostaríamos de agendar uma demonstração online do módulo de cobrança automática de propinas com Multicaixa Express.",
+        "timestamp": "2026-11-09T21:30:24.895Z",
+        "channel": "email"
+      }
+    ]
+  }
+]

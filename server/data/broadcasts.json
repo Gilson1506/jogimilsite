@@ -1,0 +1,36 @@
+[
+  {
+    "id": "bc_1",
+    "title": "Comunicado SAF-T (AO) Norma AGT 2026",
+    "channels": [
+      "whatsapp",
+      "email"
+    ],
+    "audience": "Clientes Ativos POS",
+    "totalRecipients": 480,
+    "sentCount": 480,
+    "deliveredCount": 468,
+    "failedCount": 12,
+    "message": "Prezado cliente, informamos que o patch fiscal de 2026 já está disponível para atualização imediata.",
+    "subject": "Atualização Mandatória AGT 2026 - JOGIMIL POS",
+    "status": "completed",
+    "createdAt": "2026-11-07T10:19:50.305Z"
+  },
+  {
+    "id": "bc_2",
+    "title": "Oferta Especial de Lançamento IA Omnicanal",
+    "channels": [
+      "whatsapp",
+      "sms"
+    ],
+    "audience": "Leads e Diretores Comerciais",
+    "totalRecipients": 250,
+    "sentCount": 250,
+    "deliveredCount": 242,
+    "failedCount": 8,
+    "message": "Descubra a nova automação WhatsApp com Inteligência Artificial da JOGIMIL. Agende demonstração gratuita.",
+    "subject": "",
+    "status": "completed",
+    "createdAt": "2026-11-03T10:19:50.307Z"
+  }
+]

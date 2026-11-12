@@ -1,0 +1,80 @@
+<svg width="800" height="480" viewBox="0 0 800 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#0B132B" />
+      <stop offset="50%" stopColor="#1E1E38" />
+      <stop offset="100%" stopColor="#0D1117" />
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#A855F7" />
+      <stop offset="100%" stopColor="#6366F1" />
+    </linearGradient>
+    <linearGradient id="blueGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#38BDF8" />
+      <stop offset="100%" stopColor="#0066FF" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="480" rx="16" fill="url(#bgGrad2)" />
+  <circle cx="680" cy="100" r="130" fill="#A855F7" opacity="0.18" filter="blur(60px)" />
+  <circle cx="120" cy="380" r="120" fill="#6366F1" opacity="0.12" filter="blur(50px)" />
+
+  <!-- Janela do Sistema EduGest -->
+  <g>
+    <rect x="40" y="35" width="720" height="410" rx="12" fill="#0F172A" stroke="#334155" stroke-width="1.5" />
+    
+    <!-- Barra Superior -->
+    <path d="M40 47C40 40.3726 45.3726 35 52 35H748C754.627 35 760 40.3726 760 47V75H40V47Z" fill="#1E293B" />
+    <circle cx="65" cy="55" r="5" fill="#EF4444" />
+    <circle cx="82" cy="55" r="5" fill="#F59E0B" />
+    <circle cx="99" cy="55" r="5" fill="#10B981" />
+    <text x="310" y="59" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11" font-weight="500">JOGIMIL EduGest Académico · Colégios &amp; Universidades</text>
+
+    <!-- Sidebar Lateral -->
+    <rect x="40" y="75" width="60" height="370" fill="#0B132B" opacity="0.5" />
+    <rect x="55" y="95" width="30" height="30" rx="8" fill="url(#purpleGrad)" />
+
+    <!-- Conteúdo Principal: Gestão de Propinas & Pautas de Notas -->
+    <rect x="120" y="95" width="410" height="330" rx="10" fill="#111827" stroke="#1E293B" />
+    <text x="140" y="125" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="16" font-weight="700">Controlo de Propinas &amp; Matrículas</text>
+    <rect x="420" y="110" width="95" height="22" rx="11" fill="#4338CA" />
+    <text x="432" y="125" fill="#C7D2FE" font-family="system-ui, sans-serif" font-size="10" font-weight="700">PORTAL PAIS</text>
+
+    <!-- Tabela de Alunos e Pagamentos -->
+    <rect x="140" y="145" width="370" height="34" rx="6" fill="#1F2937" />
+    <text x="155" y="167" fill="#E5E7EB" font-family="system-ui, sans-serif" font-size="11" font-weight="600">Manuel dos Santos (11ª Classe)</text>
+    <text x="380" y="167" fill="#34D399" font-family="system-ui, sans-serif" font-size="11" font-weight="700">Propina Paga ✓</text>
+
+    <rect x="140" y="187" width="370" height="34" rx="6" fill="#1F2937" opacity="0.8" />
+    <text x="155" y="209" fill="#E5E7EB" font-family="system-ui, sans-serif" font-size="11" font-weight="600">Ana Beatriz Kapata (9ª Classe)</text>
+    <text x="380" y="209" fill="#F87171" font-family="system-ui, sans-serif" font-size="11" font-weight="700">Alerta SMS Enviado</text>
+
+    <rect x="140" y="229" width="370" height="34" rx="6" fill="#1F2937" opacity="0.6" />
+    <text x="155" y="251" fill="#E5E7EB" font-family="system-ui, sans-serif" font-size="11" font-weight="600">Lukenia de Oliveira (12ª Classe)</text>
+    <text x="380" y="251" fill="#34D399" font-family="system-ui, sans-serif" font-size="11" font-weight="700">Propina Paga ✓</text>
+
+    <!-- Mini-Pauta de Notas MED -->
+    <rect x="140" y="280" width="370" height="125" rx="8" fill="#1E293B" />
+    <text x="155" y="305" fill="#A78BFA" font-family="system-ui, sans-serif" font-size="12" font-weight="700">Pauta Trimestral Oficial (Normas MED)</text>
+    <text x="155" y="330" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11">Matemática: Média da Turma: 14.8 valores</text>
+    <text x="155" y="352" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11">Língua Portuguesa: Média da Turma: 15.2 valores</text>
+    <rect x="155" y="368" width="130" height="26" rx="6" fill="url(#purpleGrad)" />
+    <text x="170" y="385" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="10" font-weight="700">Gerar Boletins (PDF)</text>
+
+    <!-- Painel Lateral: Métricas da Instituição -->
+    <rect x="550" y="95" width="190" height="330" rx="10" fill="#111827" stroke="#1E293B" />
+    <text x="568" y="125" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="13" font-weight="700">Métricas do Colégio</text>
+
+    <rect x="568" y="145" width="154" height="65" rx="8" fill="#1E293B" />
+    <text x="580" y="165" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="10">Total de Alunos</text>
+    <text x="580" y="195" fill="#C084FC" font-family="system-ui, sans-serif" font-size="18" font-weight="800">1.240 Alunos</text>
+
+    <rect x="568" y="220" width="154" height="65" rx="8" fill="#1E293B" />
+    <text x="580" y="240" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="10">Taxa de Cobrança</text>
+    <text x="580" y="270" fill="#34D399" font-family="system-ui, sans-serif" font-size="18" font-weight="800">96.4%</text>
+
+    <rect x="568" y="295" width="154" height="65" rx="8" fill="#1E293B" />
+    <text x="580" y="315" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="10">SMS Enviados este mês</text>
+    <text x="580" y="345" fill="#38BDF8" font-family="system-ui, sans-serif" font-size="18" font-weight="800">3.850 SMS</text>
+  </g>
+</svg>

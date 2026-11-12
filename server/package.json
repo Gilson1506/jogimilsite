@@ -1,0 +1,33 @@
+{
+  "name": "jogimil-omnichannel-microservice",
+  "version": "2.0.0",
+  "description": "Microserviço Backend Omnicanal Autónomo da JOGIMIL (WhatsApp Evolution API, Email SMTP/IMAP, SMS Gateway, CRM Funil e Gestão de Conteúdo)",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test": "node test/api.test.js"
+  },
+  "keywords": [
+    "jogimil",
+    "microservice",
+    "omnichannel",
+    "whatsapp",
+    "evolution-api",
+    "smtp",
+    "imap",
+    "crm",
+    "sms",
+    "luanda",
+    "angola"
+  ],
+  "author": "JOGIMIL - Tecnologias, Lda.",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "nodemailer": "^6.9.15"
+  }
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "rem_1",
+    "title": "Follow-up de proposta comercial",
+    "contactName": "Eng. Manuel Bento",
+    "phone": "+244942775559",
+    "email": "manuel.bento@jogimil.ao",
+    "datetime": "2026-11-10T20:34:04.223Z",
+    "notes": "Confirmar aceitação da proposta de desenvolvimento AI-First.",
+    "status": "pending",
+    "notifyWhatsApp": true,
+    "createdAt": "2026-11-09T20:34:04.224Z"
+  },
+  {
+    "id": "rem_2",
+    "title": "Demonstração do JOGIMIL Faturação & POS",
+    "contactName": "Mateus Silva",
+    "phone": "+244923112233",
+    "email": "mateus@parceiro.ao",
+    "datetime": "2026-11-11T20:34:04.224Z",
+    "notes": "Apresentar emissão SAF-T (AO) e funcionamento offline.",
+    "status": "pending",
+    "notifyWhatsApp": true,
+    "createdAt": "2026-11-09T20:34:04.224Z"
+  }
+]

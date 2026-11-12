@@ -1,0 +1,43 @@
+[
+  {
+    "id": "manuel-bento",
+    "name": "Eng. Manuel Bento",
+    "role": "Director Geral & Arquitecto de Software",
+    "department": "Direcção Executiva",
+    "bio": "Mais de 12 anos em engenharia de sistemas e liderança técnica em Luanda. Especialista em infraestruturas resilientes.",
+    "photo": "/team/manuel-bento.svg",
+    "email": "manuel.bento@jogimil.ao",
+    "phone": "+244 942 775 559",
+    "initials": "MB"
+  },
+  {
+    "id": "esperanca-domingos",
+    "name": "Esperança Domingos",
+    "role": "Lead Developer & Especialista AGT / SAF-T",
+    "department": "Engenharia de Software",
+    "bio": "Responsável técnica pelo motor de validação fiscal, módulos de faturação certificados pela AGT e Multicaixa Express.",
+    "photo": "/team/esperanca-domingos.svg",
+    "email": "esperanca.domingos@jogimil.ao",
+    "initials": "ED"
+  },
+  {
+    "id": "kelson-afonso",
+    "name": "Kelson Afonso",
+    "role": "Engenheiro de Redes & Cloud / POS",
+    "department": "Infraestrutura & Suporte",
+    "bio": "Especialista em servidores locais para armazéns, replicação offline-first, redes de dados estruturadas.",
+    "photo": "/team/kelson-afonso.svg",
+    "email": "kelson.afonso@jogimil.ao",
+    "initials": "KA"
+  },
+  {
+    "id": "ana-costa",
+    "name": "Ana Paula Costa",
+    "role": "Gestora de Clientes & Formação",
+    "department": "Operações & Atendimento",
+    "bio": "Gestão da relação direta com parceiros e clientes em Luanda. Coordena a formação presencial de utilizadores.",
+    "photo": "/team/ana-costa.svg",
+    "email": "ana.costa@jogimil.ao",
+    "initials": "AC"
+  }
+]

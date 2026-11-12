@@ -1,0 +1,28 @@
+{
+  "evolutionApi": {
+    "serverUrl": "https://evolution.jogimiltecnologias.it.ao",
+    "instanceName": "jogimil-main",
+    "apiKey": "jg_evolution_live_secret_key_2026",
+    "webhookUrl": "http://localhost:3001/api/v1/admin/whatsapp/webhook",
+    "autoReply": true,
+    "syncIntervalMinutes": 5
+  },
+  "emailServer": {
+    "smtpHost": "mail.jogimiltecnologias.it.ao",
+    "smtpPort": 587,
+    "smtpUser": "geral@jogimiltecnologias.it.ao",
+    "smtpSecure": false,
+    "imapHost": "mail.jogimiltecnologias.it.ao",
+    "imapPort": 993,
+    "imapUser": "geral@jogimiltecnologias.it.ao",
+    "imapSecure": true,
+    "spfDkimVerified": true
+  },
+  "systemPreferences": {
+    "theme": "dark",
+    "primaryColor": "#0066FF",
+    "companyName": "JOGIMIL - Tecnologias, Lda.",
+    "supportPhone": "+244 942 775 559",
+    "timezone": "Africa/Luanda"
+  }
+}

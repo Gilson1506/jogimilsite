@@ -1,0 +1,50 @@
+[
+  {
+    "slug": "sistema-pos-retalho-luanda",
+    "title": "Rede POS Offline-First & SAF-T (AO)",
+    "category": "Sistemas & ERP",
+    "client": "Cadeia de Retalho Alimentar",
+    "year": "2026",
+    "description": "Implantação de postos de venda de alta velocidade com emissão certificada pela AGT e funcionamento 100% autônomo sem internet.",
+    "image": "/products/faturacao.svg",
+    "metricValue": "100%",
+    "metricLabel": "Validação SAF-T AGT",
+    "tags": [
+      "SAF-T",
+      "POS",
+      "Offline-First"
+    ]
+  },
+  {
+    "slug": "agentes-ia-atendimento-whatsapp",
+    "title": "Agentes de Atendimento Inteligente no WhatsApp",
+    "category": "Inteligência Artificial",
+    "client": "Grupo de Serviços Financeiros",
+    "year": "2026",
+    "description": "Desenvolvimento de agentes autónomos com IA para qualificação de propostas e atendimento 24/7 integrado aos sistemas internos.",
+    "image": "/products/gestao-escolar.svg",
+    "metricValue": "< 4 seg",
+    "metricLabel": "Tempo Médio de Resposta",
+    "tags": [
+      "AI-First",
+      "Evolution API",
+      "LLM"
+    ]
+  },
+  {
+    "slug": "gestao-logistica-armazens",
+    "title": "JOGIMIL StockERP para Entrepostos e Carga",
+    "category": "Logística & Distribuição",
+    "client": "Distribuidora Grossista Nacional",
+    "year": "2025",
+    "description": "Rastreamento por código de barras, conferência de carga, emissão de guias de transporte e controlo de lotes para importadores.",
+    "image": "/products/erp-armazem.svg",
+    "metricValue": "99.8%",
+    "metricLabel": "Acurácia de Stock",
+    "tags": [
+      "ERP",
+      "Logística",
+      "Guias AGT"
+    ]
+  }
+]

@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  jogimil-forms-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jogimil-forms-microservice
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - NODE_ENV=production
+      - DESTINATION_EMAIL=geral@jogimiltecnologias.it.ao
+      - FROM_EMAIL="JOGIMIL Tecnologias" <geral@jogimiltecnologias.it.ao>
+      - SMTP_HOST=${SMTP_HOST:-mx109.angoweb.net}
+      - SMTP_PORT=${SMTP_PORT:-465}
+      - SMTP_SECURE=${SMTP_SECURE:-true}
+      - SMTP_USER=${SMTP_USER:-geral@jogimiltecnologias.it.ao}
+      - SMTP_PASS=${SMTP_PASS:-}
+      - IMAP_HOST=${IMAP_HOST:-mx109.angoweb.net}
+      - IMAP_PORT=${IMAP_PORT:-993}
+      - POP3_HOST=${POP3_HOST:-mx109.angoweb.net}
+      - POP3_PORT=${POP3_PORT:-995}
+      - CORS_ORIGIN=*
+    volumes:
+      - ./data:/app/data

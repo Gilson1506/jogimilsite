@@ -1,0 +1,94 @@
+<svg width="800" height="480" viewBox="0 0 800 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#0B132B" />
+      <stop offset="50%" stopColor="#1C2541" />
+      <stop offset="100%" stopColor="#0B1021" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#1E293B" stopOpacity="0.9" />
+      <stop offset="100%" stopColor="#0F172A" stopOpacity="0.95" />
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#38BDF8" />
+      <stop offset="100%" stopColor="#0066FF" />
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#34D399" />
+      <stop offset="100%" stopColor="#059669" />
+    </linearGradient>
+    <filter id="shadow" x="-10" y="-10" width="820" height="500" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#0066FF" flood-opacity="0.25" />
+    </filter>
+  </defs>
+
+  <!-- Fundo com Glow Tech -->
+  <rect width="800" height="480" rx="16" fill="url(#bgGrad)" />
+  <circle cx="700" cy="80" r="140" fill="#0066FF" opacity="0.15" filter="blur(60px)" />
+  <circle cx="100" cy="400" r="120" fill="#38BDF8" opacity="0.1" filter="blur(50px)" />
+
+  <!-- Janela Principal da Aplicação POS -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="35" width="720" height="410" rx="12" fill="url(#cardGrad)" stroke="#334155" stroke-width="1.5" />
+    
+    <!-- Barra Superior da Janela -->
+    <path d="M40 47C40 40.3726 45.3726 35 52 35H748C754.627 35 760 40.3726 760 47V75H40V47Z" fill="#0F172A" />
+    <circle cx="65" cy="55" r="5" fill="#EF4444" />
+    <circle cx="82" cy="55" r="5" fill="#F59E0B" />
+    <circle cx="99" cy="55" r="5" fill="#10B981" />
+    <rect x="260" y="45" width="280" height="20" rx="6" fill="#1E293B" />
+    <text x="320" y="59" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11" font-weight="500">JOGIMIL Faturação & POS · AGT SAF-T (AO)</text>
+
+    <!-- Barra Lateral Esquerda -->
+    <rect x="40" y="75" width="60" height="370" fill="#0B132B" opacity="0.6" />
+    <rect x="55" y="95" width="30" height="30" rx="8" fill="url(#blueGrad)" />
+    <rect x="58" y="145" width="24" height="6" rx="3" fill="#64748B" />
+    <rect x="58" y="170" width="24" height="6" rx="3" fill="#64748B" />
+    <rect x="58" y="195" width="24" height="6" rx="3" fill="#64748B" />
+    <rect x="58" y="220" width="24" height="6" rx="3" fill="#64748B" />
+
+    <!-- Área Principal do POS: Painel Central de Vendas -->
+    <rect x="120" y="95" width="380" height="330" rx="10" fill="#0F172A" stroke="#1E293B" />
+    
+    <!-- Header de Vendas -->
+    <text x="140" y="125" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="16" font-weight="700">Ponto de Venda (POS Rápido)</text>
+    <rect x="400" y="110" width="85" height="22" rx="11" fill="#065F46" />
+    <text x="412" y="125" fill="#34D399" font-family="system-ui, sans-serif" font-size="10" font-weight="700">CERTIFICADO AGT</text>
+
+    <!-- Itens do Carrinho / Tabela -->
+    <rect x="140" y="145" width="340" height="36" rx="6" fill="#1E293B" />
+    <text x="155" y="167" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Licença Mensal Software Pro</text>
+    <text x="430" y="167" fill="#38BDF8" font-family="system-ui, sans-serif" font-size="12" font-weight="700">25.000 Kz</text>
+
+    <rect x="140" y="190" width="340" height="36" rx="6" fill="#1E293B" opacity="0.7" />
+    <text x="155" y="212" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Módulo Stocks & Armazém</text>
+    <text x="430" y="212" fill="#38BDF8" font-family="system-ui, sans-serif" font-size="12" font-weight="700">15.000 Kz</text>
+
+    <rect x="140" y="235" width="340" height="36" rx="6" fill="#1E293B" opacity="0.5" />
+    <text x="155" y="257" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Comunicação AGT SAF-T (AO)</text>
+    <text x="445" y="257" fill="#34D399" font-family="system-ui, sans-serif" font-size="12" font-weight="700">0 Kz</text>
+
+    <!-- Métricas / Totais -->
+    <rect x="140" y="290" width="340" height="70" rx="8" fill="#111827" stroke="#1E293B" />
+    <text x="155" y="315" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11">Total com IVA (14% Angola):</text>
+    <text x="155" y="345" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="22" font-weight="800">45.600,00 Kz</text>
+    <rect x="360" y="305" width="105" height="40" rx="8" fill="url(#blueGrad)" />
+    <text x="375" y="330" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="12" font-weight="700">Emitir Factura</text>
+
+    <!-- Resumo Lateral Direito: Caixa & Status -->
+    <rect x="520" y="95" width="220" height="330" rx="10" fill="#0F172A" stroke="#1E293B" />
+    <text x="540" y="125" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="14" font-weight="700">Resumo Diário</text>
+
+    <rect x="540" y="145" width="180" height="60" rx="8" fill="#1E293B" />
+    <text x="555" y="165" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="10">Facturação do Dia</text>
+    <text x="555" y="190" fill="#34D399" font-family="system-ui, sans-serif" font-size="16" font-weight="800">842.500 Kz</text>
+
+    <rect x="540" y="215" width="180" height="60" rx="8" fill="#1E293B" />
+    <text x="555" y="235" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="10">Documentos Emitidos</text>
+    <text x="555" y="260" fill="#38BDF8" font-family="system-ui, sans-serif" font-size="16" font-weight="800">128 Facturas</text>
+
+    <rect x="540" y="285" width="180" height="60" rx="8" fill="#1E293B" />
+    <text x="555" y="305" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="10">Estado do SAF-T (AO)</text>
+    <text x="555" y="330" fill="#10B981" font-family="system-ui, sans-serif" font-size="13" font-weight="700">● 100% Validado</text>
+  </g>
+</svg>

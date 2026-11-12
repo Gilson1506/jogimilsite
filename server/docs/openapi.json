@@ -1,0 +1,126 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "JOGIMIL - Forms & Notifications Ingestion Microservice",
+    "description": "API REST do microserviço independente de formulários e notificações da JOGIMIL - Tecnologias, Lda.",
+    "version": "2.0.0",
+    "contact": {
+      "name": "JOGIMIL - Tecnologias, Lda.",
+      "email": "geral@jogimiltecnologias.it.ao",
+      "url": "https://jogimiltecnologias.it.ao"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3001",
+      "description": "Servidor de Desenvolvimento Local"
+    },
+    {
+      "url": "https://api.jogimil.ao",
+      "description": "Servidor de Produção"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Healthcheck do Microserviço",
+        "description": "Retorna o status operacional, uptime, conexão SMTP e métricas da fila.",
+        "responses": {
+          "200": {
+            "description": "Serviço operacional",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health/live": {
+      "get": {
+        "summary": "Liveness Probe",
+        "responses": {
+          "200": { "description": "Processo ativo" }
+        }
+      }
+    },
+    "/health/ready": {
+      "get": {
+        "summary": "Readiness Probe",
+        "responses": {
+          "200": { "description": "Pronto para tráfego" },
+          "503": { "description": "Degradado" }
+        }
+      }
+    },
+    "/api/v1/forms/submit": {
+      "post": {
+        "summary": "Submeter Formulário",
+        "parameters": [
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "required": false,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["data"],
+                "properties": {
+                  "formType": { "type": "string", "example": "orcamento" },
+                  "formTitle": { "type": "string", "example": "Pedido de Orçamento de Software" },
+                  "data": { "type": "object", "example": { "nome": "Carlos Manuel", "email": "carlos@empresa.ao", "telefone": "+244923000000" } },
+                  "source": { "type": "string", "example": "https://jogimil.ao/contacto" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Formulário registado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "id": { "type": "string" },
+                    "status": { "type": "string" },
+                    "message": { "type": "string" },
+                    "correlationId": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "422": { "description": "Erro de validação do domínio ou campos" },
+          "429": { "description": "Limite de requisições excedido" }
+        }
+      }
+    },
+    "/api/v1/forms/recent": {
+      "get": {
+        "summary": "Listar Submissões Recentes",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": { "type": "integer", "default": 20 }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Lista de submissões recuperada com sucesso" }
+        }
+      }
+    }
+  }
+}

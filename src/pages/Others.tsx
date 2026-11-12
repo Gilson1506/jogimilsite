@@ -1,0 +1,762 @@
+import { useState, useEffect } from 'react';
+import { COMPANY, POSTS, PRODUCTS, TEAM_MEMBERS, TeamMember } from '../data/content';
+import { href } from '../lib/hooks';
+import { Form, FORMS } from '../components/Forms';
+import { Icon, Reveal } from '../components/ui';
+import { Body, PageHead } from './shared';
+import { NotFound } from './Services';
+
+export function Products() {
+  return (<>
+    <PageHead
+      eyebrow="Produtos Próprios"
+      title="Software pronto por subscrição"
+      lead="Soluções desenvolvidas e homologadas pela JOGIMIL para empresas angolanas, com suporte técnico contínuo em Luanda e funcionamento offline."
+      crumbs={[['Produtos']]}
+    />
+    <Body>
+      {/* Grade de Produtos: Cards Retangulares Horizontais com Imagens */}
+      <div className="grid gap-8 lg:grid-cols-3">
+        {PRODUCTS.map((p, i) => (
+          <Reveal key={p.slug} delay={i * 80}>
+            <a
+              href={href('produtos', p.slug)}
+              className="group flex flex-col justify-between rounded-2xl bg-card/60 hover:bg-card overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl shadow-sm p-5"
+            >
+              <div>
+                {/* Imagem Retangular do Produto */}
+                <div className="aspect-[16/10] w-full rounded-xl overflow-hidden bg-slate-950 relative shadow-inner">
+                  <img
+                    src={p.image}
+                    alt={p.name}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <span className="absolute top-3 left-3 rounded-md bg-black/80 backdrop-blur-sm px-2.5 py-1 font-mono text-[11px] font-semibold text-accent">
+                    {p.tag}
+                  </span>
+                </div>
+
+                <span className="mt-5 block font-mono text-xs uppercase tracking-wider text-muted">
+                  {p.category}
+                </span>
+                <h2 className="mt-1 text-xl font-bold tracking-tight text-fg group-hover:text-blue transition-colors">
+                  {p.name}
+                </h2>
+                <p className="mt-2.5 text-sm leading-relaxed text-muted line-clamp-3">
+                  {p.description}
+                </p>
+
+                {/* Preço de Partida */}
+                <div className="mt-4 flex items-center justify-between text-xs">
+                  <span className="text-muted">A partir de:</span>
+                  <span className="font-mono font-bold text-fg bg-bg px-2.5 py-1 rounded-md">
+                    {p.priceStarting}
+                  </span>
+                </div>
+              </div>
+
+              {/* Botão Inferior */}
+              <div className="mt-6 pt-4 border-t border-line/40 flex items-center justify-between text-xs">
+                <span className="inline-flex items-center gap-1.5 font-semibold text-blue group-hover:text-accent">
+                  Ver detalhes & planos <Icon n="arrow" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </span>
+                <span className="font-mono text-muted">Homologado AGT</span>
+              </div>
+            </a>
+          </Reveal>
+        ))}
+      </div>
+    </Body>
+  </>);
+}
+
+export function ProductDetail({ id }: { id: string }) {
+  const p = PRODUCTS.find((x) => x.slug === id);
+  if (!p) return <NotFound />;
+
+  const scrollToDemo = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const el = document.getElementById('pedir-demonstracao');
+    el?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (<>
+    <PageHead
+      eyebrow={p.category}
+      title={p.name}
+      lead={p.tagline}
+      crumbs={[['Produtos', href('produtos')], [p.name]]}
+    />
+    <Body>
+      {/* Banner Principal com Imagem Retangular e Call to Action */}
+      <div className="mb-14 grid gap-8 lg:grid-cols-12 items-center">
+        <div className="lg:col-span-7">
+          <div className="aspect-[16/10] w-full rounded-2xl overflow-hidden bg-slate-950 shadow-2xl relative">
+            <img
+              src={p.image}
+              alt={p.name}
+              className="h-full w-full object-cover"
+            />
+            <span className="absolute top-4 left-4 rounded-lg bg-black/85 backdrop-blur-md px-3 py-1.5 font-mono text-xs font-semibold text-accent">
+              {p.tag}
+            </span>
+          </div>
+        </div>
+
+        <div className="lg:col-span-5 flex flex-col justify-center space-y-4">
+          <span className="font-mono text-xs uppercase tracking-widest text-muted">{p.category}</span>
+          <h1 className="text-3xl sm:text-4xl font-display font-bold text-fg">{p.name}</h1>
+          <p className="text-muted leading-relaxed text-sm sm:text-base">{p.description}</p>
+          
+          <div className="p-4 rounded-xl bg-card/60 space-y-1">
+            <span className="text-xs text-muted">Investimento Inicial:</span>
+            <p className="text-2xl font-bold font-mono text-accent">{p.priceStarting}</p>
+            <p className="text-xs text-muted">Sem custos de instalação em Luanda · Suporte técnico contínuo incluído.</p>
+          </div>
+
+          <div className="flex flex-wrap gap-3 pt-2">
+            <a href="#pedir-demonstracao" onClick={scrollToDemo} className="btn btn-primary">
+              Pedir Demonstração Gratuita <Icon n="arrow" className="h-4 w-4" />
+            </a>
+            <a href={`https://wa.me/244942775559?text=${encodeURIComponent(`Olá JOGIMIL! Gostaria de pedir uma demonstração do ${p.name}.`)}`} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
+              Falar no WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Descrição Completa e O Que Inclui */}
+      <div className="grid gap-12 lg:grid-cols-12 mb-16">
+        <div className="lg:col-span-7 space-y-6">
+          <h2 className="text-2xl font-bold font-display text-fg">Descrição Completa da Solução</h2>
+          <div className="space-y-4 text-muted leading-relaxed text-base">
+            {p.fullDescription.map((par, i) => (
+              <p key={i}>{par}</p>
+            ))}
+          </div>
+
+          <h3 className="text-xl font-bold font-display text-fg pt-4">O que inclui em todas as licenças</h3>
+          <ul className="grid gap-3 sm:grid-cols-2">
+            {p.features.map((f) => (
+              <li key={f} className="flex items-start gap-2.5 p-3 rounded-xl bg-card/40 text-sm">
+                <Icon n="check" className="mt-0.5 h-4 w-4 shrink-0 text-blue font-bold" />
+                <span className="text-fg">{f}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Tabela de Preços e Planos de Subscrição */}
+        <div className="lg:col-span-5 space-y-4">
+          <h2 className="text-2xl font-bold font-display text-fg">Planos de Subscrição</h2>
+          <p className="text-xs text-muted">Valores em Kwanzas (AOA) com facturação e suporte oficial em Angola.</p>
+
+          <div className="space-y-4">
+            {p.plans.map((pl) => (
+              <div
+                key={pl.name}
+                className={`p-6 rounded-2xl transition-all ${
+                  pl.highlighted
+                    ? 'bg-gradient-to-br from-blue/15 to-card border-2 border-blue shadow-xl'
+                    : 'bg-card/70 shadow-sm'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <h4 className="font-bold text-base text-fg">{pl.name}</h4>
+                  {pl.highlighted && (
+                    <span className="rounded-full bg-blue text-white text-[10px] font-bold px-2.5 py-0.5 uppercase tracking-wide">
+                      Mais Procurado
+                    </span>
+                  )}
+                </div>
+                <div className="mt-2 flex items-baseline gap-1">
+                  <span className="text-2xl font-mono font-extrabold text-accent">{pl.price}</span>
+                  <span className="text-xs text-muted">{pl.period}</span>
+                </div>
+                <p className="mt-2 text-xs text-muted leading-relaxed">{pl.note}</p>
+
+                <ul className="mt-4 space-y-2 border-t border-line/40 pt-3 text-xs">
+                  {pl.features.map((feat) => (
+                    <li key={feat} className="flex items-center gap-2 text-fg">
+                      <span className="text-blue font-bold">✓</span>
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <button
+                  type="button"
+                  onClick={scrollToDemo}
+                  className={`mt-5 w-full py-2.5 rounded-xl text-xs font-semibold transition-all ${
+                    pl.highlighted
+                      ? 'bg-blue text-white hover:bg-blue/90 shadow-md'
+                      : 'bg-bg text-fg hover:bg-card border border-line/40'
+                  }`}
+                >
+                  Pedir Demonstração para este Plano
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Seção do Formulário de Demonstração (Envia por Email para o Microserviço) */}
+      <div id="pedir-demonstracao" className="mt-16 pt-12 border-t border-line/40">
+        <div className="mx-auto max-w-3xl text-center mb-8">
+          <span className="eyebrow text-accent">Demonstração sem Compromisso</span>
+          <h2 className="text-3xl font-display font-bold text-fg mt-2">
+            Agende uma Demonstração do {p.name}
+          </h2>
+          <p className="lead mt-3 text-base">
+            Preencha os seus dados. A equipa comercial da JOGIMIL entrará em contacto por email e telefone para agendar a apresentação online ou nas suas instalações em Luanda.
+          </p>
+        </div>
+
+        <div className="mx-auto max-w-2xl bg-card/60 p-6 sm:p-8 rounded-3xl shadow-xl">
+          <Form def={FORMS.demonstracao} />
+        </div>
+      </div>
+    </Body>
+  </>);
+}
+
+function TeamCard({ member }: { member: TeamMember }) {
+  const [imgErr, setImgErr] = useState(false);
+  const showImg = member.photo && !imgErr;
+
+  return (
+    <div className="card rounded-none border border-line bg-card overflow-hidden flex flex-col justify-between transition-all duration-300 hover:border-blue group">
+      <div>
+        <div className="relative aspect-[4/5] w-full overflow-hidden bg-slate-950">
+          {showImg ? (
+            <img
+              src={member.photo}
+              alt={`Fotografia de ${member.name}`}
+              loading="lazy"
+              onError={() => setImgErr(true)}
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          ) : (
+            <div className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-black via-[#001844] to-[#0066FF]/30 p-6 text-center">
+              <div className="flex h-20 w-20 items-center justify-center rounded-none border-2 border-blue bg-black/70 shadow-lg">
+                <span className="font-display text-2xl font-bold tracking-wider text-white">
+                  {member.initials}
+                </span>
+              </div>
+              <p className="mt-4 font-mono text-[11px] uppercase tracking-widest text-blue">
+                Foto a caminho
+              </p>
+            </div>
+          )}
+          <div className="absolute top-3 left-3">
+            <span className="rounded-none bg-black/85 backdrop-blur-sm border border-white/20 px-2.5 py-1 text-[11px] font-semibold text-white">
+              {member.department}
+            </span>
+          </div>
+        </div>
+
+        <div className="p-5">
+          <h3 className="font-display text-lg font-bold text-fg group-hover:text-blue transition-colors">
+            {member.name}
+          </h3>
+          <p className="mt-1 text-xs font-semibold text-accent">{member.role}</p>
+          <p className="mt-3 text-xs leading-relaxed text-muted">{member.bio}</p>
+        </div>
+      </div>
+
+      <div className="border-t border-line/60 bg-bg/40 p-4 flex flex-wrap items-center justify-between gap-2 text-xs">
+        {member.email && (
+          <a
+            href={`mailto:${member.email}`}
+            className="inline-flex items-center gap-1.5 text-muted hover:text-accent transition-colors truncate max-w-[200px]"
+            title={member.email}
+          >
+            <span>✉</span> {member.email}
+          </a>
+        )}
+        <a
+          href={COMPANY.maps}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 text-accent font-semibold hover:underline ml-auto"
+        >
+          Luanda ↗
+        </a>
+      </div>
+    </div>
+  );
+}
+
+export function About() {
+  const vals = [
+    ['Clareza', 'Dizemos o que vamos fazer, quando e porquê. Sem custos ocultos nem termos dúbios.'],
+    ['Utilidade', 'Software e arquiteturas concebidos para resolver problemas de negócio reais.'],
+    ['Proximidade', 'Estamos em Luanda e respondemos prontamente em qualquer situação operacional.']
+  ];
+
+  return (
+    <>
+      <PageHead
+        eyebrow="Sobre nós"
+        title="Uma empresa angolana de tecnologia"
+        lead={COMPANY.about}
+        crumbs={[['Sobre nós']]}
+      />
+      <Body>
+        {/* História e Valores */}
+        <div className="grid gap-12 lg:grid-cols-2">
+          <div>
+            <h2 className="h2">A nossa história</h2>
+            <p className="mt-4 leading-relaxed text-muted">
+              Fundada em Luanda, a <strong className="text-fg">JOGIMIL - Tecnologias, Lda.</strong> nasceu com a missão de elevar a maturidade digital em Angola através de software fiável, moderno e integralmente alinhado à regulamentação tributária da AGT.
+            </p>
+            <p className="mt-3 leading-relaxed text-muted">
+              Desenvolvemos produtos próprios (como o JOGIMIL Faturação &amp; POS, o EduGest Académico e o StockERP Armazéns) e criamos soluções corporativas por medida. A nossa actuação alia engenharia de software de ponta a uma assistência presencial constante aos operadores, retalhistas e instituições de ensino em todo o país.
+            </p>
+            <div className="mt-8 grid grid-cols-2 gap-4">
+              <div className="card rounded-none border border-line p-5">
+                <p className="font-display text-2xl font-bold text-accent">100%</p>
+                <p className="mt-1 text-xs text-muted">Engenharia Angolana</p>
+              </div>
+              <div className="card rounded-none border border-line p-5">
+                <p className="font-display text-2xl font-bold text-accent">Luanda</p>
+                <p className="mt-1 text-xs text-muted">Sede na Nova Vida, Kilamba Kiaxi</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h2 className="h2">Os nossos valores</h2>
+            <ul className="mt-4 space-y-3">
+              {vals.map(([t, d]) => (
+                <li key={t} className="card rounded-none border border-line p-5 transition hover:border-blue">
+                  <p className="font-display font-semibold text-fg">{t}</p>
+                  <p className="mt-1 text-sm text-muted">{d}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Suporte Completo para Fotos da Equipa */}
+        <div className="mt-20">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+            <div>
+              <p className="eyebrow text-accent">Capital Humano &amp; Engenharia</p>
+              <h2 className="h2 mt-1">A nossa equipa</h2>
+              <p className="mt-2 max-w-2xl text-sm text-muted">
+                Especialistas em desenvolvimento de software, conformidade fiscal AGT, suporte de POS e gestão de clientes com base em Luanda.
+              </p>
+            </div>
+            <div className="text-left sm:text-right">
+              <span className="inline-flex items-center gap-1.5 rounded-none border border-line bg-card px-3 py-1.5 text-xs text-muted">
+                <span className="h-2 w-2 rounded-full bg-emerald-500"></span> Suporte a fotos de equipa ativo
+              </span>
+            </div>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {TEAM_MEMBERS.map((member) => (
+              <TeamCard key={member.id} member={member} />
+            ))}
+          </div>
+
+          <div className="mt-6 rounded-none border border-dashed border-line bg-card/40 p-4 text-xs text-muted flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <p>
+              <strong className="text-fg">Instruções para fotos da equipa:</strong> Adicione imagens em <code>public/team/</code> (ex: <code>manuel-bento.jpg</code>, <code>png</code> ou <code>svg</code>) e associe o caminho no ficheiro <code>src/data/content.ts</code>. Em caso de ausência, o sistema gera automaticamente o avatar executivo com as iniciais.
+            </p>
+          </div>
+        </div>
+
+        {/* Localização com Mapa do Google Interativo */}
+        <div className="mt-20">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+            <div>
+              <p className="eyebrow text-accent">Presença Física em Luanda</p>
+              <h2 className="h2 mt-1">Localização da sede</h2>
+              <p className="mt-2 text-sm text-muted">
+                Visite as nossas instalações ou agende uma reunião técnica com a nossa equipa.
+              </p>
+            </div>
+            <a
+              href={COMPANY.maps}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary rounded-none shadow-md inline-flex items-center gap-2 text-sm"
+            >
+              <Icon n="map" className="h-4 w-4" /> Traçar rota no Google Maps ↗
+            </a>
+          </div>
+
+          <div className="card rounded-none border border-line bg-card overflow-hidden shadow-sm">
+            {/* Barra de Informações da Morada */}
+            <div className="grid gap-5 border-b border-line bg-card p-6 sm:grid-cols-3">
+              <div>
+                <p className="text-xs uppercase font-semibold text-muted">Morada Oficial</p>
+                <p className="mt-1 font-semibold text-fg flex items-start gap-2">
+                  <Icon n="map" className="mt-0.5 h-4 w-4 shrink-0 text-blue" />
+                  {COMPANY.address}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs uppercase font-semibold text-muted">Horário de Atendimento</p>
+                <p className="mt-1 font-semibold text-fg flex items-center gap-2">
+                  <span>⏱</span> {COMPANY.hours}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs uppercase font-semibold text-muted">Contacto Telefónico</p>
+                <p className="mt-1 font-semibold text-fg flex items-center gap-2">
+                  <span>📞</span> <a href={`tel:+${COMPANY.phoneRaw}`} className="hover:text-blue">{COMPANY.phone}</a>
+                </p>
+              </div>
+            </div>
+
+            {/* Iframe Interativo do Google Maps */}
+            <div className="relative w-full overflow-hidden bg-slate-900 h-80 sm:h-[420px]">
+              <iframe
+                title="Mapa de Localização da JOGIMIL - Tecnologias, Lda. em Luanda"
+                src="https://maps.google.com/maps?q=Nova+Vida,+Kilamba+Kiaxi,+Luanda+(JOGIMIL+Tecnologias)&t=&z=15&ie=UTF8&iwloc=B&output=embed"
+                className="w-full h-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+            </div>
+
+            {/* Rodapé informativo do mapa */}
+            <div className="border-t border-line bg-bg/60 p-4 text-xs text-muted flex flex-wrap items-center justify-between gap-3">
+              <p>
+                Urbanização Nova Vida, Município do Kilamba Kiaxi, Província de Luanda. Estacionamento para clientes disponível.
+              </p>
+              <a
+                href={COMPANY.maps}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-blue underline underline-offset-2"
+              >
+                Abrir aplicação externa do Google Maps ↗
+              </a>
+            </div>
+          </div>
+        </div>
+      </Body>
+    </>
+  );
+}
+
+export function Partners() {
+  return (<>
+    <PageHead eyebrow="Parceiros" title="Programa de agentes autorizados" lead="Para quem quer apresentar as soluções da JOGIMIL na sua zona. Condições a combinar após a candidatura." crumbs={[['Parceiros']]} />
+    <Body><div className="mx-auto max-w-2xl"><Form def={FORMS.parceiro} /></div></Body>
+  </>);
+}
+
+const fmt = (d: string) => new Date(d).toLocaleDateString('pt-AO', { day: 'numeric', month: 'long', year: 'numeric' });
+
+export function Posts() {
+  const [allPosts, setAllPosts] = useState(POSTS);
+
+  useEffect(() => {
+    fetch('/api/v1/news')
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.news && Array.isArray(data.news)) {
+          // Mesclar notícias estáticas com as dinâmicas criadas no painel admin
+          const dynamicSlugs = new Set(data.news.map((n: any) => n.slug));
+          const uniqueStatic = POSTS.filter((p) => !dynamicSlugs.has(p.slug));
+          setAllPosts([...data.news, ...uniqueStatic]);
+        }
+      })
+      .catch(() => {
+        /* fallback para POSTS */
+      });
+  }, []);
+
+  return (<>
+    <PageHead eyebrow="Notícias" title="Faturação, SAF-T (AO) e tecnologia" lead="Artigos curtos e práticos sobre software e fiscalidade." crumbs={[['Notícias']]} />
+    <Body>
+      <div className="grid gap-5 md:grid-cols-2">
+        {allPosts.map((p) => (
+          <a key={p.slug} href={href('noticias', p.slug)} className="card card-hover block p-7">
+            <p className="text-xs font-semibold uppercase tracking-wider text-accent">{p.tag} · <time dateTime={p.date}>{fmt(p.date)}</time></p>
+            <h2 className="mt-3 text-xl font-semibold">{p.title}</h2>
+            <p className="mt-2 text-muted">{p.excerpt}</p>
+          </a>
+        ))}
+      </div>
+    </Body>
+  </>);
+}
+
+export function PostDetail({ id }: { id: string }) {
+  const [post, setPost] = useState(() => POSTS.find((x) => x.slug === id));
+
+  useEffect(() => {
+    if (!post) {
+      fetch('/api/v1/news')
+        .then((r) => r.json())
+        .then((data) => {
+          if (data.news) {
+            const found = data.news.find((n: any) => n.slug === id);
+            if (found) setPost(found);
+          }
+        })
+        .catch(() => {});
+    }
+  }, [id, post]);
+
+  if (!post) return <NotFound />;
+  return (<>
+    <PageHead eyebrow={post.tag} title={post.title} lead={<time dateTime={post.date}>{fmt(post.date)}</time>} crumbs={[['Notícias', href('noticias')], [post.title]]} />
+    <Body><article className="mx-auto max-w-2xl space-y-5 text-lg leading-relaxed">{post.body.map((t, i) => <p key={i}>{t}</p>)}</article></Body>
+  </>);
+}
+
+const TABS: [keyof typeof FORMS, string][] = [['orcamento', 'Orçamento'], ['geral', 'Contacto geral'], ['demonstracao', 'Demonstração'], ['suporte', 'Suporte']];
+
+export function Contact({ id }: { id?: string }) {
+  const cur = (id && id in FORMS ? id : 'orcamento') as keyof typeof FORMS;
+  const copy = () => navigator.clipboard?.writeText(COMPANY.phone);
+  return (<>
+    <PageHead eyebrow="Contacto" title="Fale connosco" lead="Escolha como prefere: telefone, WhatsApp ou formulário." crumbs={[['Contacto']]} />
+    <Body>
+      <div className="grid gap-10 lg:grid-cols-5">
+        <div className="space-y-4 lg:col-span-2">
+          <div className="card rounded-none border border-line p-6">
+            <p className="text-sm text-muted">Telefone</p>
+            <div className="mt-1 flex items-center gap-3">
+              <a href={`tel:+${COMPANY.phoneRaw}`} className="font-display text-2xl font-semibold">{COMPANY.phone}</a>
+              <button onClick={copy} className="inline-flex h-11 w-11 items-center justify-center rounded-none border border-line hover:border-blue" aria-label="Copiar telefone"><Icon n="copy" className="h-4 w-4" /></button>
+            </div>
+          </div>
+          <a href={`https://wa.me/${COMPANY.phoneRaw}`} target="_blank" rel="noopener noreferrer" className="card rounded-none card-hover flex items-center gap-3 p-6 font-semibold"><Icon n="wa" className="text-blue" /> WhatsApp <Icon n="arrow" className="ml-auto h-4 w-4" /></a>
+          <a href={`mailto:${COMPANY.email}`} className="card rounded-none card-hover block p-6"><p className="text-sm text-muted">Email</p><p className="font-semibold">{COMPANY.email}</p></a>
+          <div className="card rounded-none border border-line p-6">
+            <p className="text-sm text-muted">Morada</p><p className="font-semibold">{COMPANY.address}</p>
+            <a href={COMPANY.maps} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex min-h-[44px] items-center text-blue underline">Abrir no Google Maps ↗</a>
+          </div>
+          <div className="card rounded-none border border-line p-6"><p className="text-sm text-muted">Horário</p><p className="font-semibold">{COMPANY.hours}</p></div>
+        </div>
+        <div className="lg:col-span-3">
+          <div role="tablist" aria-label="Tipo de pedido" className="mb-5 flex flex-wrap gap-2">
+            {TABS.map(([k, l]) => (
+              <a key={k} role="tab" aria-selected={cur === k} href={href('contacto', k)} className={`inline-flex min-h-[44px] items-center rounded-none border px-5 text-sm font-semibold transition ${cur === k ? 'border-blue bg-blue text-white shadow-md' : 'border-line hover:border-blue'}`}>{l}</a>
+            ))}
+          </div>
+          <div role="tabpanel"><Form key={cur} def={FORMS[cur]} /></div>
+        </div>
+      </div>
+    </Body>
+  </>);
+}
+
+export function Privacy() {
+  const S = ({ t, num, children }: { t: string; num: string; children: React.ReactNode }) => (
+    <section className="mt-12 scroll-mt-24 border-t border-line/60 pt-8 first:border-0 first:pt-0">
+      <div className="flex items-center gap-3">
+        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-blue/10 font-mono text-xs font-bold text-blue">
+          {num}
+        </span>
+        <h2 className="font-display text-xl font-bold tracking-tight sm:text-2xl">{t}</h2>
+      </div>
+      <div className="mt-4 space-y-4 text-[0.95rem] leading-relaxed text-muted">{children}</div>
+    </section>
+  );
+
+  return (
+    <>
+      <PageHead
+        eyebrow="Conformidade & Segurança"
+        title="Política de Privacidade e Protecção de Dados"
+        lead="Compromisso rigoroso com a segurança da informação, privacidade em Inteligência Artificial, acordos prévios de confidencialidade (NDA) e cumprimento integral da Lei n.º 22/11 de Angola."
+        crumbs={[['Política de Privacidade']]}
+      />
+      <Body>
+        <div className="mx-auto max-w-4xl">
+          {/* DESTAQUE INSTITUCIONAL: ACORDO DE CONFIDENCIALIDADE (NDA) PRÉVIO OBRIGATÓRIO */}
+          <div className="relative overflow-hidden rounded-none border-2 border-blue-600 bg-gradient-to-br from-blue/10 via-card to-card p-6 sm:p-8 shadow-xl">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-line/60 pb-5">
+              <div className="flex items-center gap-3.5">
+                {/* Ícone livre, sem caixa ou borda fechada */}
+                <Icon n="shield" className="h-9 w-9 text-blue shrink-0" />
+                <div>
+                  <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-blue">
+                    Compromisso Corporativo Obrigatório
+                  </span>
+                  <h3 className="font-display text-xl font-bold text-fg sm:text-2xl">
+                    Acordo de Confidencialidade (NDA) Pré-Negócio
+                  </h3>
+                </div>
+              </div>
+              <span className="inline-flex items-center gap-1.5 rounded-none bg-emerald-500/10 px-3.5 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
+                <span className="h-2 w-2 rounded-none bg-emerald-500" />
+                Política Inegociável
+              </span>
+            </div>
+
+            <div className="mt-5 space-y-3.5 text-sm sm:text-base leading-relaxed text-fg">
+              <p>
+                <strong>A JOGIMIL - Tecnologias, Lda. estabelece como protocolo obrigatório</strong> a assinatura formal e prévia de um <strong>Acordo de Confidencialidade e Não Divulgação (Non-Disclosure Agreement — NDA)</strong> juridicamente vinculativo com todos os clientes, empresas parceiras e prestadores de serviços, <strong>antes de qualquer receção, acesso, troca ou análise de dados sensíveis, processos operacionais internos, segredos comerciais, bases de dados ou código-fonte</strong>.
+              </p>
+              <div className="grid gap-3 pt-2 sm:grid-cols-3 text-xs sm:text-sm">
+                <div className="rounded-none bg-bg p-3.5 border border-line/70 border-l-2 border-l-blue-600">
+                  <p className="font-bold text-blue">1. Assinatura Prévia</p>
+                  <p className="mt-1 text-muted">Nenhum dado é trocado sem o instrumento contratual assinado por ambas as partes.</p>
+                </div>
+                <div className="rounded-none bg-bg p-3.5 border border-line/70 border-l-2 border-l-blue-600">
+                  <p className="font-bold text-blue">2. Segredo Comercial Total</p>
+                  <p className="mt-1 text-muted">Protecção irrestrita de estratégias de mercado, finanças, dados fiscais e clientes.</p>
+                </div>
+                <div className="rounded-none bg-bg p-3.5 border border-line/70 border-l-2 border-l-blue-600">
+                  <p className="font-bold text-blue">3. Validade Pós-Contrato</p>
+                  <p className="mt-1 text-muted">A obrigação de sigilo mantém-se ativa mesmo após a conclusão ou entrega do projecto.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Secção 1: Enquadramento Legal e Responsável pelo Tratamento */}
+          <S num="01" t="Responsável pelo Tratamento e Enquadramento Legal">
+            <p>
+              O responsável pelo tratamento dos dados recolhidos através deste portal é a <strong>{COMPANY.name}</strong>, sociedade comercial com sede em {COMPANY.address}, Luanda, República de Angola.
+            </p>
+            <p>
+              A nossa atuação rege-se integralmente pela <strong>Lei n.º 22/11, de 17 de Junho (Lei da Protecção de Dados Pessoais da República de Angola)</strong>, bem como pelos mais rigorosos referenciais internacionais de cibersegurança e governança de dados (ISO/IEC 27001, NIST e RGPD da União Europeia para interações com sistemas internacionais).
+            </p>
+            <p>
+              Canal oficial de privacidade e proteção de dados: <a href={`mailto:${COMPANY.email}`} className="text-blue font-semibold hover:underline">{COMPANY.email}</a>.
+            </p>
+          </S>
+
+          {/* Secção 2: Privacidade em Inteligência Artificial & Modelo AI-First */}
+          <S num="02" t="Privacidade em Soluções de Inteligência Artificial & Agentes (AI-First)">
+            <p>
+              No âmbito do nosso modelo tecnológico <strong>AI-First</strong> (desenvolvimento de soluções e ferramentas com suporte nativo a inteligência artificial e agentes autónomos), a JOGIMIL adota uma <strong>Política Estrita de Treino Zero (Zero-Training Policy)</strong>:
+            </p>
+            <ul className="list-disc pl-5 space-y-2">
+              <li>
+                <strong>Nenhum Dado de Cliente é Usado para Treino:</strong> Os dados corporativos, documentos, consultas, bases de dados ou prompts processados pelos nossos agentes de IA <strong>nunca</strong> são armazenados para reaproveitamento público ou utilizados para treinar modelos fundacionais de terceiros (Anthropic, OpenAI, Google ou outros).
+              </li>
+              <li>
+                <strong>Isolamento Lógico em Ambientes Fechados:</strong> As instâncias de inferência de IA operam através de canais criptografados com chaves privadas empresariais dedicadas exclusivamente à sua organização.
+              </li>
+              <li>
+                <strong>Anonimização e Higienização de Dados:</strong> Sempre que os fluxos de trabalho envolvam triagem com agentes inteligentes, dados de identificação pessoal são filtrados e anonimizados antes do envio a motores de processamento de linguagem.
+              </li>
+            </ul>
+          </S>
+
+          {/* Secção 3: Operações de NOC & Monitorização de Infraestruturas 24/7 */}
+          <S num="03" t="Segurança e Dados em Operações de NOC 24/7">
+            <p>
+              Nas operações do nosso <strong>Centro de Operações de Rede (NOC 24/7)</strong>, a monitorização incide exclusivamente sobre <strong>telemetria operacional</strong> (consumo de CPU, memória RAM, latência de rede, disponibilidade de portas e integridade de conexões de telecomunicações).
+            </p>
+            <p>
+              A equipa técnica do NOC <strong>não inspeciona, não armazena e não tem acesso ao conteúdo dos ficheiros, bancos de dados ou comunicações internas</strong> das empresas monitorizadas. Quaisquer alertas e intervenções são auditados com registo inalterável de logs de acesso (*audit trails*).
+            </p>
+          </S>
+
+          {/* Secção 4: Dados que Recolhemos e Finalidades */}
+          <S num="04" t="Categorias de Dados Recolhidos e Finalidades">
+            <p>Recolhemos apenas as informações estritamente necessárias e proporcionais para cada finalidade técnica ou comercial:</p>
+            <div className="grid gap-3 sm:grid-cols-2 pt-2">
+              <div className="rounded-none border border-line/70 bg-card p-4">
+                <p className="font-semibold text-fg">Dados de Contacto e Identificação</p>
+                <p className="mt-1 text-xs text-muted">Nome, endereço de correio eletrónico, número de telefone e empresa indicada nos formulários de contacto, pedidos de orçamento ou Live Chat.</p>
+              </div>
+              <div className="rounded-none border border-line/70 bg-card p-4">
+                <p className="font-semibold text-fg">Dados de Diagnóstico Técnico</p>
+                <p className="mt-1 text-xs text-muted">Descrição dos requisitos de software, especificações de arquitetura e documentos de escopo voluntariamente submetidos para orçamentação.</p>
+              </div>
+              <div className="rounded-none border border-line/70 bg-card p-4">
+                <p className="font-semibold text-fg">Dados de Navegação e Telemetria</p>
+                <p className="mt-1 text-xs text-muted">Endereço IP pseudonimizado, tipo de navegador, páginas visualizadas e duração da sessão para auditoria de segurança e prevenção de ataques DDoS.</p>
+              </div>
+              <div className="rounded-none border border-line/70 bg-card p-4">
+                <p className="font-semibold text-fg">Preferências de Interface</p>
+                <p className="mt-1 text-xs text-muted">Preferência de tema visual (modo claro ou modo escuro) e preferências de navegação armazenadas localmente no seu dispositivo.</p>
+              </div>
+            </div>
+          </S>
+
+          {/* Secção 5: Medidas de Segurança da Informação */}
+          <S num="05" t="Medidas Técnicas e Organizativas de Segurança">
+            <p>
+              A JOGIMIL implementa salvaguardas tecnológicas avançadas para prevenir o acesso não autorizado, a destruição, a perda ou a alteração de dados:
+            </p>
+            <ul className="list-disc pl-5 space-y-1.5">
+              <li>Criptografia de dados em trânsito com protocolos modernos <strong>TLS 1.3</strong> e em repouso com algoritmo <strong>AES de 256 bits</strong>;</li>
+              <li>Acesso restrito baseado no princípio do menor privilégio (*Role-Based Access Control — RBAC*) e autenticação multifatorial (MFA);</li>
+              <li>Cópias de segurança (*backups*) automáticas com réplicas geograficamente distribuídas e testes periódicos de restauração;</li>
+              <li>Monitorização contínua de vulnerabilidades e testes de intrusão em todas as aplicações antes da entrada em produção.</li>
+            </ul>
+          </S>
+
+          {/* Secção 6: Conservação e Partilha com Terceiros */}
+          <S num="06" t="Conservação de Dados e Partilha Responsável">
+            <p>
+              <strong>A JOGIMIL nunca vende, aluga ou cede dados pessoais ou empresariais a terceiros para fins de marketing ou publicidade.</strong>
+            </p>
+            <p>
+              Os dados são conservados exclusivamente durante o período necessário para cumprir as finalidades para as quais foram recolhidos (por exemplo, vigência de contrato de prestação de serviços ou cumprimento de obrigações fiscais junto da AGT) ou até que o titular solicite a sua eliminação, observados os prazos legais de prescrição.
+            </p>
+          </S>
+
+          {/* Secção 7: Direitos do Titular dos Dados */}
+          <S num="07" t="Os Seus Direitos (Lei n.º 22/11 de Angola)">
+            <p>
+              Em conformidade com a legislação angolana de proteção de dados, tem o direito pleno e irrevogável de exercer, a qualquer momento:
+            </p>
+            <div className="grid gap-2 sm:grid-cols-2 pt-1 text-sm">
+              <div className="flex items-start gap-2 rounded-none bg-bg p-3 border border-line/70">
+                <span className="text-blue font-bold">✓</span>
+                <div>
+                  <strong className="text-fg">Direito de Acesso:</strong> Confirmar se tratamos os seus dados e obter cópia dos mesmos.
+                </div>
+              </div>
+              <div className="flex items-start gap-2 rounded-none bg-bg p-3 border border-line/70">
+                <span className="text-blue font-bold">✓</span>
+                <div>
+                  <strong className="text-fg">Direito de Rectificação:</strong> Corrigir dados inexatos, incompletos ou desatualizados.
+                </div>
+              </div>
+              <div className="flex items-start gap-2 rounded-none bg-bg p-3 border border-line/70">
+                <span className="text-blue font-bold">✓</span>
+                <div>
+                  <strong className="text-fg">Direito de Eliminação:</strong> Exigir a eliminação permanente dos seus dados (salvo obrigações legais).
+                </div>
+              </div>
+              <div className="flex items-start gap-2 rounded-none bg-bg p-3 border border-line/70">
+                <span className="text-blue font-bold">✓</span>
+                <div>
+                  <strong className="text-fg">Direito de Oposição:</strong> Opor-se ao tratamento de dados para finalidades não essenciais.
+                </div>
+              </div>
+            </div>
+            <p className="pt-2">
+              Para exercer qualquer um destes direitos, basta enviar uma comunicação escrita identificando-se para o correio eletrónico <a href={`mailto:${COMPANY.email}`} className="text-blue font-semibold hover:underline">{COMPANY.email}</a> ou contactar-nos por correio postal para {COMPANY.address}, Luanda.
+            </p>
+          </S>
+
+          {/* Secção 8: Política de Cookies */}
+          <S num="08" t="Gestão de Cookies e Armazenamento Local">
+            <p>
+              O nosso portal utiliza cookies e armazenamento local (*localStorage*) exclusivamente para:
+            </p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li><strong>Cookies Estritamente Necessários:</strong> Manter a integridade da sessão, segurança contra requisições fraudulentas (CSRF) e prevenção de ataques;</li>
+              <li><strong>Cookies de Preferências:</strong> Recordar a sua escolha entre tema Claro ou Escuro e a confirmação do banner de cookies;</li>
+              <li><strong>Cookies Analíticos:</strong> Quando aceites, recolhem dados estatísticos agregados e anónimos sobre o desempenho e velocidade do site.</li>
+            </ul>
+            <p className="pt-1">
+              Pode a qualquer momento gerir ou revogar as suas preferências de cookies através das configurações do seu navegador ou limpando os dados de navegação deste website.
+            </p>
+          </S>
+        </div>
+      </Body>
+    </>
+  );
+}

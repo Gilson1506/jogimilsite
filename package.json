@@ -1,0 +1,44 @@
+{
+  "name": "jogimil-tech-website",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "server": "cd server && npm run dev",
+    "backend:dev": "cd server && npm run dev",
+    "backend:start": "cd server && npm start",
+    "backend:test": "cd server && npm test",
+    "admin:dev": "cd admin && npm run dev",
+    "admin:build": "cd admin && npm run build"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/space-grotesk": "^5.3.0",
+    "clsx": "^2.1.1",
+    "cors": "^2.8.6",
+    "lucide-react": "^1.16.0",
+    "nodemailer": "^10.3.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^3.10.1",
+    "tailwind-merge": "^2.5.4",
+    "three": "^0.169.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/node": "^22.8.1",
+    "@types/nodemailer": "^8.0.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/three": "^0.169.0",
+    "@vitejs/plugin-react": "^4.3.3",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10"
+  }
+}

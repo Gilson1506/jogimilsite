@@ -1,0 +1,44 @@
+[
+  {
+    "id": "news_1",
+    "title": "JOGIMIL lança nova suite de IA em Luanda",
+    "slug": "jogimil-lanca-nova-suite-ia-luanda",
+    "category": "Inteligência Artificial",
+    "tag": "IA & Cloud",
+    "author": "Redação JOGIMIL",
+    "date": "2026-03-28",
+    "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
+    "summary": "Automação avançada com conformidade e dados protegidos para empresas e instituições públicas em Angola.",
+    "excerpt": "Automação avançada com conformidade e dados protegidos para empresas e instituições públicas em Angola.",
+    "body": "A JOGIMIL Tecnologias anunciou o lançamento de uma infraestrutura pioneira de inteligência artificial soberana para o setor empresarial em Angola, permitindo integrar agentes autônomos em WhatsApp, ERPs locais e plataformas de suporte corporativo com garantia de privacidade e soberania de dados.",
+    "published": true
+  },
+  {
+    "id": "news_2",
+    "title": "Atualização das Normas de Validação AGT 2026 para POS",
+    "slug": "atualizacao-normas-validacao-agt-2026-pos",
+    "category": "SAF-T POS",
+    "tag": "Fiscalidade",
+    "author": "Engenharia Fiscal JOGIMIL",
+    "date": "2026-03-25",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+    "summary": "Exportação instantânea de SAF-T (AO) para retalho, distribuição e faturamento corporativo.",
+    "excerpt": "Exportação instantânea de SAF-T (AO) para retalho, distribuição e faturamento corporativo.",
+    "body": "O sistema de POS da JOGIMIL recebeu a mais recente certificação e conformidade para envio automático de ficheiros fiscais em Angola, garantindo assinatura de faturas em tempo real e relatórios de auditoria em conformidade com as exigências da Administração Geral Tributária.",
+    "published": true
+  },
+  {
+    "id": "news_3",
+    "title": "Parcerias Estratégicas para Modernização do Ensino e Saúde",
+    "slug": "parcerias-estrategicas-modernizacao-ensino-saude",
+    "category": "Institucional",
+    "tag": "Inovação",
+    "author": "Direção de Relações Institucionais",
+    "date": "2026-03-20",
+    "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
+    "summary": "Sistemas de gestão escolar e agendamento clínico ganham integração com pagamentos Multicaixa GPO.",
+    "excerpt": "Sistemas de gestão escolar e agendamento clínico ganham integração com pagamentos Multicaixa GPO.",
+    "body": "Novas implantações dos portais acadêmicos e clínicos da JOGIMIL em Luanda e Benguela registam crescimento na adesão a pagamentos digitais e atendimento via canal WhatsApp oficial.",
+    "published": true
+  }
+]

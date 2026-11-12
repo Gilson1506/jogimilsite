@@ -1,0 +1,97 @@
+[
+  {
+    "id": "cont_1793886035438_6m619",
+    "name": "Eng. Manuel Bento",
+    "email": "manuel.bento@jogimil.ao",
+    "phone": "+244 942 775 559",
+    "company": "Empresa em Angola",
+    "status": "novo",
+    "source": "Teste Automatizado do Microserviço",
+    "createdAt": "quinta-feira, 5 de novembro de 2026 às 14:40:35",
+    "history": [
+      {
+        "id": "msg_1794256444222_init",
+        "channel": "form",
+        "direction": "inbound",
+        "content": "Teste automatizado de envio",
+        "timestamp": "quinta-feira, 5 de novembro de 2026 às 14:40:35"
+      }
+    ]
+  },
+  {
+    "id": "cont_1793886127714_ja176",
+    "name": "Paulo Afonso",
+    "email": "paulo@jogimil.ao",
+    "phone": "+244 942 775 559",
+    "company": "Empresa em Angola",
+    "status": "novo",
+    "source": "Pedido de Contacto pelo Site",
+    "createdAt": "quinta-feira, 5 de novembro de 2026 às 14:42:07",
+    "history": [
+      {
+        "id": "msg_1794256444222_init",
+        "channel": "form",
+        "direction": "inbound",
+        "content": "Pretendo agendar visita",
+        "timestamp": "quinta-feira, 5 de novembro de 2026 às 14:42:07"
+      }
+    ]
+  },
+  {
+    "id": "cont_1793886133975_sb1mn",
+    "name": "Teste Proxy",
+    "email": "proxy@jogimil.ao",
+    "phone": "+244 942 775 559",
+    "company": "Empresa em Angola",
+    "status": "novo",
+    "source": "Teste via Proxy Vite",
+    "createdAt": "quinta-feira, 5 de novembro de 2026 às 14:42:13",
+    "history": [
+      {
+        "id": "msg_1794256444222_init",
+        "channel": "form",
+        "direction": "inbound",
+        "content": "Submissão inicial do formulário: Teste via Proxy Vite",
+        "timestamp": "quinta-feira, 5 de novembro de 2026 às 14:42:13"
+      }
+    ]
+  },
+  {
+    "id": "cont_1793886359717_pbcmx",
+    "name": "Mateus Silva",
+    "email": "mateus@parceiro.ao",
+    "phone": "+244923112233",
+    "company": "Empresa em Angola",
+    "status": "novo",
+    "source": "Candidatura a Agente Autorizado",
+    "createdAt": "quinta-feira, 5 de novembro de 2026 às 14:45:59",
+    "history": [
+      {
+        "id": "msg_1794256444222_init",
+        "channel": "form",
+        "direction": "inbound",
+        "content": "Submissão inicial do formulário: Candidatura a Agente Autorizado",
+        "timestamp": "quinta-feira, 5 de novembro de 2026 às 14:45:59"
+      }
+    ]
+  },
+  {
+    "id": "cont_1793890306181_lwybe",
+    "name": "Contacto Website",
+    "email": "diurogilson@gmail.com",
+    "phone": "+244 942 775 559",
+    "company": "Empresa em Angola",
+    "status": "novo",
+    "source": "Subscrição de Newsletter",
+    "createdAt": "quinta-feira, 5 de novembro de 2026 às 15:51:46",
+    "history": [
+      {
+        "id": "msg_1794256444222_init",
+        "channel": "form",
+        "direction": "inbound",
+        "content": "Submissão inicial do formulário: Subscrição de Newsletter",
+        "timestamp": "quinta-feira, 5 de novembro de 2026 às 15:51:46"
+      }
+    ]
+  }
+]

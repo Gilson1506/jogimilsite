@@ -1,0 +1,77 @@
+<svg width="800" height="480" viewBox="0 0 800 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#0B132B" />
+      <stop offset="50%" stopColor="#1B2A4A" />
+      <stop offset="100%" stopColor="#0B1220" />
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#06B6D4" />
+      <stop offset="100%" stopColor="#0284C7" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="480" rx="16" fill="url(#bgGrad3)" />
+  <circle cx="680" cy="120" r="130" fill="#06B6D4" opacity="0.18" filter="blur(60px)" />
+  <circle cx="140" cy="360" r="110" fill="#0284C7" opacity="0.12" filter="blur(50px)" />
+
+  <!-- Janela Principal do StockERP -->
+  <g>
+    <rect x="40" y="35" width="720" height="410" rx="12" fill="#0F172A" stroke="#334155" stroke-width="1.5" />
+    
+    <!-- Barra Superior -->
+    <path d="M40 47C40 40.3726 45.3726 35 52 35H748C754.627 35 760 40.3726 760 47V75H40V47Z" fill="#1E293B" />
+    <circle cx="65" cy="55" r="5" fill="#EF4444" />
+    <circle cx="82" cy="55" r="5" fill="#F59E0B" />
+    <circle cx="99" cy="55" r="5" fill="#10B981" />
+    <text x="300" y="59" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11" font-weight="500">JOGIMIL StockERP · Gestão de Armazéns &amp; Logística</text>
+
+    <!-- Sidebar Lateral -->
+    <rect x="40" y="75" width="60" height="370" fill="#0B132B" opacity="0.5" />
+    <rect x="55" y="95" width="30" height="30" rx="8" fill="url(#cyanGrad)" />
+
+    <!-- Conteúdo Principal: Gestão Multi-Armazém -->
+    <rect x="120" y="95" width="410" height="330" rx="10" fill="#111827" stroke="#1E293B" />
+    <text x="140" y="125" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="16" font-weight="700">Multi-Armazém &amp; Controlo de Stocks</text>
+    <rect x="420" y="110" width="95" height="22" rx="11" fill="#0E7490" />
+    <text x="432" y="125" fill="#A5F3FC" font-family="system-ui, sans-serif" font-size="10" font-weight="700">MODO OFFLINE</text>
+
+    <!-- Cards de Filiais / Armazéns -->
+    <rect x="140" y="145" width="175" height="75" rx="8" fill="#1E293B" />
+    <text x="155" y="167" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="700">Armazém Central (Viana)</text>
+    <text x="155" y="187" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11">Capacidade: 84%</text>
+    <text x="155" y="207" fill="#38BDF8" font-family="system-ui, sans-serif" font-size="13" font-weight="800">42.500 Artigos</text>
+
+    <rect x="330" y="145" width="180" height="75" rx="8" fill="#1E293B" />
+    <text x="345" y="167" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="700">Filial 2 (Cacuaco)</text>
+    <text x="345" y="187" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11">Capacidade: 62%</text>
+    <text x="345" y="207" fill="#38BDF8" font-family="system-ui, sans-serif" font-size="13" font-weight="800">18.200 Artigos</text>
+
+    <!-- Leitor de Código de Barras & Guias -->
+    <rect x="140" y="235" width="370" height="90" rx="8" fill="#1E293B" />
+    <text x="155" y="260" fill="#22D3EE" font-family="system-ui, sans-serif" font-size="12" font-weight="700">Entrada Rápida via Código de Barras (EAN-13)</text>
+    <text x="155" y="282" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11">Última leitura: Lote #9482 · Validade: 12/2027</text>
+    <rect x="155" y="295" width="140" height="22" rx="4" fill="#0891B2" />
+    <text x="168" y="310" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="10" font-weight="700">Emitir Guia de Transporte</text>
+
+    <rect x="140" y="340" width="370" height="65" rx="8" fill="#1E293B" opacity="0.8" />
+    <text x="155" y="365" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="11" font-weight="600">Reconciliação e Inventário Físico</text>
+    <text x="155" y="388" fill="#34D399" font-family="system-ui, sans-serif" font-size="12" font-weight="700">Divergências: 0.02% (Dentro da margem)</text>
+
+    <!-- Painel Lateral: Métricas de Distribuição -->
+    <rect x="550" y="95" width="190" height="330" rx="10" fill="#111827" stroke="#1E293B" />
+    <text x="568" y="125" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="13" font-weight="700">Relatório Logístico</text>
+
+    <rect x="568" y="145" width="154" height="65" rx="8" fill="#1E293B" />
+    <text x="580" y="165" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="10">Valor em Stock Total</text>
+    <text x="580" y="195" fill="#22D3EE" font-family="system-ui, sans-serif" font-size="16" font-weight="800">185.4M Kz</text>
+
+    <rect x="568" y="220" width="154" height="65" rx="8" fill="#1E293B" />
+    <text x="580" y="240" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="10">Transferências Hoje</text>
+    <text x="580" y="270" fill="#34D399" font-family="system-ui, sans-serif" font-size="18" font-weight="800">14 Cargas</text>
+
+    <rect x="568" y="295" width="154" height="65" rx="8" fill="#1E293B" />
+    <text x="580" y="315" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="10">Alertas de Reposição</text>
+    <text x="580" y="345" fill="#F59E0B" font-family="system-ui, sans-serif" font-size="18" font-weight="800">3 Artigos</text>
+  </g>
+</svg>
