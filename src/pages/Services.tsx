@@ -1,4 +1,4 @@
-import { SERVICES } from '../data/content';
+import { COMPANY, SERVICES } from '../data/content';
 import { href } from '../lib/hooks';
 import { Icon, Icon3D, Reveal } from '../components/ui';
 import { Body, PageHead } from './shared';
@@ -82,8 +82,79 @@ export function ServiceDetail({ id }: { id: string }) {
 }
 
 export function NotFound() {
-  return (<>
-    <PageHead eyebrow="Erro 404" title="Esta página não existe" lead="O endereço pode estar errado ou a página mudou de sítio." />
-    <Body><div className="flex flex-wrap gap-3"><a href={href('inicio')} className="btn btn-primary">Ir para o início</a><a href={href('servicos')} className="btn btn-ghost">Ver serviços</a><a href={href('contacto')} className="btn btn-ghost">Contacto</a></div></Body>
-  </>);
+  return (
+    <>
+      <PageHead
+        eyebrow="Erro 404"
+        title="Página não encontrada"
+        lead="O endereço acedido não existe, foi alterado ou está temporariamente indisponível."
+        crumbs={[['Erro 404']]}
+      />
+      <Body>
+        <div className="relative overflow-hidden rounded-3xl border border-line/50 bg-gradient-to-br from-card/90 via-card/50 to-slate-950 p-8 sm:p-14 text-center shadow-2xl max-w-4xl mx-auto my-6">
+          {/* Luz de fundo suave */}
+          <div className="pointer-events-none absolute -top-20 -right-20 h-64 w-64 rounded-full bg-blue/20 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-accent/20 blur-3xl" />
+
+          {/* 404 Monumental */}
+          <div className="relative z-10">
+            <span className="font-mono text-xs uppercase tracking-widest text-accent font-bold px-3 py-1 rounded-full border border-accent/30 bg-accent/10">
+              Código de Estado 404
+            </span>
+
+            <h1 className="mt-4 font-display font-extrabold text-7xl sm:text-9xl tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-200 to-slate-600 select-none">
+              404
+            </h1>
+
+            <h2 className="mt-2 text-2xl sm:text-3xl font-display font-bold text-fg">
+              Pedimos desculpa, esta página não foi encontrada.
+            </h2>
+            <p className="mt-3 text-sm sm:text-base text-muted max-w-xl mx-auto leading-relaxed">
+              O link que utilizou pode estar quebrado ou o conteúdo foi reorganizado. Explore os nossos principais produtos e serviços ou fale diretamente connosco.
+            </p>
+
+            {/* Ações principais */}
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <a href={href('inicio')} className="btn btn-primary inline-flex items-center gap-2 shadow-lg">
+                Voltar à Página Inicial <Icon n="arrow" className="h-4 w-4" />
+              </a>
+              <a
+                href={`https://wa.me/${COMPANY.phoneRaw}?text=${encodeURIComponent('Olá JOGIMIL! Encontrei um erro 404 no site e preciso de ajuda.')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-ghost inline-flex items-center gap-2 border border-line hover:border-accent text-accent font-semibold"
+              >
+                <Icon n="wa" className="h-4 w-4" /> Suporte no WhatsApp
+              </a>
+            </div>
+
+            {/* Atalhos Rápidos Recomendados */}
+            <div className="mt-12 pt-8 border-t border-line/40">
+              <p className="text-xs uppercase font-mono tracking-wider text-muted mb-4">
+                Páginas mais visitadas na JOGIMIL:
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">
+                <a href={href('produtos', 'soba-gest')} className="p-3.5 rounded-xl bg-card/60 hover:bg-card border border-line/40 hover:border-blue transition-all group">
+                  <p className="font-semibold text-xs text-fg group-hover:text-blue">SOBA GEST</p>
+                  <p className="text-[11px] text-muted mt-0.5">Faturação Certificada AGT</p>
+                </a>
+                <a href={href('produtos', 'soba-school')} className="p-3.5 rounded-xl bg-card/60 hover:bg-card border border-line/40 hover:border-blue transition-all group">
+                  <p className="font-semibold text-xs text-fg group-hover:text-blue">SOBA SCHOOL</p>
+                  <p className="text-[11px] text-muted mt-0.5">Gestão Escolar e Propinas</p>
+                </a>
+                <a href={href('servicos')} className="p-3.5 rounded-xl bg-card/60 hover:bg-card border border-line/40 hover:border-blue transition-all group">
+                  <p className="font-semibold text-xs text-fg group-hover:text-blue">Serviços & NOC</p>
+                  <p className="text-[11px] text-muted mt-0.5">16 Áreas de Especialidade</p>
+                </a>
+                <a href={href('contacto')} className="p-3.5 rounded-xl bg-card/60 hover:bg-card border border-line/40 hover:border-blue transition-all group">
+                  <p className="font-semibold text-xs text-fg group-hover:text-blue">Contacto Geral</p>
+                  <p className="text-[11px] text-muted mt-0.5">Sede em Luanda</p>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Body>
+    </>
+  );
 }

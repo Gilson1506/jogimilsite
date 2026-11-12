@@ -37,23 +37,32 @@ export function Footer() {
 
         <div className={`mt-8 sm:mt-10 grid gap-px overflow-hidden rounded-xl border ${
           isDark ? 'border-white/10 bg-white/10' : 'border-slate-200 bg-slate-200'
-        } sm:grid-cols-3`}>
+        } grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`}>
           <div className={`${isDark ? 'bg-black' : 'bg-white'} p-4 sm:p-5`}>
-            <p className={`text-xs ${isDark ? 'text-white/50' : 'text-slate-500'}`}>Telefone</p>
+            <p className={`text-xs ${isDark ? 'text-white/50' : 'text-slate-500'}`}>Telefone / WhatsApp</p>
             <div className="mt-1 flex items-center gap-2.5">
-              <a href={`tel:+${COMPANY.phoneRaw}`} className="font-display text-lg font-semibold hover:text-accent sm:text-xl">{COMPANY.phone}</a>
+              <a href={`tel:+${COMPANY.phoneRaw}`} className="font-display text-base font-semibold hover:text-accent sm:text-lg">{COMPANY.phone}</a>
               <button
                 onClick={copy}
-                className={`inline-flex h-8 w-8 items-center justify-center rounded-lg border ${
+                className={`inline-flex h-7 w-7 items-center justify-center rounded-lg border ${
                   isDark ? 'border-white/20 hover:border-white' : 'border-slate-300 hover:border-slate-900'
                 }`}
                 aria-label="Copiar número"
               >
-                <Icon n={copied ? 'check' : 'copy'} className="h-3.5 w-3.5" />
+                <Icon n={copied ? 'check' : 'copy'} className="h-3 w-3" />
               </button>
               <span role="status" className="text-xs text-accent">{copied ? 'Copiado' : ''}</span>
             </div>
           </div>
+          <a
+            href={`mailto:${COMPANY.email}`}
+            className={`group ${isDark ? 'bg-black hover:bg-white/[0.04]' : 'bg-white hover:bg-slate-100/60'} p-4 sm:p-5`}
+          >
+            <p className={`text-xs ${isDark ? 'text-white/50' : 'text-slate-500'}`}>Email Geral</p>
+            <p className="mt-1 font-display text-sm font-semibold group-hover:text-accent sm:text-base truncate">
+              {COMPANY.email}
+            </p>
+          </a>
           <a
             href={wa('Olá JOGIMIL! Gostaria de falar com a equipa.')}
             target="_blank"
@@ -61,7 +70,7 @@ export function Footer() {
             className={`group ${isDark ? 'bg-black hover:bg-white/[0.04]' : 'bg-white hover:bg-slate-100/60'} p-4 sm:p-5`}
           >
             <p className={`text-xs ${isDark ? 'text-white/50' : 'text-slate-500'}`}>WhatsApp Directo</p>
-            <p className="mt-1 flex items-center gap-1.5 font-display text-lg font-semibold group-hover:text-accent sm:text-xl">
+            <p className="mt-1 flex items-center gap-1.5 font-display text-base font-semibold group-hover:text-accent sm:text-lg">
               Enviar mensagem <Icon n="arrow" className="h-4 w-4" />
             </p>
           </a>
@@ -72,7 +81,7 @@ export function Footer() {
             className={`group ${isDark ? 'bg-black hover:bg-white/[0.04]' : 'bg-white hover:bg-slate-100/60'} p-4 sm:p-5`}
           >
             <p className={`text-xs ${isDark ? 'text-white/50' : 'text-slate-500'}`}>Sede em Luanda</p>
-            <p className="mt-1 font-display text-lg font-semibold group-hover:text-accent sm:text-xl">Nova Vida, Kilamba Kiaxi</p>
+            <p className="mt-1 font-display text-base font-semibold group-hover:text-accent sm:text-lg">Nova Vida, Kilamba Kiaxi</p>
             <p className={`text-xs ${isDark ? 'text-white/60' : 'text-slate-500'}`}>Ver no mapa ↗</p>
           </a>
         </div>

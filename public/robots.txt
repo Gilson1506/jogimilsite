@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Host & Sitemaps para Google Search Console
+Host: https://jogimiltecnologias.it.ao
+Sitemap: https://jogimiltecnologias.it.ao/sitemap.xml

@@ -16,23 +16,20 @@ export function Products() {
     />
     <Body>
       {/* Grade de Produtos: Cards Retangulares Horizontais com Imagens */}
-      <div className="grid gap-8 lg:grid-cols-3">
+      <div className="grid gap-8 lg:grid-cols-2 max-w-5xl mx-auto">
         {PRODUCTS.map((p, i) => (
           <Reveal key={p.slug} delay={i * 80}>
-            <a
-              href={href('produtos', p.slug)}
-              className="group flex flex-col justify-between rounded-2xl bg-card/60 hover:bg-card overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl shadow-sm p-5"
-            >
+            <div className="group flex flex-col justify-between rounded-2xl bg-card/60 hover:bg-card border border-line/40 hover:border-blue/50 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-sm p-6">
               <div>
-                {/* Imagem Retangular do Produto */}
-                <div className="aspect-[16/10] w-full rounded-xl overflow-hidden bg-slate-950 relative shadow-inner">
+                {/* Imagem / Logotipo Oficial do Produto */}
+                <div className="aspect-[16/10] w-full rounded-xl overflow-hidden bg-slate-950 flex items-center justify-center p-4 relative shadow-inner">
                   <img
                     src={p.image}
                     alt={p.name}
                     loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
                   />
-                  <span className="absolute top-3 left-3 rounded-md bg-black/80 backdrop-blur-sm px-2.5 py-1 font-mono text-[11px] font-semibold text-accent">
+                  <span className="absolute top-3 left-3 rounded-md bg-black/85 backdrop-blur-sm px-2.5 py-1 font-mono text-[11px] font-semibold text-accent border border-white/10">
                     {p.tag}
                   </span>
                 </div>
@@ -40,30 +37,55 @@ export function Products() {
                 <span className="mt-5 block font-mono text-xs uppercase tracking-wider text-muted">
                   {p.category}
                 </span>
-                <h2 className="mt-1 text-xl font-bold tracking-tight text-fg group-hover:text-blue transition-colors">
+                <h2 className="mt-1 text-2xl font-bold tracking-tight text-fg group-hover:text-blue transition-colors">
                   {p.name}
                 </h2>
-                <p className="mt-2.5 text-sm leading-relaxed text-muted line-clamp-3">
+                <p className="mt-3 text-sm leading-relaxed text-muted">
                   {p.description}
                 </p>
 
-                {/* Preço de Partida */}
-                <div className="mt-4 flex items-center justify-between text-xs">
-                  <span className="text-muted">A partir de:</span>
-                  <span className="font-mono font-bold text-fg bg-bg px-2.5 py-1 rounded-md">
-                    {p.priceStarting}
-                  </span>
+                {/* Preço Inicial Simplificado - sem bordas excessivas */}
+                <div className="mt-6 py-3 border-y border-line/40 flex items-baseline justify-between">
+                  <span className="text-xs text-muted font-medium">A partir de</span>
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-2xl font-mono font-bold text-accent">
+                      {p.starterPriceValue || p.priceStarting}
+                    </span>
+                    <span className="text-xs text-muted">{p.starterPeriod || '/mês'}</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Botão Inferior */}
-              <div className="mt-6 pt-4 border-t border-line/40 flex items-center justify-between text-xs">
-                <span className="inline-flex items-center gap-1.5 font-semibold text-blue group-hover:text-accent">
-                  Ver detalhes & planos <Icon n="arrow" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </span>
-                <span className="font-mono text-muted">Homologado AGT</span>
+              {/* Botões de Ação Direta: Solicitar Info e Download PDF */}
+              <div className="mt-6 pt-2 flex flex-wrap gap-2.5 items-center">
+                <a
+                  href={`https://wa.me/${COMPANY.phoneRaw}?text=${encodeURIComponent(`Olá JOGIMIL! Gostaria de solicitar informações sobre o ${p.name}.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary text-xs py-2.5 px-4 flex-1 justify-center inline-flex items-center gap-1.5 shadow-sm"
+                >
+                  <Icon n="wa" className="h-4 w-4" /> Solicitar Info
+                </a>
+
+                {p.pdfUrl && (
+                  <a
+                    href={p.pdfUrl}
+                    download
+                    className="btn btn-ghost text-xs py-2.5 px-3 border border-line hover:border-accent inline-flex items-center gap-1.5 text-muted hover:text-fg"
+                    title="Download da Apresentação em PDF"
+                  >
+                    <Icon n="download" className="h-4 w-4 text-accent" /> PDF
+                  </a>
+                )}
+
+                <a
+                  href={href('produtos', p.slug)}
+                  className="btn btn-ghost text-xs py-2.5 px-3 border border-line hover:border-blue inline-flex items-center gap-1 text-blue"
+                >
+                  Detalhes <Icon n="arrow" className="h-3.5 w-3.5" />
+                </a>
               </div>
-            </a>
+            </div>
           </Reveal>
         ))}
       </div>
@@ -72,7 +94,7 @@ export function Products() {
 }
 
 export function ProductDetail({ id }: { id: string }) {
-  const p = PRODUCTS.find((x) => x.slug === id);
+  const p = PRODUCTS.find((x) => x.slug === id || (id === 'faturacao' && x.slug === 'soba-gest') || (id === 'gestao-escolar' && x.slug === 'soba-school'));
   if (!p) return <NotFound />;
 
   const scrollToDemo = (e: React.MouseEvent) => {
@@ -89,38 +111,64 @@ export function ProductDetail({ id }: { id: string }) {
       crumbs={[['Produtos', href('produtos')], [p.name]]}
     />
     <Body>
-      {/* Banner Principal com Imagem Retangular e Call to Action */}
+      {/* Banner Principal com Imagem e Ações Imediatas */}
       <div className="mb-14 grid gap-8 lg:grid-cols-12 items-center">
-        <div className="lg:col-span-7">
-          <div className="aspect-[16/10] w-full rounded-2xl overflow-hidden bg-slate-950 shadow-2xl relative">
+        <div className="lg:col-span-6">
+          <div className="aspect-[16/10] w-full rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center p-6 shadow-2xl relative border border-line/40">
             <img
               src={p.image}
               alt={p.name}
-              className="h-full w-full object-cover"
+              className="max-h-full max-w-full object-contain"
             />
-            <span className="absolute top-4 left-4 rounded-lg bg-black/85 backdrop-blur-md px-3 py-1.5 font-mono text-xs font-semibold text-accent">
+            <span className="absolute top-4 left-4 rounded-lg bg-black/85 backdrop-blur-md px-3 py-1.5 font-mono text-xs font-semibold text-accent border border-white/10">
               {p.tag}
             </span>
           </div>
         </div>
 
-        <div className="lg:col-span-5 flex flex-col justify-center space-y-4">
+        <div className="lg:col-span-6 flex flex-col justify-center space-y-4">
           <span className="font-mono text-xs uppercase tracking-widest text-muted">{p.category}</span>
           <h1 className="text-3xl sm:text-4xl font-display font-bold text-fg">{p.name}</h1>
           <p className="text-muted leading-relaxed text-sm sm:text-base">{p.description}</p>
           
-          <div className="p-4 rounded-xl bg-card/60 space-y-1">
-            <span className="text-xs text-muted">Investimento Inicial:</span>
-            <p className="text-2xl font-bold font-mono text-accent">{p.priceStarting}</p>
-            <p className="text-xs text-muted">Sem custos de instalação em Luanda · Suporte técnico contínuo incluído.</p>
+          {/* Preço Inicial Simplificado - sem bordas excessivas */}
+          <div className="py-4 my-2 border-y border-line/40">
+            <span className="text-xs uppercase tracking-wider text-muted font-mono">Investimento:</span>
+            <div className="mt-1 flex items-baseline gap-2">
+              <span className="text-sm text-muted">A partir de</span>
+              <span className="text-3xl sm:text-4xl font-mono font-bold text-accent">
+                {p.starterPriceValue || p.priceStarting}
+              </span>
+              <span className="text-xs text-muted">{p.starterPeriod || '/mês (Plano Starter)'}</span>
+            </div>
+            <p className="mt-1.5 text-xs text-muted">
+              Sem custos de instalação em Luanda · Suporte técnico contínuo e atualizações incluídos.
+            </p>
           </div>
 
+          {/* Botões: Solicitar Info e Download PDF */}
           <div className="flex flex-wrap gap-3 pt-2">
-            <a href="#pedir-demonstracao" onClick={scrollToDemo} className="btn btn-primary">
-              Pedir Demonstração Gratuita <Icon n="arrow" className="h-4 w-4" />
+            <a
+              href={`https://wa.me/${COMPANY.phoneRaw}?text=${encodeURIComponent(`Olá JOGIMIL! Gostaria de solicitar informações sobre o ${p.name}.`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary inline-flex items-center gap-2"
+            >
+              <Icon n="wa" className="h-4 w-4" /> Solicitar Informações
             </a>
-            <a href={`https://wa.me/244942775559?text=${encodeURIComponent(`Olá JOGIMIL! Gostaria de pedir uma demonstração do ${p.name}.`)}`} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
-              Falar no WhatsApp
+
+            {p.pdfUrl && (
+              <a
+                href={p.pdfUrl}
+                download
+                className="btn btn-ghost inline-flex items-center gap-2 border border-line hover:border-accent"
+              >
+                <Icon n="download" className="h-4 w-4 text-accent" /> Download da Apresentação (PDF)
+              </a>
+            )}
+
+            <a href="#pedir-demonstracao" onClick={scrollToDemo} className="btn btn-ghost text-xs text-muted hover:text-fg">
+              Pedir Demonstração Online ↓
             </a>
           </div>
         </div>
@@ -147,57 +195,42 @@ export function ProductDetail({ id }: { id: string }) {
           </ul>
         </div>
 
-        {/* Tabela de Preços e Planos de Subscrição */}
-        <div className="lg:col-span-5 space-y-4">
-          <h2 className="text-2xl font-bold font-display text-fg">Planos de Subscrição</h2>
-          <p className="text-xs text-muted">Valores em Kwanzas (AOA) com facturação e suporte oficial em Angola.</p>
+        {/* Bloco de Aquisição Simplificado e Limpo */}
+        <div className="lg:col-span-5 flex flex-col justify-center space-y-5 rounded-2xl bg-card/40 p-6 sm:p-8 border border-line/40">
+          <div>
+            <span className="font-mono text-xs uppercase tracking-widest text-accent">Plano Inicial</span>
+            <h3 className="text-xl font-display font-bold text-fg mt-1">Ativação Imediata & Suporte Local</h3>
+            <div className="mt-3 flex items-baseline gap-2">
+              <span className="text-xs text-muted">A partir de</span>
+              <span className="text-3xl font-mono font-extrabold text-accent">
+                {p.starterPriceValue || p.priceStarting}
+              </span>
+              <span className="text-xs text-muted">{p.starterPeriod || '/mês'}</span>
+            </div>
+            <p className="mt-2 text-xs leading-relaxed text-muted">
+              Conformidade garantida com a legislação angolana, emissão ágil e apoio presencial ou remoto da equipa técnica em Luanda.
+            </p>
+          </div>
 
-          <div className="space-y-4">
-            {p.plans.map((pl) => (
-              <div
-                key={pl.name}
-                className={`p-6 rounded-2xl transition-all ${
-                  pl.highlighted
-                    ? 'bg-gradient-to-br from-blue/15 to-card border-2 border-blue shadow-xl'
-                    : 'bg-card/70 shadow-sm'
-                }`}
+          <div className="space-y-2.5 pt-2">
+            <a
+              href={`https://wa.me/${COMPANY.phoneRaw}?text=${encodeURIComponent(`Olá JOGIMIL! Gostaria de solicitar informações sobre o ${p.name}.`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary w-full justify-center inline-flex items-center gap-2 py-3"
+            >
+              <Icon n="wa" className="h-4 w-4" /> Solicitar Info no WhatsApp
+            </a>
+
+            {p.pdfUrl && (
+              <a
+                href={p.pdfUrl}
+                download
+                className="btn btn-ghost w-full justify-center inline-flex items-center gap-2 border border-line hover:border-accent py-3 text-sm font-semibold"
               >
-                <div className="flex items-center justify-between">
-                  <h4 className="font-bold text-base text-fg">{pl.name}</h4>
-                  {pl.highlighted && (
-                    <span className="rounded-full bg-blue text-white text-[10px] font-bold px-2.5 py-0.5 uppercase tracking-wide">
-                      Mais Procurado
-                    </span>
-                  )}
-                </div>
-                <div className="mt-2 flex items-baseline gap-1">
-                  <span className="text-2xl font-mono font-extrabold text-accent">{pl.price}</span>
-                  <span className="text-xs text-muted">{pl.period}</span>
-                </div>
-                <p className="mt-2 text-xs text-muted leading-relaxed">{pl.note}</p>
-
-                <ul className="mt-4 space-y-2 border-t border-line/40 pt-3 text-xs">
-                  {pl.features.map((feat) => (
-                    <li key={feat} className="flex items-center gap-2 text-fg">
-                      <span className="text-blue font-bold">✓</span>
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <button
-                  type="button"
-                  onClick={scrollToDemo}
-                  className={`mt-5 w-full py-2.5 rounded-xl text-xs font-semibold transition-all ${
-                    pl.highlighted
-                      ? 'bg-blue text-white hover:bg-blue/90 shadow-md'
-                      : 'bg-bg text-fg hover:bg-card border border-line/40'
-                  }`}
-                >
-                  Pedir Demonstração para este Plano
-                </button>
-              </div>
-            ))}
+                <Icon n="download" className="h-4 w-4 text-accent" /> Download do PDF de Apresentação
+              </a>
+            )}
           </div>
         </div>
       </div>
@@ -214,7 +247,7 @@ export function ProductDetail({ id }: { id: string }) {
           </p>
         </div>
 
-        <div className="mx-auto max-w-2xl bg-card/60 p-6 sm:p-8 rounded-3xl shadow-xl">
+        <div className="mx-auto max-w-2xl bg-card/60 p-6 sm:p-8 rounded-3xl shadow-xl border border-line/40">
           <Form def={FORMS.demonstracao} />
         </div>
       </div>
@@ -227,62 +260,54 @@ function TeamCard({ member }: { member: TeamMember }) {
   const showImg = member.photo && !imgErr;
 
   return (
-    <div className="card rounded-none border border-line bg-card overflow-hidden flex flex-col justify-between transition-all duration-300 hover:border-blue group">
-      <div>
-        <div className="relative aspect-[4/5] w-full overflow-hidden bg-slate-950">
-          {showImg ? (
-            <img
-              src={member.photo}
-              alt={`Fotografia de ${member.name}`}
-              loading="lazy"
-              onError={() => setImgErr(true)}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-          ) : (
-            <div className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-black via-[#001844] to-[#0066FF]/30 p-6 text-center">
-              <div className="flex h-20 w-20 items-center justify-center rounded-none border-2 border-blue bg-black/70 shadow-lg">
-                <span className="font-display text-2xl font-bold tracking-wider text-white">
-                  {member.initials}
-                </span>
-              </div>
-              <p className="mt-4 font-mono text-[11px] uppercase tracking-widest text-blue">
-                Foto a caminho
-              </p>
-            </div>
-          )}
-          <div className="absolute top-3 left-3">
-            <span className="rounded-none bg-black/85 backdrop-blur-sm border border-white/20 px-2.5 py-1 text-[11px] font-semibold text-white">
-              {member.department}
+    <div className="group relative overflow-hidden rounded-2xl bg-card/70 border border-line/40 hover:border-blue/50 transition-all duration-300 hover:shadow-2xl flex flex-col justify-between">
+      {/* Container de imagem simplificado sem borda dura, adaptado para PNG com fundo transparente */}
+      <div className="relative w-full pt-8 px-6 flex items-end justify-center bg-gradient-to-t from-blue/10 via-transparent to-transparent min-h-[320px]">
+        {showImg ? (
+          <img
+            src={member.photo}
+            alt={`Fotografia de ${member.name}`}
+            loading="lazy"
+            onError={() => setImgErr(true)}
+            className="max-h-[300px] w-auto object-contain object-bottom transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <div className="flex h-44 w-44 items-center justify-center rounded-2xl bg-black/60 border border-line shadow-lg">
+            <span className="font-display text-3xl font-bold tracking-wider text-white">
+              {member.initials}
             </span>
           </div>
-        </div>
-
-        <div className="p-5">
-          <h3 className="font-display text-lg font-bold text-fg group-hover:text-blue transition-colors">
-            {member.name}
-          </h3>
-          <p className="mt-1 text-xs font-semibold text-accent">{member.role}</p>
-          <p className="mt-3 text-xs leading-relaxed text-muted">{member.bio}</p>
-        </div>
+        )}
+        <span className="absolute top-4 left-4 rounded-md bg-black/80 backdrop-blur-sm px-2.5 py-1 text-[11px] font-semibold text-accent border border-white/10">
+          {member.department}
+        </span>
       </div>
 
-      <div className="border-t border-line/60 bg-bg/40 p-4 flex flex-wrap items-center justify-between gap-2 text-xs">
+      <div className="p-6">
+        <h3 className="font-display text-xl font-bold text-fg group-hover:text-blue transition-colors">
+          {member.name}
+        </h3>
+        <p className="mt-1 text-sm font-semibold text-accent">{member.role}</p>
+        <p className="mt-3 text-xs leading-relaxed text-muted">{member.bio}</p>
+      </div>
+
+      <div className="border-t border-line/40 bg-bg/40 p-4 flex flex-wrap items-center justify-between gap-2 text-xs">
         {member.email && (
           <a
             href={`mailto:${member.email}`}
-            className="inline-flex items-center gap-1.5 text-muted hover:text-accent transition-colors truncate max-w-[200px]"
+            className="inline-flex items-center gap-1.5 text-muted hover:text-accent transition-colors truncate max-w-[220px]"
             title={member.email}
           >
             <span>✉</span> {member.email}
           </a>
         )}
         <a
-          href={COMPANY.maps}
+          href={`https://wa.me/${COMPANY.phoneRaw}`}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1 text-accent font-semibold hover:underline ml-auto"
         >
-          Luanda ↗
+          WhatsApp ↗
         </a>
       </div>
     </div>
@@ -340,33 +365,22 @@ export function About() {
           </div>
         </div>
 
-        {/* Suporte Completo para Fotos da Equipa */}
+        {/* Secção da Equipa - Apresentação Limpa e Focada */}
         <div className="mt-20">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
             <div>
-              <p className="eyebrow text-accent">Capital Humano &amp; Engenharia</p>
+              <p className="eyebrow text-accent">Liderança &amp; Gestão</p>
               <h2 className="h2 mt-1">A nossa equipa</h2>
               <p className="mt-2 max-w-2xl text-sm text-muted">
-                Especialistas em desenvolvimento de software, conformidade fiscal AGT, suporte de POS e gestão de clientes com base em Luanda.
+                Gestão estratégica de projectos de tecnologia, implementação de software empresarial e acompanhamento de excelência em Angola.
               </p>
-            </div>
-            <div className="text-left sm:text-right">
-              <span className="inline-flex items-center gap-1.5 rounded-none border border-line bg-card px-3 py-1.5 text-xs text-muted">
-                <span className="h-2 w-2 rounded-full bg-emerald-500"></span> Suporte a fotos de equipa ativo
-              </span>
             </div>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="max-w-md mx-auto">
             {TEAM_MEMBERS.map((member) => (
               <TeamCard key={member.id} member={member} />
             ))}
-          </div>
-
-          <div className="mt-6 rounded-none border border-dashed border-line bg-card/40 p-4 text-xs text-muted flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <p>
-              <strong className="text-fg">Instruções para fotos da equipa:</strong> Adicione imagens em <code>public/team/</code> (ex: <code>manuel-bento.jpg</code>, <code>png</code> ou <code>svg</code>) e associe o caminho no ficheiro <code>src/data/content.ts</code>. Em caso de ausência, o sistema gera automaticamente o avatar executivo com as iniciais.
-            </p>
           </div>
         </div>
 

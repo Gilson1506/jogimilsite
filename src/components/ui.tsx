@@ -29,6 +29,7 @@ const P: Record<string, string> = {
   map: 'M12 22s7-6.500 7-12a7 7 0 10-14 0c0 5.500 7 12 7 12zM12 12a2.500 2.500 0 100-5 2.500 2.500 0 000 5z',
   clip: 'M20 11l-8.500 8.500a5 5 0 01-7-7L13 4a3.500 3.500 0 015 5l-8.500 8.500a2 2 0 01-3-3L14 7',
   plus: 'M12 5v14M5 12h14',
+  download: 'M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3',
 };
 
 export const Icon = ({ n, className = 'h-5 w-5' }: { n: string; className?: string }) => (
