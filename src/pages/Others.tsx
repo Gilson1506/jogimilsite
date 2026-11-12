@@ -21,15 +21,18 @@ export function Products() {
           <Reveal key={p.slug} delay={i * 80}>
             <div className="group flex flex-col justify-between rounded-2xl bg-card/60 hover:bg-card border border-line/40 hover:border-blue/50 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-sm p-6">
               <div>
-                {/* Imagem / Logotipo Oficial do Produto */}
-                <div className="aspect-[16/10] w-full rounded-xl overflow-hidden bg-slate-950 flex items-center justify-center p-4 relative shadow-inner">
-                  <img
-                    src={p.image}
-                    alt={p.name}
-                    loading="lazy"
-                    className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <span className="absolute top-3 left-3 rounded-md bg-black/85 backdrop-blur-sm px-2.5 py-1 font-mono text-[11px] font-semibold text-accent border border-white/10">
+                {/* Logotipo Oficial do Produto: sem fundo escuro de caixa, sem bordas, tamanho responsivo */}
+                <div className="w-full flex flex-col items-center justify-center py-6">
+                  <div className="relative flex items-center justify-center h-36 sm:h-44 md:h-48 w-full">
+                    <div className="absolute h-28 w-28 rounded-full bg-blue/10 blur-2xl pointer-events-none" />
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      loading="lazy"
+                      className="max-h-full max-w-[260px] sm:max-w-[320px] w-auto object-contain drop-shadow-lg transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <span className="mt-3 inline-block rounded-md bg-accent/10 px-2.5 py-1 font-mono text-[11px] font-semibold text-accent border border-accent/20">
                     {p.tag}
                   </span>
                 </div>
@@ -113,17 +116,18 @@ export function ProductDetail({ id }: { id: string }) {
     <Body>
       {/* Banner Principal com Imagem e Ações Imediatas */}
       <div className="mb-14 grid gap-8 lg:grid-cols-12 items-center">
-        <div className="lg:col-span-6">
-          <div className="aspect-[16/10] w-full rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center p-6 shadow-2xl relative border border-line/40">
+        <div className="lg:col-span-6 flex flex-col items-center justify-center py-6">
+          <div className="relative flex items-center justify-center h-52 sm:h-64 md:h-72 w-full">
+            <div className="absolute h-44 w-44 rounded-full bg-blue/15 blur-3xl pointer-events-none" />
             <img
               src={p.image}
               alt={p.name}
-              className="max-h-full max-w-full object-contain"
+              className="max-h-full max-w-[300px] sm:max-w-[420px] w-auto object-contain drop-shadow-xl"
             />
-            <span className="absolute top-4 left-4 rounded-lg bg-black/85 backdrop-blur-md px-3 py-1.5 font-mono text-xs font-semibold text-accent border border-white/10">
-              {p.tag}
-            </span>
           </div>
+          <span className="mt-4 rounded-lg bg-accent/10 px-3 py-1.5 font-mono text-xs font-semibold text-accent border border-accent/20">
+            {p.tag}
+          </span>
         </div>
 
         <div className="lg:col-span-6 flex flex-col justify-center space-y-4">

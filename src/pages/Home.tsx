@@ -243,17 +243,14 @@ function Services() {
                         href={href('produtos', p.slug)}
                         className="group flex flex-col sm:flex-row items-stretch rounded-2xl bg-card/50 hover:bg-card/90 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl shadow-sm p-4 sm:p-4.5 gap-4.5"
                       >
-                        {/* Imagem Retangular do Produto (Sem Ícone) */}
-                        <div className="w-full sm:w-48 lg:w-44 xl:w-52 shrink-0 aspect-[16/10] sm:aspect-auto sm:min-h-[140px] rounded-xl overflow-hidden bg-slate-950 relative shadow-inner">
+                        {/* Logotipo Limpo do Produto: sem fundo escuro, sem bordas */}
+                        <div className="w-full sm:w-48 lg:w-44 xl:w-48 shrink-0 flex items-center justify-center py-2 sm:py-0">
                           <img
                             src={p.image}
                             alt={p.name}
                             loading="lazy"
-                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            className="h-24 sm:h-28 max-w-full w-auto object-contain drop-shadow-md transition-transform duration-500 group-hover:scale-105"
                           />
-                          <span className="absolute top-2 left-2 rounded-md bg-black/80 backdrop-blur-sm px-2 py-0.5 font-mono text-[10px] font-semibold text-accent">
-                            {p.tag}
-                          </span>
                         </div>
 
                         {/* Conteúdo: Título, Parágrafo e Preço */}
@@ -343,8 +340,9 @@ function Services() {
                         href={href('produtos', p.slug)}
                         className="group block rounded-2xl bg-card/60 p-4 transition-all duration-200 shadow-sm"
                       >
-                        <div className="aspect-[16/10] w-full rounded-xl overflow-hidden bg-slate-950 mb-3">
-                          <img src={p.image} alt={p.name} className="h-full w-full object-cover" />
+                        {/* Logotipo Limpo do Produto */}
+                        <div className="w-full flex items-center justify-center py-4 mb-2">
+                          <img src={p.image} alt={p.name} className="h-28 max-w-full w-auto object-contain drop-shadow-md" />
                         </div>
                         <span className="font-mono text-[10px] uppercase tracking-wider text-muted">
                           {p.category}
