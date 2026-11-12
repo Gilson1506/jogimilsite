@@ -11,7 +11,12 @@ export class NodemailerAdapter extends IMailProvider {
     this.isConfigured = isSmtpConfigured;
 
     if (this.isConfigured) {
-      this.transporter = nodemailer.createTransport(ENV.SMTP);
+      this.transporter = nodemailer.createTransport({
+        ...ENV.SMTP,
+        connectionTimeout: 2500,
+        greetingTimeout: 2500,
+        socketTimeout: 3000,
+      });
     }
   }
 
@@ -25,7 +30,15 @@ export class NodemailerAdapter extends IMailProvider {
     }
 
     try {
-      await this.transporter.verify();
+      const verifyPromise = this.transporter.verify();
+      const timeoutPromise = new Promise((_, reject) => {
+        const id = setTimeout(() => {
+          clearTimeout(id);
+          reject(new Error('Tempo limite excedido ao validar SMTP (2.5s)'));
+        }, 2500);
+      });
+
+      await Promise.race([verifyPromise, timeoutPromise]);
       return {
         ok: true,
         mode: 'smtp',
