@@ -1,12 +1,35 @@
 import { useState, useEffect } from 'react';
-import { COMPANY, POSTS, PRODUCTS, TEAM_MEMBERS, TeamMember } from '../data/content';
+import { Globe, Mail, Phone } from 'lucide-react';
+import { COMPANY, POSTS, PRODUCTS, TEAM_MEMBERS } from '../data/content';
+import { fetchPublicProducts, fetchPublicTeam, PublicProduct, PublicTeamMember } from '../lib/api';
 import { href } from '../lib/hooks';
 import { Form, FORMS } from '../components/Forms';
 import { Icon, Reveal } from '../components/ui';
 import { Body, PageHead } from './shared';
 import { NotFound } from './Services';
 
+function mergeStaticAndDynamicProducts(dynamic: PublicProduct[]) {
+  if (!dynamic.length) return PRODUCTS;
+  const dynamicSlugs = new Set(dynamic.map((d) => d.slug));
+  const mergedStatic = PRODUCTS.filter((s) => !dynamicSlugs.has(s.slug));
+  return [...dynamic, ...mergedStatic];
+}
+
 export function Products() {
+  const [items, setItems] = useState(() => PRODUCTS);
+
+  useEffect(() => {
+    let active = true;
+    fetchPublicProducts().then((dynamic) => {
+      if (active && dynamic.length > 0) {
+        setItems(mergeStaticAndDynamicProducts(dynamic) as typeof PRODUCTS);
+      }
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
+
   return (<>
     <PageHead
       eyebrow="Produtos Próprios"
@@ -17,7 +40,7 @@ export function Products() {
     <Body>
       {/* Grade de Produtos: Cards Retangulares Horizontais com Imagens */}
       <div className="grid gap-8 lg:grid-cols-2 max-w-5xl mx-auto">
-        {PRODUCTS.map((p, i) => (
+        {items.map((p, i) => (
           <Reveal key={p.slug} delay={i * 80}>
             <div className="group flex flex-col justify-between rounded-2xl bg-card/60 hover:bg-card border border-line/40 hover:border-blue/50 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-sm p-6">
               <div>
@@ -97,7 +120,43 @@ export function Products() {
 }
 
 export function ProductDetail({ id }: { id: string }) {
-  const p = PRODUCTS.find((x) => x.slug === id || (id === 'faturacao' && x.slug === 'soba-gest') || (id === 'gestao-escolar' && x.slug === 'soba-school'));
+  const [items, setItems] = useState(() => PRODUCTS);
+  const [loading, setLoading] = useState(true);
+  const [activePhotoIdx, setActivePhotoIdx] = useState(0);
+
+  useEffect(() => {
+    setActivePhotoIdx(0);
+  }, [id]);
+
+  useEffect(() => {
+    let active = true;
+    fetchPublicProducts()
+      .then((dynamic) => {
+        if (active && dynamic.length > 0) {
+          setItems(mergeStaticAndDynamicProducts(dynamic) as typeof PRODUCTS);
+        }
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const p = items.find(
+    (x) =>
+      x.slug === id ||
+      (id === 'faturacao' && x.slug === 'soba-gest') ||
+      (id === 'gestao-escolar' && x.slug === 'soba-school')
+  );
+  if (!p && loading) {
+    return (
+      <section data-tone="hero" className="min-h-[60vh] flex items-center justify-center pt-32">
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-blue/20 border-t-blue" />
+      </section>
+    );
+  }
   if (!p) return <NotFound />;
 
   const scrollToDemo = (e: React.MouseEvent) => {
@@ -117,14 +176,43 @@ export function ProductDetail({ id }: { id: string }) {
       {/* Banner Principal com Imagem e Ações Imediatas */}
       <div className="mb-14 grid gap-8 lg:grid-cols-12 items-center">
         <div className="lg:col-span-6 flex flex-col items-center justify-center py-6">
-          <div className="relative flex items-center justify-center h-52 sm:h-64 md:h-72 w-full">
-            <div className="absolute h-44 w-44 rounded-full bg-blue/15 blur-3xl pointer-events-none" />
-            <img
-              src={p.image}
-              alt={p.name}
-              className="max-h-full max-w-[300px] sm:max-w-[420px] w-auto object-contain drop-shadow-xl"
-            />
-          </div>
+          {(() => {
+            const galleryList =
+              'gallery' in p && Array.isArray((p as PublicProduct).gallery) && ((p as PublicProduct).gallery?.length || 0) > 0
+                ? ((p as PublicProduct).gallery as string[])
+                : [p.image];
+            const currentSrc = galleryList[activePhotoIdx] || galleryList[0] || p.image;
+            return (
+              <>
+                <div className="relative flex items-center justify-center h-52 sm:h-64 md:h-72 w-full">
+                  <div className="absolute h-44 w-44 rounded-full bg-blue/15 blur-3xl pointer-events-none" />
+                  <img
+                    src={currentSrc}
+                    alt={p.name}
+                    className="max-h-full max-w-[300px] sm:max-w-[420px] w-auto object-contain drop-shadow-xl transition-all duration-300"
+                  />
+                </div>
+                {galleryList.length > 1 && (
+                  <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+                    {galleryList.slice(0, 5).map((src, idx) => (
+                      <button
+                        key={`${idx}_${src.slice(0, 20)}`}
+                        type="button"
+                        onClick={() => setActivePhotoIdx(idx)}
+                        className={`h-14 w-14 p-1 border transition-all ${
+                          activePhotoIdx === idx
+                            ? 'border-blue bg-blue/10 scale-105'
+                            : 'border-line/60 bg-card/50 opacity-70 hover:opacity-100'
+                        }`}
+                      >
+                        <img src={src} alt={`${p.name} ${idx + 1}`} className="h-full w-full object-contain" />
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </>
+            );
+          })()}
           <span className="mt-4 rounded-lg bg-accent/10 px-3 py-1.5 font-mono text-xs font-semibold text-accent border border-accent/20">
             {p.tag}
           </span>
@@ -259,54 +347,87 @@ export function ProductDetail({ id }: { id: string }) {
   </>);
 }
 
-function TeamCard({ member }: { member: TeamMember }) {
+function TeamCard({ member }: { member: PublicTeamMember }) {
   const [imgErr, setImgErr] = useState(false);
-  const showImg = member.photo && !imgErr;
+  const showImg = Boolean(member.photo) && !imgErr;
+  const digits = (member.whatsapp || member.phone || '').replace(/\D/g, '');
+  const waHref = digits.length >= 7
+    ? `https://wa.me/${digits}?text=${encodeURIComponent(`Olá ${member.name}, venho através do site da JOGIMIL.`)}`
+    : `https://wa.me/${COMPANY.phoneRaw}`;
 
   return (
-    <div className="group relative overflow-hidden rounded-2xl bg-card/70 border border-line/40 hover:border-blue/50 transition-all duration-300 hover:shadow-2xl flex flex-col justify-between">
-      {/* Container de imagem simplificado sem borda dura, adaptado para PNG com fundo transparente */}
-      <div className="relative w-full pt-8 px-6 flex items-end justify-center bg-gradient-to-t from-blue/10 via-transparent to-transparent min-h-[320px]">
+    <div className="group relative overflow-hidden rounded-none bg-card/75 border border-line/60 hover:border-blue/50 transition-all duration-400 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue/10 flex flex-col justify-between">
+      <div className="relative w-full h-72 overflow-hidden flex items-center justify-center bg-gradient-to-br from-blue/15 via-card to-cyan-500/10">
         {showImg ? (
           <img
             src={member.photo}
             alt={`Fotografia de ${member.name}`}
             loading="lazy"
             onError={() => setImgErr(true)}
-            className="max-h-[300px] w-auto object-contain object-bottom transition-transform duration-500 group-hover:scale-105"
+            className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-44 w-44 items-center justify-center rounded-2xl bg-black/60 border border-line shadow-lg">
+          <div className="flex h-28 w-28 items-center justify-center rounded-none bg-black/70 border border-white/10 shadow-xl">
             <span className="font-display text-3xl font-bold tracking-wider text-white">
               {member.initials}
             </span>
           </div>
         )}
-        <span className="absolute top-4 left-4 rounded-md bg-black/80 backdrop-blur-sm px-2.5 py-1 text-[11px] font-semibold text-accent border border-white/10">
-          {member.department}
-        </span>
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/65 via-black/20 to-transparent" />
+        {member.department && (
+          <span className="absolute top-4 left-4 rounded-none bg-black/75 backdrop-blur-md px-3 py-1 text-[11px] font-semibold text-white border border-white/10">
+            {member.department}
+          </span>
+        )}
       </div>
 
-      <div className="p-6">
+      <div className="p-6 flex-1 flex flex-col">
         <h3 className="font-display text-xl font-bold text-fg group-hover:text-blue transition-colors">
           {member.name}
         </h3>
         <p className="mt-1 text-sm font-semibold text-accent">{member.role}</p>
-        <p className="mt-3 text-xs leading-relaxed text-muted">{member.bio}</p>
+        {member.bio && <p className="mt-3 text-xs leading-relaxed text-muted flex-1">{member.bio}</p>}
+
+        {(member.email || member.phone) && (
+          <div className="mt-4 space-y-1.5 pt-3 border-t border-line/40 text-xs text-muted">
+            {member.email && (
+              <a
+                href={`mailto:${member.email}`}
+                className="flex items-center gap-2 hover:text-blue transition-colors truncate"
+                title={member.email}
+              >
+                <Mail className="h-3.5 w-3.5 shrink-0 text-blue" />
+                <span className="truncate">{member.email}</span>
+              </a>
+            )}
+            {member.phone && (
+              <a
+                href={`tel:${member.phone.replace(/\s+/g, '')}`}
+                className="flex items-center gap-2 hover:text-blue transition-colors truncate"
+              >
+                <Phone className="h-3.5 w-3.5 shrink-0 text-emerald-400" />
+                <span>{member.phone}</span>
+              </a>
+            )}
+          </div>
+        )}
       </div>
 
-      <div className="border-t border-line/40 bg-bg/40 p-4 flex flex-wrap items-center justify-between gap-2 text-xs">
-        {member.email && (
+      <div className="border-t border-line/40 bg-bg/40 px-5 py-3.5 flex flex-wrap items-center justify-between gap-2 text-xs">
+        {member.linkedin ? (
           <a
-            href={`mailto:${member.email}`}
-            className="inline-flex items-center gap-1.5 text-muted hover:text-accent transition-colors truncate max-w-[220px]"
-            title={member.email}
+            href={member.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-muted hover:text-blue transition-colors"
           >
-            <span>✉</span> {member.email}
+            <Globe className="h-3.5 w-3.5" /> LinkedIn
           </a>
+        ) : (
+          <span className="text-[11px] text-muted">Equipa JOGIMIL</span>
         )}
         <a
-          href={`https://wa.me/${COMPANY.phoneRaw}`}
+          href={waHref}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1 text-accent font-semibold hover:underline ml-auto"
@@ -319,6 +440,31 @@ function TeamCard({ member }: { member: TeamMember }) {
 }
 
 export function About() {
+  const [team, setTeam] = useState<PublicTeamMember[]>(() =>
+    TEAM_MEMBERS.map((m) => ({
+      id: m.id,
+      name: m.name,
+      role: m.role,
+      department: m.department,
+      bio: m.bio,
+      photo: m.photo || '',
+      email: m.email,
+      initials: m.initials,
+    }))
+  );
+
+  useEffect(() => {
+    let active = true;
+    fetchPublicTeam().then((dynamicTeam) => {
+      if (active && dynamicTeam.length > 0) {
+        setTeam(dynamicTeam);
+      }
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
+
   const vals = [
     ['Clareza', 'Dizemos o que vamos fazer, quando e porquê. Sem custos ocultos nem termos dúbios.'],
     ['Utilidade', 'Software e arquiteturas concebidos para resolver problemas de negócio reais.'],
@@ -381,9 +527,19 @@ export function About() {
             </div>
           </div>
 
-          <div className="max-w-md mx-auto">
-            {TEAM_MEMBERS.map((member) => (
-              <TeamCard key={member.id} member={member} />
+          <div
+            className={
+              team.length === 1
+                ? 'max-w-md mx-auto'
+                : team.length === 2
+                ? 'grid gap-6 sm:grid-cols-2 max-w-3xl mx-auto'
+                : 'grid gap-6 sm:grid-cols-2 lg:grid-cols-3'
+            }
+          >
+            {team.map((member, idx) => (
+              <Reveal key={member.id} delay={(idx % 3) * 80}>
+                <TeamCard member={member} />
+              </Reveal>
             ))}
           </div>
         </div>
@@ -550,7 +706,7 @@ export function Contact({ id }: { id?: string }) {
               <button onClick={copy} className="inline-flex h-11 w-11 items-center justify-center rounded-none border border-line hover:border-blue" aria-label="Copiar telefone"><Icon n="copy" className="h-4 w-4" /></button>
             </div>
           </div>
-          <a href={`https://wa.me/${COMPANY.phoneRaw}`} target="_blank" rel="noopener noreferrer" className="card rounded-none card-hover flex items-center gap-3 p-6 font-semibold"><Icon n="wa" className="text-blue" /> WhatsApp <Icon n="arrow" className="ml-auto h-4 w-4" /></a>
+          <a href={`https://wa.me/${COMPANY.phoneRaw}`} target="_blank" rel="noopener noreferrer" className="card rounded-none card-hover flex items-center gap-3 p-6 font-semibold"><Icon n="wa" className="h-5 w-5 shrink-0 text-blue" /> WhatsApp <Icon n="arrow" className="ml-auto h-4 w-4 shrink-0" /></a>
           <a href={`mailto:${COMPANY.email}`} className="card rounded-none card-hover block p-6"><p className="text-sm text-muted">Email</p><p className="font-semibold">{COMPANY.email}</p></a>
           <div className="card rounded-none border border-line p-6">
             <p className="text-sm text-muted">Morada</p><p className="font-semibold">{COMPANY.address}</p>

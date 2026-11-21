@@ -2,6 +2,7 @@
 node_modules/
 admin/node_modules/
 server/node_modules/
+serviços/*/node_modules/
 
 # Production builds
 dist/
@@ -14,12 +15,16 @@ admin/dist/
 server/.env
 server/.env.*
 !server/.env.example
+serviços/*/.env
+serviços/*/.env.*
+!serviços/*/.env.example
 
 # Logs and runtime data
 *.log
 npm-debug.log*
 yarn-debug.log*
 server/data/*.jsonl
+serviços/*/data/*.jsonl
 
 # System files
 .DS_Store

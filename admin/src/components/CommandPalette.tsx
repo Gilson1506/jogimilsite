@@ -50,6 +50,9 @@ export function CommandPalette({
 
   const navItems = [
     { id: 'dashboard', label: 'Painel Executivo & Métricas', icon: LayoutDashboard, group: 'Navegação' },
+    { id: 'calendar', label: 'Calendário Corporativo & CalDAV', icon: Bell, group: 'Navegação' },
+    { id: 'tasks', label: 'Gestão de Tarefas & Processos', icon: Users, group: 'Navegação' },
+    { id: 'files', label: 'Biblioteca de Arquivos Digitais (PDF, Excel, Imagens)', icon: Server, group: 'Navegação' },
     { id: 'support', label: 'Central de Atendimento (WhatsApp & Email)', icon: MessageSquare, group: 'Navegação' },
     { id: 'broadcast', label: 'Disparo em Massa (WhatsApp, Email, SMS)', icon: Mail, group: 'Navegação' },
     { id: 'crm', label: 'CRM & Funil de Vendas com Gráficos', icon: Users, group: 'Navegação' },
@@ -87,21 +90,27 @@ export function CommandPalette({
       />
 
       {/* Modal Dialog */}
-      <div className="relative w-full max-w-xl overflow-hidden rounded-2xl border border-white/10 bg-[#0B1224] shadow-2xl shadow-blue/20">
+      <div
+        className="relative w-full max-w-xl overflow-hidden border ds-divider"
+        style={{
+          backgroundColor: 'rgb(var(--surface))',
+          color: 'rgb(var(--text))',
+          boxShadow: 'var(--shadow-elevated)',
+        }}
+      >
         {/* Input Bar */}
-        <div className="flex items-center border-b border-white/10 px-4 py-3.5">
-          <Search className="h-5 w-5 text-sky-400 shrink-0 mr-3" />
+        <div className="flex items-center border-b ds-divider px-4 py-3.5">
+          <Search className="h-4 w-4 text-brand shrink-0 mr-3" />
           <input
             type="text"
             autoFocus
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Digite um comando, contacto ou aba do sistema..."
-            className="w-full bg-transparent text-sm text-white placeholder-slate-400 focus:outline-none"
+            className="w-full bg-transparent text-sm placeholder:opacity-60 focus:outline-none"
+            style={{ color: 'rgb(var(--text))' }}
           />
-          <kbd className="hidden sm:inline-flex rounded border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-mono text-slate-400">
-            ESC
-          </kbd>
+          <kbd className="hidden sm:inline-flex kbd">ESC</kbd>
         </div>
 
         {/* Results List */}
@@ -109,7 +118,7 @@ export function CommandPalette({
           {/* Navegação */}
           {filteredNav.length > 0 && (
             <div>
-              <p className="px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+              <p className="px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ds-subtle">
                 Navegação
               </p>
               <div className="mt-1 space-y-0.5">
@@ -122,13 +131,13 @@ export function CommandPalette({
                         onNavigate(item.id);
                         onClose();
                       }}
-                      className="w-full flex items-center justify-between rounded-xl px-3 py-2 text-xs font-medium text-slate-200 hover:bg-white/10 hover:text-white transition group text-left"
+                      className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium hover:bg-[rgb(var(--surface-2))] transition group text-left"
                     >
                       <div className="flex items-center gap-2.5">
-                        <Icon className="h-4 w-4 text-sky-400 group-hover:scale-110 transition-transform" />
+                        <Icon className="h-4 w-4 text-brand shrink-0" />
                         <span>{item.label}</span>
                       </div>
-                      <ArrowRight className="h-3.5 w-3.5 text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <ArrowRight className="h-3.5 w-3.5 ds-subtle opacity-0 group-hover:opacity-100 transition-opacity" />
                     </button>
                   );
                 })}
@@ -139,7 +148,7 @@ export function CommandPalette({
           {/* Ações Rápidas */}
           {filteredActions.length > 0 && (
             <div>
-              <p className="px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+              <p className="px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ds-subtle">
                 Ações Rápidas
               </p>
               <div className="mt-1 space-y-0.5">
@@ -152,15 +161,15 @@ export function CommandPalette({
                         onAction(item.id);
                         onClose();
                       }}
-                      className="w-full flex items-center justify-between rounded-xl px-3 py-2 text-xs font-medium text-slate-200 hover:bg-blue-600/20 hover:text-white transition group text-left border border-transparent hover:border-blue-500/30"
+                      className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium hover:bg-[rgb(var(--surface-2))] transition group text-left border border-transparent hover:border-[rgb(var(--border))]"
                     >
                       <div className="flex items-center gap-2.5">
-                        <div className="flex h-5 w-5 items-center justify-center rounded-md bg-blue-600/30 text-sky-300">
+                        <div className="flex h-5 w-5 items-center justify-center bg-brand/15 text-brand">
                           <Icon className="h-3 w-3" />
                         </div>
                         <span>{item.label}</span>
                       </div>
-                      <span className="text-[10px] text-sky-400 font-mono">Executar</span>
+                      <span className="text-[10px] text-brand font-mono">Executar</span>
                     </button>
                   );
                 })}
@@ -171,7 +180,7 @@ export function CommandPalette({
           {/* Contactos Encontrados */}
           {filteredContacts.length > 0 && (
             <div>
-              <p className="px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+              <p className="px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ds-subtle">
                 Contactos / Leads no CRM
               </p>
               <div className="mt-1 space-y-0.5">
@@ -183,13 +192,13 @@ export function CommandPalette({
                       onNavigate('contacts');
                       onClose();
                     }}
-                    className="w-full flex items-center justify-between rounded-xl px-3 py-2 text-xs font-medium text-slate-200 hover:bg-white/10 hover:text-white transition group text-left"
+                    className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium hover:bg-[rgb(var(--surface-2))] transition group text-left"
                   >
                     <div>
-                      <p className="font-semibold text-white">{contact.name}</p>
-                      <p className="text-[11px] text-slate-400">{contact.phone} · {contact.email}</p>
+                      <p className="font-semibold">{contact.name}</p>
+                      <p className="text-[11px] ds-muted">{contact.phone} · {contact.email}</p>
                     </div>
-                    <ExternalLink className="h-3.5 w-3.5 text-slate-500 group-hover:text-sky-400" />
+                    <ExternalLink className="h-3.5 w-3.5 ds-subtle group-hover:text-brand" />
                   </button>
                 ))}
               </div>
@@ -197,14 +206,14 @@ export function CommandPalette({
           )}
 
           {filteredNav.length === 0 && filteredActions.length === 0 && filteredContacts.length === 0 && (
-            <div className="py-8 text-center text-sm text-slate-400">
+            <div className="py-8 text-center text-sm ds-muted">
               Nenhum resultado encontrado para &quot;{query}&quot;
             </div>
           )}
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between border-t border-white/10 bg-black/30 px-4 py-2 text-[11px] text-slate-400">
+        <div className="flex items-center justify-between border-t ds-divider ds-surface-2 px-4 py-2 text-[11px] ds-muted">
           <div className="flex items-center gap-3">
             <span>↑↓ navegar</span>
             <span>↵ selecionar</span>

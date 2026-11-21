@@ -1,17 +1,5 @@
-import {
-  Blocks,
-  Headphones,
-  Newspaper,
-  Users2,
-  Briefcase,
-  Contact2,
-  Settings2,
-  ChevronLeft,
-  ChevronRight,
-  ExternalLink,
-  Send,
-  LogOut,
-} from 'lucide-react';
+import { PanelLeftClose, PanelLeftOpen } from 'lucide-react';
+import { AdminIcon3D, AdminIcon3DName } from './AdminIcon3D';
 
 interface SidebarProps {
   activeTab?: string;
@@ -19,8 +7,50 @@ interface SidebarProps {
   collapsed?: boolean;
   onToggleCollapse?: () => void;
   theme?: 'dark' | 'light';
+  sidebarMode?: 'inverted' | 'match' | 'dark' | 'light';
+  userRole?: string;
   onLogout?: () => void;
 }
+
+const NAV_GROUPS: Array<{
+  title: string;
+  items: Array<{ id: string; label: string; icon3d: AdminIcon3DName; adminOnly?: boolean }>;
+}> = [
+  {
+    title: 'Operação',
+    items: [
+      { id: 'dashboard', label: 'Visão Geral', icon3d: 'dashboard' },
+      { id: 'calendar', label: 'Calendário', icon3d: 'calendar' },
+      { id: 'tasks', label: 'Tarefas & Processos', icon3d: 'tasks' },
+      { id: 'files', label: 'Arquivos Digitais', icon3d: 'folder' },
+    ],
+  },
+  {
+    title: 'Comunicação & Leads',
+    items: [
+      { id: 'crm', label: 'CRM & Contactos', icon3d: 'contacts' },
+      { id: 'submissions', label: 'Formulários Portal', icon3d: 'inbox' },
+      { id: 'support', label: 'Atendimento', icon3d: 'support' },
+      { id: 'broadcast', label: 'Disparo em Massa', icon3d: 'send' },
+      { id: 'internal_chat', label: 'Comunicação Interna', icon3d: 'chat' },
+    ],
+  },
+  {
+    title: 'Conteúdo do Website',
+    items: [
+      { id: 'products', label: 'Produtos', icon3d: 'channels' },
+      { id: 'news', label: 'Notícias', icon3d: 'news' },
+      { id: 'team', label: 'Equipa', icon3d: 'users' },
+      { id: 'portfolio', label: 'Portfólio', icon3d: 'portfolio' },
+    ],
+  },
+  {
+    title: 'Sistema & Conta',
+    items: [
+      { id: 'settings', label: 'Definições & Canais', icon3d: 'settings', adminOnly: false },
+    ],
+  },
+];
 
 export function Sidebar({
   activeTab = 'dashboard',
@@ -28,224 +58,122 @@ export function Sidebar({
   collapsed = false,
   onToggleCollapse,
   theme = 'dark',
-  onLogout,
+  sidebarMode = 'inverted',
+  userRole = 'admin',
 }: SidebarProps) {
-  const isDark = theme === 'dark';
-
-  const navItems = [
-    {
-      id: 'dashboard',
-      label: 'DASHBOARD',
-      sublabel: 'Visão Geral & Gráficos',
-      icon: Blocks,
-      badge: null,
-    },
-    {
-      id: 'support',
-      label: 'ATENDIMENTO',
-      sublabel: 'WhatsApp & Email',
-      icon: Headphones,
-      badge: 'Live',
-      badgeColor: 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30',
-    },
-    {
-      id: 'broadcast',
-      label: 'DISPARO EM MASSA',
-      sublabel: 'WhatsApp, Email & SMS',
-      icon: Send,
-      badge: 'SMS/WA',
-      badgeColor: 'bg-purple-500/20 text-purple-400 border border-purple-500/30',
-    },
-    {
-      id: 'crm',
-      label: 'CRM & VENDAS',
-      sublabel: 'Funil, Gráficos & Negócios',
-      icon: Contact2,
-      badge: 'Kz',
-      badgeColor: 'bg-blue-500/20 text-blue-400 border border-blue-500/30',
-    },
-    {
-      id: 'news',
-      label: 'NOTÍCIAS',
-      sublabel: 'Publicação com Foto',
-      icon: Newspaper,
-      badge: null,
-    },
-    {
-      id: 'team',
-      label: 'EQUIPA',
-      sublabel: 'Membros & Perfis',
-      icon: Users2,
-      badge: null,
-    },
-    {
-      id: 'portfolio',
-      label: 'PORTFÓLIO',
-      sublabel: 'Projetos & Mockups',
-      icon: Briefcase,
-      badge: null,
-    },
-    {
-      id: 'settings',
-      label: 'DEFINIÇÕES',
-      sublabel: 'Evolution API & Email',
-      icon: Settings2,
-      badge: null,
-    },
-  ];
+  const isPanelDark = theme === 'dark';
+  const sidebarDark =
+    sidebarMode === 'dark'
+      ? true
+      : sidebarMode === 'light'
+      ? false
+      : sidebarMode === 'match'
+      ? isPanelDark
+      : !isPanelDark;
+  const isLightSidebar = !sidebarDark;
+  const isAdmin = userRole === 'admin' || userRole === 'Administrador Executivo';
 
   return (
     <aside
-      className={`sticky top-24 h-[calc(100vh-8rem)] transition-all duration-300 ease-in-out hidden md:flex flex-col p-4 rounded-2xl border ${
-        collapsed ? 'w-20' : 'w-64'
+      className={`shrink-0 h-screen overflow-hidden border-r hidden md:flex flex-col transition-all duration-200 select-none ${
+        collapsed ? 'w-16' : 'w-60'
       } ${
-        isDark
-          ? 'bg-[#090D16]/95 border-[#1E293B] text-slate-200 shadow-2xl shadow-blue-950/20 backdrop-blur-xl'
-          : 'bg-white/95 border-slate-200 text-slate-800 shadow-xl shadow-slate-200/50 backdrop-blur-xl'
+        isLightSidebar
+          ? 'bg-white text-slate-900 border-slate-200'
+          : 'bg-[#0B0F17] text-slate-100 border-white/10'
       }`}
     >
-      {/* Minifier / Collapse Toggle Header */}
-      <div className="flex items-center justify-between pb-4 mb-2 border-b border-inherit">
+      {/* Marca + Toggle */}
+      <div
+        className={`h-14 px-4 flex items-center justify-between border-b ${
+          isLightSidebar ? 'border-slate-200' : 'border-white/10'
+        }`}
+      >
         {!collapsed && (
-          <div className="flex items-center gap-2 px-2">
-            <div className="w-2 h-2 rounded-full bg-[#0066FF] animate-pulse" />
-            <span className="text-[11px] font-bold tracking-wider uppercase text-blue-500">
-              Menu Executivo
+          <button
+            type="button"
+            onClick={() => onSelectTab?.('dashboard')}
+            className="flex items-center gap-2.5 min-w-0 text-left"
+          >
+            <img
+              src={isLightSidebar ? '/logo-mark.png' : '/logo-white.png'}
+              alt="JOGIMIL"
+              className="h-6 w-auto object-contain shrink-0"
+            />
+            <span
+              className={`text-[11px] font-mono uppercase tracking-widest truncate ${
+                isLightSidebar ? 'text-slate-500' : 'text-slate-400'
+              }`}
+            >
+              Admin
             </span>
-          </div>
+          </button>
         )}
         <button
+          type="button"
           onClick={onToggleCollapse}
-          title={collapsed ? 'Expandir Sidebar' : 'Minimizar Sidebar'}
-          className={`p-1.5 rounded-lg transition-colors flex items-center justify-center ${
+          title={collapsed ? 'Expandir menu' : 'Recolher menu'}
+          className={`inline-flex items-center justify-center rounded-lg h-8 w-8 transition-colors ${
             collapsed ? 'mx-auto' : ''
           } ${
-            isDark
-              ? 'hover:bg-slate-800 text-slate-400 hover:text-white'
-              : 'hover:bg-slate-100 text-slate-500 hover:text-slate-900'
+            isLightSidebar
+              ? 'text-slate-600 hover:bg-slate-100 hover:text-slate-950'
+              : 'text-slate-300 hover:bg-white/10 hover:text-white'
           }`}
         >
-          {collapsed ? (
-            <ChevronRight className="h-5 w-5 text-blue-500" />
-          ) : (
-            <ChevronLeft className="h-5 w-5" />
-          )}
+          {collapsed ? <PanelLeftOpen className="h-4 w-4" /> : <PanelLeftClose className="h-4 w-4" />}
         </button>
       </div>
 
-      {/* Nav items */}
-      <nav className="flex-1 flex flex-col gap-1.5 overflow-y-auto no-scrollbar py-2">
-        {navItems.map((item) => {
-          const Icon = item.icon;
-          const isActive = activeTab === item.id;
-
-          return (
-            <button
-              key={item.id}
-              onClick={() => onSelectTab && onSelectTab(item.id)}
-              title={collapsed ? item.label : undefined}
-              className={`w-full group flex items-center gap-3.5 px-3 py-2.5 rounded-xl transition-all duration-200 text-left relative ${
-                isActive
-                  ? isDark
-                    ? 'bg-[#0066FF] text-white shadow-lg shadow-blue-600/30'
-                    : 'bg-[#0066FF] text-white shadow-md shadow-blue-500/20'
-                  : isDark
-                  ? 'text-slate-400 hover:text-white hover:bg-slate-800/60'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
-              }`}
-            >
-              <div
-                className={`flex items-center justify-center rounded-lg transition-transform group-hover:scale-105 ${
-                  collapsed ? 'mx-auto' : ''
+      {/* Navegação agrupada com ícones 3D */}
+      <nav className="flex-1 overflow-y-auto no-scrollbar py-3 space-y-5">
+        {NAV_GROUPS.map((group) => (
+          <div key={group.title}>
+            {!collapsed && (
+              <p
+                className={`px-4 mb-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] ${
+                  isLightSidebar ? 'text-slate-500' : 'text-slate-400'
                 }`}
               >
-                <Icon
-                  className={`h-5 w-5 ${
-                    isActive
-                      ? 'text-white'
-                      : isDark
-                      ? 'text-slate-400 group-hover:text-blue-400'
-                      : 'text-slate-500 group-hover:text-[#0066FF]'
-                  }`}
-                />
-              </div>
-
-              {!collapsed && (
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold tracking-wide truncate">
-                      {item.label}
-                    </span>
-                    {item.badge && (
-                      <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${item.badgeColor}`}>
-                        {item.badge}
-                      </span>
-                    )}
-                  </div>
-                  <p
-                    className={`text-[10px] truncate ${
-                      isActive
-                        ? 'text-blue-100'
-                        : isDark
-                        ? 'text-slate-500'
-                        : 'text-slate-400'
-                    }`}
-                  >
-                    {item.sublabel}
-                  </p>
-                </div>
-              )}
-
-              {/* Active Indicator Bar */}
-              {isActive && (
-                <div
-                  className={`absolute left-0 top-2 bottom-2 w-1 rounded-r-full ${
-                    collapsed ? 'bg-white' : 'hidden'
-                  }`}
-                />
-              )}
-            </button>
-          );
-        })}
+                {group.title}
+              </p>
+            )}
+            <div className="space-y-0.5">
+              {group.items
+                .filter((item) => !item.adminOnly || isAdmin)
+                .map((item) => {
+                  const isActive = activeTab === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => onSelectTab?.(item.id)}
+                      title={collapsed ? item.label : undefined}
+                      className={`group relative flex items-center gap-3 rounded-full mx-2 px-3.5 h-9 text-[13px] font-medium transition-all duration-150 w-[calc(100%-1rem)] ${
+                        collapsed ? 'justify-center px-0' : ''
+                      } ${
+                        isActive
+                          ? isLightSidebar
+                            ? 'bg-[#0066FF]/10 text-[#0066FF] font-semibold shadow-[inset_0_0_0_1px_rgba(0,102,255,0.22)]'
+                            : 'bg-[#0066FF]/20 text-white font-semibold shadow-[inset_0_0_0_1px_rgba(56,189,248,0.35)]'
+                          : isLightSidebar
+                          ? 'text-slate-700 hover:bg-slate-100 hover:text-slate-950'
+                          : 'text-slate-300 hover:bg-white/[0.08] hover:text-white'
+                      }`}
+                    >
+                      <AdminIcon3D
+                        name={item.icon3d}
+                        size={20}
+                        className={isActive ? 'opacity-100 scale-105' : 'opacity-85 group-hover:opacity-100'}
+                      />
+                      {!collapsed && <span className="truncate">{item.label}</span>}
+                    </button>
+                  );
+                })}
+            </div>
+          </div>
+        ))}
       </nav>
-
-      {/* Footer / External Links */}
-      <div className="mt-auto pt-4 border-t border-inherit flex flex-col gap-2">
-        <a
-          href="https://jogimiltecnologias.it.ao"
-          target="_blank"
-          rel="noreferrer"
-          title={collapsed ? 'Portal JOGIMIL' : undefined}
-          className={`flex items-center gap-3 px-3 py-2 rounded-xl text-xs transition-colors ${
-            collapsed ? 'justify-center' : ''
-          } ${
-            isDark
-              ? 'text-slate-400 hover:text-white hover:bg-slate-800/60'
-              : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
-          }`}
-        >
-          <ExternalLink className="h-4 w-4 text-blue-500" />
-          {!collapsed && <span className="font-medium truncate">Portal JOGIMIL</span>}
-        </a>
-
-        {onLogout && (
-          <button
-            type="button"
-            onClick={onLogout}
-            title={collapsed ? 'Terminar Sessão' : undefined}
-            className={`flex items-center gap-3 px-3 py-2 rounded-xl text-xs cursor-pointer transition-colors ${
-              collapsed ? 'justify-center' : ''
-            } ${
-              isDark
-                ? 'text-red-400 hover:text-red-300 hover:bg-red-500/10'
-                : 'text-red-600 hover:text-red-700 hover:bg-red-50'
-            }`}
-          >
-            <LogOut className="h-4 w-4" />
-            {!collapsed && <span className="font-medium truncate">Terminar Sessão</span>}
-          </button>
-        )}
-      </div>
     </aside>
   );
 }

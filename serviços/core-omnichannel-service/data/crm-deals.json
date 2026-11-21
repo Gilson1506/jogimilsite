@@ -1,0 +1,452 @@
+[
+  {
+    "id": "deal_1795133033064",
+    "clientName": "Eng. Manuel Bento",
+    "company": "Eng. Manuel Bento",
+    "value": 0,
+    "stage": "novo_lead",
+    "probability": 25,
+    "primaryChannel": "email",
+    "contactPhone": "",
+    "contactEmail": "manuel.bento@jogimil.ao",
+    "expectedCloseDate": "2026-12-05",
+    "assignedAgent": "Joel Gaspar",
+    "productInterest": "Pedido de Orçamento Teste",
+    "interactions": [
+      {
+        "id": "int_1795133033060",
+        "channel": "portal",
+        "type": "Pedido de Orçamento Teste",
+        "note": "Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-20T00:03:53.060Z",
+        "agent": "Sistema Portal"
+      }
+    ],
+    "createdAt": "2026-11-20T00:03:53.064Z",
+    "updatedAt": "2026-11-20T00:03:53.064Z"
+  },
+  {
+    "id": "deal_1795091600647",
+    "clientName": "Eng. Manuel Bento",
+    "company": "Eng. Manuel Bento",
+    "value": 0,
+    "stage": "novo_lead",
+    "probability": 25,
+    "primaryChannel": "email",
+    "contactPhone": "",
+    "contactEmail": "manuel.bento@jogimil.ao",
+    "expectedCloseDate": "2026-12-04",
+    "assignedAgent": "Joel Gaspar",
+    "productInterest": "Pedido de Orçamento Teste",
+    "interactions": [
+      {
+        "id": "int_1795091600604",
+        "channel": "portal",
+        "type": "Pedido de Orçamento Teste",
+        "note": "Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T12:33:20.604Z",
+        "agent": "Sistema Portal"
+      }
+    ],
+    "createdAt": "2026-11-19T12:33:20.648Z",
+    "updatedAt": "2026-11-19T12:33:20.648Z"
+  },
+  {
+    "id": "deal_1795089473627",
+    "clientName": "Eng. Manuel Bento",
+    "company": "Eng. Manuel Bento",
+    "value": 0,
+    "stage": "novo_lead",
+    "probability": 25,
+    "primaryChannel": "email",
+    "contactPhone": "",
+    "contactEmail": "manuel.bento@jogimil.ao",
+    "expectedCloseDate": "2026-12-04",
+    "assignedAgent": "Joel Gaspar",
+    "productInterest": "Pedido de Orçamento Teste",
+    "interactions": [
+      {
+        "id": "int_1795089473624",
+        "channel": "portal",
+        "type": "Pedido de Orçamento Teste",
+        "note": "Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T11:57:53.624Z",
+        "agent": "Sistema Portal"
+      }
+    ],
+    "createdAt": "2026-11-19T11:57:53.627Z",
+    "updatedAt": "2026-11-19T11:57:53.627Z"
+  },
+  {
+    "id": "deal_1795088214160",
+    "clientName": "Eng. Manuel Bento",
+    "company": "Eng. Manuel Bento",
+    "value": 0,
+    "stage": "novo_lead",
+    "probability": 25,
+    "primaryChannel": "email",
+    "contactPhone": "",
+    "contactEmail": "manuel.bento@jogimil.ao",
+    "expectedCloseDate": "2026-12-04",
+    "assignedAgent": "Joel Gaspar",
+    "productInterest": "Pedido de Orçamento Teste",
+    "interactions": [
+      {
+        "id": "int_1795088214157",
+        "channel": "portal",
+        "type": "Pedido de Orçamento Teste",
+        "note": "Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T11:36:54.157Z",
+        "agent": "Sistema Portal"
+      }
+    ],
+    "createdAt": "2026-11-19T11:36:54.160Z",
+    "updatedAt": "2026-11-19T11:36:54.160Z"
+  },
+  {
+    "id": "deal_1795087896814",
+    "clientName": "Eng. Manuel Bento",
+    "company": "Eng. Manuel Bento",
+    "value": 0,
+    "stage": "novo_lead",
+    "probability": 25,
+    "primaryChannel": "email",
+    "contactPhone": "",
+    "contactEmail": "manuel.bento@jogimil.ao",
+    "expectedCloseDate": "2026-12-04",
+    "assignedAgent": "Joel Gaspar",
+    "productInterest": "Pedido de Orçamento Teste",
+    "interactions": [
+      {
+        "id": "int_1795087896812",
+        "channel": "portal",
+        "type": "Pedido de Orçamento Teste",
+        "note": "Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T11:31:36.812Z",
+        "agent": "Sistema Portal"
+      }
+    ],
+    "createdAt": "2026-11-19T11:31:36.814Z",
+    "updatedAt": "2026-11-19T11:31:36.814Z"
+  },
+  {
+    "id": "deal_1795085546743",
+    "clientName": "Eng. Manuel Bento",
+    "company": "Eng. Manuel Bento",
+    "value": 0,
+    "stage": "novo_lead",
+    "probability": 25,
+    "primaryChannel": "email",
+    "contactPhone": "",
+    "contactEmail": "manuel.bento@jogimil.ao",
+    "expectedCloseDate": "2026-12-04",
+    "assignedAgent": "Joel Gaspar",
+    "productInterest": "Pedido de Orçamento Teste",
+    "interactions": [
+      {
+        "id": "int_1795085546741",
+        "channel": "portal",
+        "type": "Pedido de Orçamento Teste",
+        "note": "Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T10:52:26.741Z",
+        "agent": "Sistema Portal"
+      }
+    ],
+    "createdAt": "2026-11-19T10:52:26.743Z",
+    "updatedAt": "2026-11-19T10:52:26.743Z"
+  },
+  {
+    "id": "deal_1795083869709",
+    "clientName": "Eng. Manuel Bento",
+    "company": "Eng. Manuel Bento",
+    "value": 0,
+    "stage": "novo_lead",
+    "probability": 25,
+    "primaryChannel": "email",
+    "contactPhone": "",
+    "contactEmail": "manuel.bento@jogimil.ao",
+    "expectedCloseDate": "2026-12-04",
+    "assignedAgent": "Joel Gaspar",
+    "productInterest": "Pedido de Orçamento Teste",
+    "interactions": [
+      {
+        "id": "int_1795083869707",
+        "channel": "portal",
+        "type": "Pedido de Orçamento Teste",
+        "note": "Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T10:24:29.707Z",
+        "agent": "Sistema Portal"
+      }
+    ],
+    "createdAt": "2026-11-19T10:24:29.709Z",
+    "updatedAt": "2026-11-19T10:24:29.709Z"
+  },
+  {
+    "id": "deal_1795082942890",
+    "clientName": "Eng. Manuel Bento",
+    "company": "Eng. Manuel Bento",
+    "value": 0,
+    "stage": "novo_lead",
+    "probability": 25,
+    "primaryChannel": "email",
+    "contactPhone": "",
+    "contactEmail": "manuel.bento@jogimil.ao",
+    "expectedCloseDate": "2026-12-04",
+    "assignedAgent": "Joel Gaspar",
+    "productInterest": "Pedido de Orçamento Teste",
+    "interactions": [
+      {
+        "id": "int_1795082942889",
+        "channel": "portal",
+        "type": "Pedido de Orçamento Teste",
+        "note": "Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T10:09:02.889Z",
+        "agent": "Sistema Portal"
+      }
+    ],
+    "createdAt": "2026-11-19T10:09:02.890Z",
+    "updatedAt": "2026-11-19T10:09:02.890Z"
+  },
+  {
+    "id": "deal_1795082353096",
+    "clientName": "Eng. Manuel Bento",
+    "company": "Eng. Manuel Bento",
+    "value": 0,
+    "stage": "novo_lead",
+    "probability": 25,
+    "primaryChannel": "email",
+    "contactPhone": "",
+    "contactEmail": "manuel.bento@jogimil.ao",
+    "expectedCloseDate": "2026-12-04",
+    "assignedAgent": "Joel Gaspar",
+    "productInterest": "Pedido de Orçamento Teste",
+    "interactions": [
+      {
+        "id": "int_1795082353093",
+        "channel": "portal",
+        "type": "Pedido de Orçamento Teste",
+        "note": "Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T09:59:13.093Z",
+        "agent": "Sistema Portal"
+      }
+    ],
+    "createdAt": "2026-11-19T09:59:13.096Z",
+    "updatedAt": "2026-11-19T09:59:13.096Z"
+  },
+  {
+    "id": "deal_1795081248246",
+    "clientName": "Eng. Manuel Bento",
+    "company": "Eng. Manuel Bento",
+    "value": 0,
+    "stage": "novo_lead",
+    "probability": 25,
+    "primaryChannel": "email",
+    "contactPhone": "",
+    "contactEmail": "manuel.bento@jogimil.ao",
+    "expectedCloseDate": "2026-12-04",
+    "assignedAgent": "Joel Gaspar",
+    "productInterest": "Pedido de Orçamento Teste",
+    "interactions": [
+      {
+        "id": "int_1795081248244",
+        "channel": "portal",
+        "type": "Pedido de Orçamento Teste",
+        "note": "Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T09:40:48.244Z",
+        "agent": "Sistema Portal"
+      }
+    ],
+    "createdAt": "2026-11-19T09:40:48.246Z",
+    "updatedAt": "2026-11-19T09:40:48.246Z"
+  },
+  {
+    "id": "deal_1795079977140",
+    "clientName": "Eng. Manuel Bento",
+    "company": "Eng. Manuel Bento",
+    "value": 0,
+    "stage": "novo_lead",
+    "probability": 25,
+    "primaryChannel": "email",
+    "contactPhone": "",
+    "contactEmail": "manuel.bento@jogimil.ao",
+    "expectedCloseDate": "2026-12-04",
+    "assignedAgent": "Joel Gaspar",
+    "productInterest": "Pedido de Orçamento Teste",
+    "interactions": [
+      {
+        "id": "int_1795079977139",
+        "channel": "portal",
+        "type": "Pedido de Orçamento Teste",
+        "note": "Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T09:19:37.139Z",
+        "agent": "Sistema Portal"
+      }
+    ],
+    "createdAt": "2026-11-19T09:19:37.140Z",
+    "updatedAt": "2026-11-19T09:19:37.140Z"
+  },
+  {
+    "id": "deal_1795079826150",
+    "clientName": "Eng. Manuel Bento",
+    "company": "Eng. Manuel Bento",
+    "value": 0,
+    "stage": "novo_lead",
+    "probability": 25,
+    "primaryChannel": "email",
+    "contactPhone": "",
+    "contactEmail": "manuel.bento@jogimil.ao",
+    "expectedCloseDate": "2026-12-04",
+    "assignedAgent": "Joel Gaspar",
+    "productInterest": "Pedido de Orçamento Teste",
+    "interactions": [
+      {
+        "id": "int_1795079826149",
+        "channel": "portal",
+        "type": "Pedido de Orçamento Teste",
+        "note": "Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T09:17:06.149Z",
+        "agent": "Sistema Portal"
+      }
+    ],
+    "createdAt": "2026-11-19T09:17:06.150Z",
+    "updatedAt": "2026-11-19T09:17:06.150Z"
+  },
+  {
+    "id": "deal_101",
+    "clientName": "Manuel Quaresma",
+    "company": "Supermercado Alvalade, Lda",
+    "value": 3850000,
+    "stage": "negociacao",
+    "probability": 80,
+    "primaryChannel": "whatsapp",
+    "contactPhone": "+244 923 881 229",
+    "contactEmail": "m.quaresma@alvalade.co.ao",
+    "expectedCloseDate": "2026-11-15",
+    "assignedAgent": "Joel Gaspar",
+    "productInterest": "POS SAF-T Angola (3 Caixas)",
+    "interactions": [
+      {
+        "id": "int_1",
+        "channel": "whatsapp",
+        "type": "Reunião de Alinhamento",
+        "note": "Cliente confirmou orçamento de 3.850.000 Kz. Aguarda minuta final de contrato.",
+        "timestamp": "2026-11-09T10:19:50.309Z",
+        "agent": "Joel Gaspar"
+      },
+      {
+        "id": "int_2",
+        "channel": "email",
+        "type": "Envio de Proposta",
+        "note": "Enviada minuta técnica com arquitetura de backup offline para Luanda.",
+        "timestamp": "2026-11-08T10:19:50.309Z",
+        "agent": "Joel Gaspar"
+      }
+    ],
+    "createdAt": "2026-11-06T10:19:50.309Z",
+    "updatedAt": "2026-11-10T10:19:50.309Z"
+  },
+  {
+    "id": "deal_102",
+    "clientName": "Dra. Luísa Furtado",
+    "company": "Complexo Escolar Milénio",
+    "value": 5200000,
+    "stage": "proposta",
+    "probability": 60,
+    "primaryChannel": "email",
+    "contactPhone": "+244 912 340 991",
+    "contactEmail": "luisa.furtado@colegiomilenio.ao",
+    "expectedCloseDate": "2026-11-22",
+    "assignedAgent": "Helena Kiala",
+    "productInterest": "Portal Acadêmico Cloud + Propinas GPO",
+    "interactions": [
+      {
+        "id": "int_3",
+        "channel": "email",
+        "type": "Apresentação Comercial",
+        "note": "Diretoria analisou o plano de 5.200.000 Kz para 2.400 alunos matriculados.",
+        "timestamp": "2026-11-08T10:19:50.309Z",
+        "agent": "Helena Kiala"
+      }
+    ],
+    "createdAt": "2026-11-05T10:19:50.309Z",
+    "updatedAt": "2026-11-10T10:19:50.309Z"
+  },
+  {
+    "id": "deal_103",
+    "clientName": "Eng. António Silva",
+    "company": "Logística & Navegação Luanda",
+    "value": 7800000,
+    "stage": "ganho",
+    "probability": 100,
+    "primaryChannel": "whatsapp",
+    "contactPhone": "+244 942 775 559",
+    "contactEmail": "antonio.silva@logluanda.ao",
+    "expectedCloseDate": "2026-11-09",
+    "assignedAgent": "Joel Gaspar",
+    "productInterest": "Assistente IA Omnicanal + GPS Mobile",
+    "interactions": [
+      {
+        "id": "int_4",
+        "channel": "whatsapp",
+        "type": "Contrato Assinado",
+        "note": "Primeira tranche de pagamento liquidada via transferência bancária BFA.",
+        "timestamp": "2026-11-09T10:19:50.309Z",
+        "agent": "Joel Gaspar"
+      }
+    ],
+    "createdAt": "2026-10-31T10:19:50.309Z",
+    "updatedAt": "2026-11-10T10:19:50.309Z"
+  },
+  {
+    "id": "deal_104",
+    "clientName": "Dr. Paulo Kassoma",
+    "company": "Clínica Sagrada Esperança Parceiros",
+    "value": 4100000,
+    "stage": "demonstracao",
+    "probability": 40,
+    "primaryChannel": "whatsapp",
+    "contactPhone": "+244 931 100 240",
+    "contactEmail": "paulo.k@clinicasagrada.co.ao",
+    "expectedCloseDate": "2026-11-28",
+    "assignedAgent": "Mauro dos Santos",
+    "productInterest": "Agendamento Clínico com Bot WhatsApp",
+    "interactions": [
+      {
+        "id": "int_5",
+        "channel": "whatsapp",
+        "type": "Demonstração Agendada",
+        "note": "Demonstração ao vivo agendada para sexta-feira às 14h30.",
+        "timestamp": "2026-11-10T06:19:50.309Z",
+        "agent": "Mauro dos Santos"
+      }
+    ],
+    "createdAt": "2026-11-08T10:19:50.309Z",
+    "updatedAt": "2026-11-10T10:19:50.309Z"
+  },
+  {
+    "id": "deal_105",
+    "clientName": "Kátia dos Remédios",
+    "company": "Grupo Hoteleiro Baía de Luanda",
+    "value": 6400000,
+    "stage": "novo_lead",
+    "probability": 20,
+    "primaryChannel": "sms",
+    "contactPhone": "+244 928 554 112",
+    "contactEmail": "remedios@hotelbaia.ao",
+    "expectedCloseDate": "2026-12-05",
+    "assignedAgent": "Joel Gaspar",
+    "productInterest": "Suite Completa Hotelaria & POS Restaurante",
+    "interactions": [
+      {
+        "id": "int_6",
+        "channel": "sms",
+        "type": "Lead Recebido",
+        "note": "Contacto recebido através de campanha SMS em massa.",
+        "timestamp": "2026-11-09T10:19:50.309Z",
+        "agent": "Joel Gaspar"
+      }
+    ],
+    "createdAt": "2026-11-10T10:19:50.309Z",
+    "updatedAt": "2026-11-10T10:19:50.309Z"
+  }
+]

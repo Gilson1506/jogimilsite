@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { apiUrl } from '../lib/api';
 import {
   Contact2,
   Plus,
@@ -96,154 +97,14 @@ export function AdvancedCrm({ theme = 'dark' }: AdvancedCrmProps) {
   const fetchDeals = async () => {
     try {
       setLoading(true);
-      const res = await fetch('http://localhost:3001/api/v1/admin/crm/deals');
+      const res = await fetch(apiUrl('/api/v1/admin/crm/deals'));
       if (res.ok) {
         const json = await res.json();
         const list = json.data || json.deals || [];
         if (list.length > 0) setDeals(list);
       }
     } catch {
-      // Local fallback initial mock
-      setDeals([
-        {
-          id: 'deal_101',
-          clientName: 'Manuel Quaresma',
-          company: 'Supermercado Alvalade, Lda',
-          value: 3850000,
-          stage: 'negociacao',
-          probability: 80,
-          primaryChannel: 'whatsapp',
-          contactPhone: '+244 923 881 229',
-          contactEmail: 'm.quaresma@alvalade.co.ao',
-          expectedCloseDate: '2026-03-30',
-          assignedAgent: 'Joel Gaspar',
-          productInterest: 'POS SAF-T Angola (3 Caixas)',
-          interactions: [
-            {
-              id: 'int_1',
-              channel: 'whatsapp',
-              type: 'Reunião de Alinhamento',
-              note: 'Cliente confirmou orçamento de 3.850.000 Kz. Aguarda minuta final de contrato.',
-              timestamp: 'Ontem, 16:40',
-              agent: 'Joel Gaspar',
-            },
-            {
-              id: 'int_2',
-              channel: 'email',
-              type: 'Envio de Proposta',
-              note: 'Enviada minuta técnica com arquitetura de backup offline para Luanda.',
-              timestamp: '08 Mar, 11:20',
-              agent: 'Joel Gaspar',
-            },
-          ],
-          createdAt: '2026-03-01',
-          updatedAt: '2026-03-09',
-        },
-        {
-          id: 'deal_102',
-          clientName: 'Dra. Luísa Furtado',
-          company: 'Complexo Escolar Milénio',
-          value: 5200000,
-          stage: 'proposta',
-          probability: 60,
-          primaryChannel: 'email',
-          contactPhone: '+244 912 340 991',
-          contactEmail: 'luisa.furtado@colegiomilenio.ao',
-          expectedCloseDate: '2026-04-10',
-          assignedAgent: 'Helena Kiala',
-          productInterest: 'Portal Acadêmico Cloud + Propinas GPO',
-          interactions: [
-            {
-              id: 'int_3',
-              channel: 'email',
-              type: 'Apresentação Comercial',
-              note: 'Diretoria analisou o plano de 5.200.000 Kz para 2.400 alunos matriculados.',
-              timestamp: '07 Mar, 14:15',
-              agent: 'Helena Kiala',
-            },
-          ],
-          createdAt: '2026-03-02',
-          updatedAt: '2026-03-07',
-        },
-        {
-          id: 'deal_103',
-          clientName: 'Eng. António Silva',
-          company: 'Logística & Navegação Luanda',
-          value: 7800000,
-          stage: 'ganho',
-          probability: 100,
-          primaryChannel: 'whatsapp',
-          contactPhone: '+244 942 775 559',
-          contactEmail: 'antonio.silva@logluanda.ao',
-          expectedCloseDate: '2026-03-08',
-          assignedAgent: 'Joel Gaspar',
-          productInterest: 'Assistente IA Omnicanal + GPS Mobile',
-          interactions: [
-            {
-              id: 'int_4',
-              channel: 'whatsapp',
-              type: 'Contrato Assinado',
-              note: 'Primeira tranche de pagamento liquidada via transferência bancária BFA.',
-              timestamp: '08 Mar, 10:00',
-              agent: 'Joel Gaspar',
-            },
-          ],
-          createdAt: '2026-02-20',
-          updatedAt: '2026-03-08',
-        },
-        {
-          id: 'deal_104',
-          clientName: 'Dr. Paulo Kassoma',
-          company: 'Clínica Sagrada Esperança Parceiros',
-          value: 4100000,
-          stage: 'demonstracao',
-          probability: 40,
-          primaryChannel: 'whatsapp',
-          contactPhone: '+244 931 100 240',
-          contactEmail: 'paulo.k@clinicasagrada.co.ao',
-          expectedCloseDate: '2026-04-05',
-          assignedAgent: 'Mauro dos Santos',
-          productInterest: 'Agendamento Clínico com Bot WhatsApp',
-          interactions: [
-            {
-              id: 'int_5',
-              channel: 'whatsapp',
-              type: 'Demonstração Agendada',
-              note: 'Demonstração ao vivo agendada para sexta-feira às 14h30.',
-              timestamp: 'Hoje, 09:30',
-              agent: 'Mauro dos Santos',
-            },
-          ],
-          createdAt: '2026-03-05',
-          updatedAt: '2026-03-09',
-        },
-        {
-          id: 'deal_105',
-          clientName: 'Kátia dos Remédios',
-          company: 'Grupo Hoteleiro Baía de Luanda',
-          value: 6400000,
-          stage: 'novo_lead',
-          probability: 20,
-          primaryChannel: 'sms',
-          contactPhone: '+244 928 554 112',
-          contactEmail: 'remedios@hotelbaia.ao',
-          expectedCloseDate: '2026-04-20',
-          assignedAgent: 'Joel Gaspar',
-          productInterest: 'Suite Completa Hotelaria & POS Restaurante',
-          interactions: [
-            {
-              id: 'int_6',
-              channel: 'sms',
-              type: 'Lead Recebido',
-              note: 'Contacto recebido através de campanha SMS em massa.',
-              timestamp: 'Ontem, 18:20',
-              agent: 'Joel Gaspar',
-            },
-          ],
-          createdAt: '2026-03-08',
-          updatedAt: '2026-03-08',
-        },
-      ]);
+      setDeals([]);
     } finally {
       setLoading(false);
     }
@@ -301,7 +162,7 @@ export function AdvancedCrm({ theme = 'dark' }: AdvancedCrmProps) {
       setSelectedDeal((prev) => (prev ? { ...prev, stage: nextStage } : null));
     }
     try {
-      await fetch(`http://localhost:3001/api/v1/admin/crm/deals/${dealId}/stage`, {
+      await fetch(apiUrl(`/api/v1/admin/crm/deals/${dealId}/stage`), {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ stage: nextStage }),
@@ -345,7 +206,7 @@ export function AdvancedCrm({ theme = 'dark' }: AdvancedCrmProps) {
 
     try {
       await fetch(
-        `http://localhost:3001/api/v1/admin/crm/deals/${selectedDeal.id}/interactions`,
+        apiUrl(`/api/v1/admin/crm/deals/${selectedDeal.id}/interactions`),
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -395,7 +256,7 @@ export function AdvancedCrm({ theme = 'dark' }: AdvancedCrmProps) {
     setTimeout(() => setNotice(null), 4000);
 
     try {
-      await fetch('http://localhost:3001/api/v1/admin/crm/deals', {
+      await fetch(apiUrl('/api/v1/admin/crm/deals'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newDeal),

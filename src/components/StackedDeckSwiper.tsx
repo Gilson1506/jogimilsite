@@ -27,7 +27,7 @@ export const SHOWCASE_ITEMS: StackItem[] = [
     type: 'produto',
     title: 'SOBA GEST - Faturação & POS',
     subtitle: 'Certificação Oficial AGT Nº FE/402/AGT/2026',
-    category: 'Comércio, Retalho & Restauração',
+    category: 'Comércio, Retalho, Restauração & Hotelaria',
     tag: 'Homologação AGT 100%',
     description: 'Software de faturação e POS com funcionamento 100% offline, emissão de faturas e recibos em menos de 2s, controlo rigoroso de stocks com PMP e exportação oficial do SAF-T (AO).',
     features: ['Certificado AGT FE/402/AGT/2026', 'Modo 100% Offline', 'POS Ultra-rápido (< 2s)', 'Gestão de Stocks & Guias GT/GR'],

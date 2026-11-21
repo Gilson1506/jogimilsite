@@ -1,51 +1,173 @@
-import { Wallet, TrendingUp } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { MessageSquare, Mail, RefreshCw } from 'lucide-react';
+import { apiFetch } from '../lib/api';
+import { AdminIcon3D } from './AdminIcon3D';
 
 interface DashboardMetricsProps {
   theme?: 'dark' | 'light';
 }
 
-export function DashboardMetrics({ theme = 'dark' }: DashboardMetricsProps) {
-  const isDark = theme === 'dark';
+interface DashboardSummary {
+  totalContacts: number;
+  newContacts: number;
+  pendingReminders: number;
+  totalNews: number;
+  totalMessages: number;
+  whatsappConnected: boolean;
+  whatsappState: string;
+  emailOperational: boolean;
+  totalVisits: number;
+  uniqueVisitors: number;
+  todayVisits: number;
+  activeNow: number;
+}
+
+export function DashboardMetrics(_props: DashboardMetricsProps) {
+  const [summary, setSummary] = useState<DashboardSummary | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const loadMetrics = async () => {
+    setLoading(true);
+    try {
+      const data = await apiFetch<{ success: boolean; summary: DashboardSummary }>('/api/v1/admin/dashboard');
+      if (data?.summary) {
+        setSummary(data.summary);
+      }
+    } catch {
+      // ignore
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadMetrics();
+    const timer = setInterval(loadMetrics, 30000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <div
-      className={`flex flex-col xl:flex-row gap-8 xl:items-center justify-between p-6 rounded-2xl border transition-all ${
-        isDark
-          ? 'bg-[#0D0D0D] border-[#1F1F1F] text-white shadow-xl'
-          : 'bg-white border-slate-200 text-slate-900 shadow-md'
-      }`}
-    >
-      {/* Hero Metric */}
-      <div className="flex flex-col gap-2">
-        <div className="flex items-center gap-2 text-gray-400">
-          <Wallet className="h-5 w-5 text-blue-500" />
-          <span className="text-base font-medium">Faturação & Pipeline Global</span>
-          <span className="flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full bg-[#86efac]/10 text-[#86efac] border border-[#86efac]/20">
-            <TrendingUp className="h-3 w-3" /> +30.46%
-          </span>
+    <div className="space-y-4">
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <h1 className="text-lg font-semibold tracking-tight flex items-center gap-2.5">
+            <AdminIcon3D name="dashboard" size={26} />
+            <span>Visão Geral</span>
+          </h1>
         </div>
-        <div className="text-4xl md:text-4xl lg:text-5xl font-bold font-mono tracking-tight text-inherit">
-          Kz 27.850.000
-        </div>
+        <button
+          type="button"
+          onClick={loadMetrics}
+          disabled={loading}
+          className="btn btn-secondary btn-sm"
+        >
+          <RefreshCw className={`h-3.5 w-3.5 ${loading ? 'animate-spin' : ''}`} />
+          <span>Atualizar</span>
+        </button>
       </div>
 
-      {/* 4 Finbro Submetrics */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 xl:gap-14">
-        <div className="flex flex-col gap-1">
-          <span className="text-gray-400 text-xs uppercase tracking-wider font-medium">Pipeline Ativo</span>
-          <span className="text-xl md:text-xl lg:text-2xl font-bold font-mono text-inherit">Kz 18.220.000</span>
+      {/* 4 KPIs Elevados · Ícones 3D flutuantes sem caixa de cor */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        <div className="group ds-card ds-card-interactive p-5 flex flex-col justify-between gap-3">
+          <div className="flex items-start justify-between gap-2">
+            <span className="text-[11px] font-semibold uppercase tracking-wider ds-muted pt-1">
+              Visitas do Portal (30d)
+            </span>
+            <AdminIcon3D name="visits" size={40} />
+          </div>
+          <div>
+            <p className="text-3xl font-semibold font-mono tabular-nums tracking-tight">
+              {(summary?.totalVisits ?? 0).toLocaleString('pt-PT')}
+            </p>
+            <p className="text-xs ds-muted mt-1">
+              Hoje:{' '}
+              <span className="font-mono font-semibold text-[rgb(var(--text))]">
+                {summary?.todayVisits ?? 0}
+              </span>{' '}
+              visualizações
+            </p>
+          </div>
         </div>
-        <div className="flex flex-col gap-1">
-          <span className="text-gray-400 text-xs uppercase tracking-wider font-medium">Vendas Ganhas</span>
-          <span className="text-xl md:text-xl lg:text-2xl font-bold font-mono text-[#86efac]">+Kz 9.630.000</span>
+
+        <div className="group ds-card ds-card-interactive p-5 flex flex-col justify-between gap-3">
+          <div className="flex items-start justify-between gap-2">
+            <span className="text-[11px] font-semibold uppercase tracking-wider ds-muted pt-1">
+              Visitantes Únicos
+            </span>
+            <AdminIcon3D name="users" size={40} />
+          </div>
+          <div>
+            <p className="text-3xl font-semibold font-mono tabular-nums tracking-tight">
+              {(summary?.uniqueVisitors ?? 0).toLocaleString('pt-PT')}
+            </p>
+            <p className="text-xs ds-muted mt-1 flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="font-mono font-semibold text-[rgb(var(--text))]">
+                {summary?.activeNow ?? 0}
+              </span>{' '}
+              ativos agora no portal
+            </p>
+          </div>
         </div>
-        <div className="flex flex-col gap-1">
-          <span className="text-gray-400 text-xs uppercase tracking-wider font-medium">Conversão Funil</span>
-          <span className="text-xl md:text-xl lg:text-2xl font-bold font-mono text-[#86efac]">+68.4%</span>
+
+        <div className="group ds-card ds-card-interactive p-5 flex flex-col justify-between gap-3">
+          <div className="flex items-start justify-between gap-2">
+            <span className="text-[11px] font-semibold uppercase tracking-wider ds-muted pt-1">
+              Contactos & Leads
+            </span>
+            <AdminIcon3D name="contacts" size={40} />
+          </div>
+          <div>
+            <p className="text-3xl font-semibold font-mono tabular-nums tracking-tight">
+              {(summary?.totalContacts ?? 0).toLocaleString('pt-PT')}
+            </p>
+            <p className="text-xs ds-muted mt-1">
+              Novos:{' '}
+              <span className="font-mono font-semibold text-amber-400">
+                {summary?.newContacts ?? 0}
+              </span>{' '}
+              · <span className="font-mono">{summary?.totalMessages ?? 0}</span> interações
+            </p>
+          </div>
         </div>
-        <div className="flex flex-col gap-1">
-          <span className="text-gray-400 text-xs uppercase tracking-wider font-medium">Faturado Hoje (24h)</span>
-          <span className="text-xl md:text-xl lg:text-2xl font-bold font-mono text-[#86efac]">+Kz 1.450.000</span>
+
+        <div className="group ds-card ds-card-interactive p-5 flex flex-col justify-between gap-3">
+          <div className="flex items-start justify-between gap-2">
+            <span className="text-[11px] font-semibold uppercase tracking-wider ds-muted pt-1">
+              Canais & Conteúdo
+            </span>
+            <AdminIcon3D name="channels" size={40} />
+          </div>
+          <div className="space-y-2">
+            <div className="flex items-center justify-between text-xs">
+              <span className="inline-flex items-center gap-1.5 ds-muted">
+                <MessageSquare className="h-3.5 w-3.5 text-emerald-400" /> WhatsApp
+              </span>
+              <span
+                className={`font-mono font-semibold ${
+                  summary?.whatsappConnected ? 'text-emerald-400' : 'text-amber-400'
+                }`}
+              >
+                {summary?.whatsappConnected ? 'Conectado' : 'Desconectado'}
+              </span>
+            </div>
+            <div className="flex items-center justify-between text-xs">
+              <span className="inline-flex items-center gap-1.5 ds-muted">
+                <Mail className="h-3.5 w-3.5 text-brand" /> SMTP / IMAP
+              </span>
+              <span
+                className={`font-mono font-semibold ${
+                  summary?.emailOperational ? 'text-emerald-400' : 'text-amber-400'
+                }`}
+              >
+                {summary?.emailOperational ? 'Operacional' : 'Verificar ENV'}
+              </span>
+            </div>
+            <div className="flex items-center justify-between text-xs">
+              <span className="ds-muted">Notícias no Portal</span>
+              <span className="font-mono font-semibold">{summary?.totalNews ?? 0}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

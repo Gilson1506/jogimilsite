@@ -6,83 +6,116 @@
 /* 1. MODO CLARO (LIGHT THEME) */
 :root,
 html[data-theme='light'] {
-  --bg: 255 255 255;
-  --fg: 10 15 25;
-  --muted: 85 100 120;
-  --line: 226 232 242;
+  --bg: 248 250 253;
+  --fg: 10 15 28;
+  --muted: 71 85 105;
+  --line: 214 223 236;
   --card: 255 255 255;
+  --surface-glass: 255 255 255 / 0.84;
+  --border-glass: 15 23 42 / 0.09;
+  --shadow-elevated: 0 14px 38px -14px rgba(15, 23, 42, 0.14);
   --blue: 0 102 255;
   --accent: 0 102 255;
 }
 html[data-theme='light'] [data-tone='a'] {
-  --bg: 255 255 255;
-  --fg: 10 15 25;
-  --muted: 85 100 120;
-  --line: 226 232 242;
+  --bg: 248 250 253;
+  --fg: 10 15 28;
+  --muted: 71 85 105;
+  --line: 214 223 236;
   --card: 255 255 255;
   --blue: 0 102 255;
   --accent: 0 102 255;
 }
 html[data-theme='light'] [data-tone='b'] {
-  --bg: 244 247 252;
-  --fg: 10 15 25;
-  --muted: 85 100 120;
-  --line: 220 228 238;
+  --bg: 240 245 252;
+  --fg: 10 15 28;
+  --muted: 71 85 105;
+  --line: 208 219 234;
   --card: 255 255 255;
   --blue: 0 102 255;
   --accent: 0 102 255;
 }
 html[data-theme='light'] [data-tone='hero'] {
-  --bg: 246 250 255;
-  --fg: 10 15 25;
-  --muted: 85 100 120;
-  --line: 220 228 238;
+  --bg: 248 250 253;
+  --fg: 10 15 28;
+  --muted: 71 85 105;
+  --line: 214 223 236;
   --card: 255 255 255;
   --blue: 0 102 255;
   --accent: 0 102 255;
+  background: transparent !important;
 }
 
 /* 2. MODO ESCURO (DARK THEME - PRETO NOITE PROFUNDA COM LUZ CELESTIAL) */
 html[data-theme='dark'] {
-  --bg: 0 0 0;
-  --fg: 255 255 255;
-  --muted: 156 163 175;
-  --line: 26 26 26;
-  --card: 6 6 6;
+  --bg: 4 6 11;
+  --fg: 248 250 252;
+  --muted: 161 170 185;
+  --line: 30 36 50;
+  --card: 11 14 22;
+  --surface-glass: 7 10 17 / 0.78;
+  --border-glass: 255 255 255 / 0.1;
+  --shadow-elevated: 0 16px 44px -16px rgba(0, 102, 255, 0.25);
   --blue: 0 102 255;
   --accent: 0 102 255;
 }
 html[data-theme='dark'] [data-tone='a'] {
-  --bg: 0 0 0;
-  --fg: 255 255 255;
-  --muted: 156 163 175;
-  --line: 26 26 26;
-  --card: 6 6 6;
+  --bg: 4 6 11;
+  --fg: 248 250 252;
+  --muted: 161 170 185;
+  --line: 30 36 50;
+  --card: 11 14 22;
   --blue: 0 102 255;
   --accent: 0 102 255;
 }
 html[data-theme='dark'] [data-tone='hero'] {
-  --bg: 0 0 0;
-  --fg: 255 255 255;
-  --muted: 156 163 175;
-  --line: 26 26 26;
-  --card: 6 6 6;
+  --bg: 4 6 11;
+  --fg: 248 250 252;
+  --muted: 161 170 185;
+  --line: 30 36 50;
+  --card: 11 14 22;
   --blue: 0 102 255;
   --accent: 0 102 255;
   background: transparent !important;
 }
 html[data-theme='dark'] [data-tone='b'] {
-  --bg: 5 5 5;
-  --fg: 255 255 255;
-  --muted: 156 163 175;
-  --line: 26 26 26;
-  --card: 10 10 10;
+  --bg: 8 11 18;
+  --fg: 248 250 252;
+  --muted: 161 170 185;
+  --line: 30 36 50;
+  --card: 14 18 28;
   --blue: 0 102 255;
   --accent: 0 102 255;
 }
 [data-tone] {
-  background: rgb(var(--bg));
+  background: rgb(var(--bg) / 0.84);
   color: rgb(var(--fg));
+  transition: background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1), color 0.4s ease;
+}
+
+/* Transição fluida de tom ao alternar entre Modo Escuro e Modo Claro (CSS + View Transitions API) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 420ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow !important;
+  transition-duration: 460ms !important;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* Superfície glassmórfica da Navbar alinhada aos tokens */
+.nav-glass {
+  background: rgb(var(--surface-glass));
+  border-bottom: 1px solid rgb(var(--border-glass));
+  box-shadow: var(--shadow-elevated);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
 }
 
 @layer base {
@@ -179,18 +212,62 @@ html[data-theme='dark'] [data-tone='b'] {
 /* ---------- Revelação cinematográfica de alto nível ao rolar ---------- */
 .reveal {
   opacity: 0;
-  transform: translateY(32px) scale(0.985);
-  filter: blur(5px);
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translate3d(0, 38px, 0) scale(0.975);
+  filter: blur(6px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+              filter 0.85s cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: var(--d, 0ms);
   will-change: opacity, transform, filter;
 }
-.reveal.in {
+.reveal.in,
+[data-lateral-stage] .reveal {
   opacity: 1;
-  transform: none;
+  transform: translate3d(0, 0, 0) scale(1);
   filter: blur(0);
+}
+
+/* Efeito de brilho diagonal subtil ao passar o rato nos cartões */
+.card-sheen {
+  position: relative;
+  overflow: hidden;
+}
+.card-sheen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(0, 102, 255, 0.08) 45%,
+    rgba(255, 255, 255, 0.09) 50%,
+    transparent 75%
+  );
+  transform: translateX(-130%);
+  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card-sheen:hover::after {
+  transform: translateX(130%);
+}
+
+/* Scroll horizontal suave sem barra visível (para swipers e carrosséis) */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Barra de progresso animada para slides automáticos */
+@keyframes progressFill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.animate-slide-progress {
+  transform-origin: left center;
+  animation: progressFill 5.5s linear forwards;
 }
 
 /* ---------- Barra de rolagem moderna e fluida ---------- */
@@ -224,18 +301,29 @@ html[data-theme='dark'] [data-tone='b'] {
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 .animate-scale-up {
-  animation: scaleUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: scaleUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 .animate-slide-up {
-  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-/* ---------- Transição entre páginas ---------- */
-.page-in { animation: pagein 0.22s ease both; }
-@keyframes pagein { from { opacity: 0; } to { opacity: 1; } }
+@keyframes marqueeScroll {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+.animate-marquee {
+  animation: marqueeScroll 32s linear infinite;
+}
+
+/* ---------- Transição cinematográfica entre páginas (sem transform para não quebrar position:fixed do ScrollTrigger) ---------- */
+.page-in { animation: pagein 0.38s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes pagein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
 .caret { animation: blink 1s steps(2) infinite; }
 @keyframes blink { 50% { opacity: 0; } }

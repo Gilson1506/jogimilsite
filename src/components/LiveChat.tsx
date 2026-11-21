@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { MessageSquare } from 'lucide-react';
 import { COMPANY } from '../data/content';
 import { submitToMicroservice } from '../lib/api';
 import { MascoteAgente } from './MascoteAgente';
@@ -60,6 +61,7 @@ function getSmartReply(userText: string): string {
 
 export function LiveChat() {
   const [open, setOpen] = useState(false);
+  const [channelPickerOpen, setChannelPickerOpen] = useState(false);
   const [minimized, setMinimized] = useState(false);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -185,48 +187,89 @@ export function LiveChat() {
 
   return (
     <>
-      {/* 1. Mascote Robô Animado Flutuante a Acenar como Trigger Interativo do Live Chat */}
+      {/* 1. Mascote 3D Original Flutuante + Seletor de Canal (WhatsApp ou Chat) */}
       <div
-        className="fixed z-40 select-none bottom-4 right-3 sm:bottom-6 sm:right-6"
+        className="fixed z-40 select-none bottom-4 right-3 sm:bottom-6 sm:right-6 flex flex-col items-center gap-3"
         style={{
           bottom: 'max(1.25rem, calc(env(safe-area-inset-bottom, 0px) + 0.75rem))',
           right: 'max(1rem, calc(env(safe-area-inset-right, 0px) + 0.75rem))',
         }}
       >
+        {/* 2 Ícones 3D (Branco & Azul) ao clicar na Mascote 3D */}
+        {channelPickerOpen && !open && (
+          <div className="flex flex-col items-center gap-3 animate-[fadeIn_0.2s_ease-out]">
+            {/* Canal 1: WhatsApp 3D Branco & Azul */}
+            <a
+              href={`https://wa.me/${COMPANY.phoneRaw}?text=${encodeURIComponent(
+                'Olá JOGIMIL Tecnologias! Gostaria de iniciar uma conversa.'
+              )}`}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => setChannelPickerOpen(false)}
+              aria-label="Iniciar conversa no WhatsApp"
+              className="group relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-b from-white via-sky-50 to-sky-100 text-[#0066FF] border border-sky-400/60 shadow-[0_5px_0_#0052cc,0_14px_28px_-6px_rgba(0,102,255,0.55),inset_0_2px_4px_rgba(255,255,255,1)] transition-all duration-200 hover:-translate-y-1 hover:scale-105 active:translate-y-0.5"
+            >
+              <span className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded-lg bg-white border border-sky-300 px-3 py-1 text-xs font-semibold text-slate-900 shadow-[0_8px_20px_-6px_rgba(0,102,255,0.35)] opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                WhatsApp
+              </span>
+              <svg viewBox="0 0 24 24" className="h-7 w-7 fill-current drop-shadow-[0_2px_4px_rgba(0,102,255,0.28)]" aria-hidden="true">
+                <path d="M20.52 3.48A11.86 11.86 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.6 5.95L0 24l6.33-1.66a11.85 11.85 0 0 0 5.72 1.46h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.17-3.43-8.42ZM12.06 21.8h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.22-3.76.99 1-3.66-.24-.38a9.86 9.86 0 0 1-1.51-5.25c0-5.46 4.44-9.9 9.91-9.9 2.65 0 5.14 1.03 7.01 2.9a9.84 9.84 0 0 1 2.9 7.01c0 5.46-4.44 9.89-9.9 9.89Zm5.43-7.41c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35Z" />
+              </svg>
+            </a>
+
+            {/* Canal 2: Chat ao Vivo 3D Azul & Branco */}
+            <button
+              type="button"
+              onClick={() => {
+                setChannelPickerOpen(false);
+                handleOpen();
+              }}
+              aria-label="Abrir Chat ao Vivo"
+              className="group relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-b from-sky-400 via-[#0066FF] to-[#0052cc] text-white border border-white/40 shadow-[0_5px_0_#003d99,0_14px_28px_-6px_rgba(0,102,255,0.6),inset_0_2px_4px_rgba(255,255,255,0.65)] transition-all duration-200 hover:-translate-y-1 hover:scale-105 active:translate-y-0.5"
+            >
+              <span className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded-lg bg-white border border-sky-300 px-3 py-1 text-xs font-semibold text-slate-900 shadow-[0_8px_20px_-6px_rgba(0,102,255,0.35)] opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                Chat ao Vivo
+              </span>
+              <MessageSquare className="h-6 w-6 drop-shadow-[0_2px_4px_rgba(0,0,0,0.28)]" />
+            </button>
+          </div>
+        )}
+
         <MascoteAgente
           onClick={() => {
             if (open) {
               setOpen(false);
+              setChannelPickerOpen(false);
             } else {
-              handleOpen();
+              setChannelPickerOpen((prev) => !prev);
             }
           }}
-          isOpen={open}
+          isOpen={open || channelPickerOpen}
           unreadCount={unreadCount}
         />
       </div>
 
-      {/* 2. Card do Live Chat: 100% Responsivo em Mobile (Full-Screen nativo) e Retangular no Desktop */}
+      {/* 2. Card do Live Chat 3D Branco & Azul de Alta Nitidez */}
       {open && (
         <div
           role="dialog"
           aria-modal="true"
           aria-label="Atendimento JOGIMIL"
-          className={`fixed z-50 flex flex-col overflow-hidden bg-white text-slate-900 border-sky-300 shadow-2xl transition-all duration-200 ${
+          className={`fixed z-50 flex flex-col overflow-hidden bg-white text-slate-900 border-2 border-sky-500/45 ring-1 ring-white/90 transition-all duration-200 ${
             minimized
-              ? 'bottom-8 right-5 sm:bottom-8 sm:right-8 h-14 w-[calc(100vw-2.5rem)] sm:w-[360px] rounded-xl border border-sky-300 shadow-lg flex items-center justify-between px-4'
-              : 'inset-0 sm:inset-auto sm:bottom-28 sm:right-8 sm:w-[385px] sm:h-[540px] sm:max-h-[calc(100dvh-9rem)] sm:rounded-none sm:border rounded-none'
-          } shadow-[0_20px_60px_-15px_rgba(2,132,199,0.25)]`}
+              ? 'bottom-8 right-5 sm:bottom-8 sm:right-8 h-14 w-[calc(100vw-2.5rem)] sm:w-[360px] rounded-2xl shadow-[0_18px_42px_-12px_rgba(0,102,255,0.45),0_4px_0_rgba(0,102,255,0.25)] flex items-center justify-between px-4'
+              : 'inset-0 sm:inset-auto sm:bottom-28 sm:right-8 sm:w-[395px] sm:h-[550px] sm:max-h-[calc(100dvh-9rem)] sm:rounded-2xl rounded-none shadow-[0_28px_72px_-14px_rgba(0,102,255,0.45),0_10px_28px_-10px_rgba(15,23,42,0.3),0_5px_0_rgba(0,102,255,0.22)]'
+          }`}
         >
-          {/* Cabeçalho Refinado em Azul Claro & Branco com Logótipo Oficial */}
+          {/* Cabeçalho 3D em Azul & Branco de Alto Contraste */}
           <div
-            className="flex items-center justify-between px-4 py-3 sm:py-3.5 select-none border-b border-sky-400/30 bg-gradient-to-r from-sky-500 via-sky-600 to-blue-600 text-white shrink-0"
+            className="flex items-center justify-between px-4 py-3.5 select-none border-b border-sky-400/40 bg-gradient-to-r from-[#0052cc] via-[#0066FF] to-sky-500 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] shrink-0"
             style={{
               paddingTop: 'max(0.75rem, env(safe-area-inset-top, 0px))',
             }}
           >
             <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-none bg-white p-1 shadow-xs border border-white/40">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white p-1.5 shadow-[0_4px_12px_rgba(0,0,0,0.22),inset_0_1px_0_rgba(255,255,255,1)] border border-white/80">
                 <img src="/logo-mark.png" alt="JOGIMIL" className="h-full w-full object-contain" />
               </div>
               <div>
@@ -273,11 +316,11 @@ export function LiveChat() {
           </div>
 
           {!minimized && (
-            <div className="flex flex-1 flex-col overflow-hidden bg-gradient-to-b from-sky-50/50 via-white to-sky-50/30">
-              {/* Fluxo de Mensagens em Branco e Azul Claro */}
+            <div className="flex flex-1 flex-col overflow-hidden bg-gradient-to-b from-sky-50/80 via-white to-sky-50/40">
+              {/* Fluxo de Mensagens Nítido em Branco e Azul */}
               <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4 text-xs sm:text-sm overscroll-contain">
                 <div className="flex justify-center">
-                  <span className="px-3 py-0.5 font-mono text-[9px] rounded-full bg-sky-100 text-blue-900 border border-sky-200">
+                  <span className="px-3 py-0.5 font-mono text-[10px] font-semibold rounded-full bg-white text-sky-800 border border-sky-200 shadow-xs">
                     Atendimento Oficial · Luanda
                   </span>
                 </div>
@@ -290,30 +333,30 @@ export function LiveChat() {
                     <div
                       className={`max-w-[85%] sm:max-w-[80%] rounded-2xl px-3.5 py-2.5 leading-relaxed text-xs sm:text-sm ${
                         m.sender === 'user'
-                          ? 'bg-gradient-to-r from-blue-600 to-sky-500 text-white rounded-br-xs font-normal shadow-sm shadow-blue-500/20'
-                          : 'bg-white text-slate-800 border border-sky-200/90 rounded-bl-xs shadow-xs'
+                          ? 'bg-gradient-to-br from-[#0066FF] to-sky-500 text-white rounded-br-xs font-normal shadow-[0_6px_16px_-4px_rgba(0,102,255,0.45)]'
+                          : 'bg-white text-slate-900 border border-sky-200 rounded-bl-xs shadow-[0_4px_14px_-4px_rgba(0,102,255,0.18)]'
                       }`}
                     >
                       <p className="whitespace-pre-line">{m.text}</p>
                     </div>
-                    <span className="mt-1 px-1 font-mono text-[9px] text-sky-700/70">
+                    <span className="mt-1 px-1 font-mono text-[9px] text-sky-800/70">
                       {m.time}
                     </span>
                   </div>
                 ))}
 
                 {isTyping && (
-                  <div className="flex items-center gap-1.5 rounded-2xl px-3.5 py-2.5 w-fit bg-white text-sky-600 border border-sky-200 shadow-xs">
+                  <div className="flex items-center gap-1.5 rounded-2xl px-3.5 py-2.5 w-fit bg-white text-[#0066FF] border border-sky-200 shadow-sm">
                     <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-current" />
                     <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-current [animation-delay:0.18s]" />
                     <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-current [animation-delay:0.36s]" />
                   </div>
                 )}
 
-                {/* Sugestões Rápidas em Pílulas em Azul Claro & Branco */}
+                {/* Sugestões Rápidas em Pílulas em Branco & Azul */}
                 {messages.length <= 2 && (
                   <div className="pt-2">
-                    <p className="text-[11px] font-medium mb-2 text-sky-900">
+                    <p className="text-[11px] font-semibold mb-2 text-slate-900">
                       Tópicos frequentes:
                     </p>
                     <div className="flex flex-wrap gap-1.5">
@@ -321,7 +364,7 @@ export function LiveChat() {
                         <button
                           key={s.id}
                           onClick={() => handleSuggestion(s.query)}
-                          className="rounded-full px-3.5 py-1.5 text-xs transition active:scale-98 font-medium bg-white hover:bg-sky-50 text-blue-900 border border-sky-200 shadow-2xs"
+                          className="rounded-full px-3.5 py-1.5 text-xs transition active:scale-98 font-semibold bg-white hover:bg-[#0066FF] hover:text-white text-[#0052cc] border border-sky-300 shadow-xs"
                         >
                           {s.label}
                         </button>
@@ -333,7 +376,7 @@ export function LiveChat() {
                 <div ref={messagesEndRef} />
               </div>
 
-              {/* Modern Chat Composer em Azul Claro & Branco */}
+              {/* Modern Chat Composer em Branco & Azul */}
               <div
                 className="p-3 border-t border-sky-100 bg-white shrink-0"
                 style={{
@@ -341,10 +384,10 @@ export function LiveChat() {
                 }}
               >
                 <div
-                  className={`relative flex flex-col rounded-xl border transition-all duration-200 ${
+                  className={`relative flex flex-col rounded-xl border-2 transition-all duration-200 ${
                     isFocused
-                      ? 'border-sky-400 bg-white ring-2 ring-sky-100 shadow-xs'
-                      : 'border-sky-200 bg-sky-50/30 hover:border-sky-300'
+                      ? 'border-[#0066FF] bg-white ring-2 ring-sky-100 shadow-sm'
+                      : 'border-sky-200 bg-sky-50/40 hover:border-sky-300'
                   }`}
                 >
                   <textarea
@@ -369,9 +412,9 @@ export function LiveChat() {
                       type="button"
                       onClick={handleSend}
                       disabled={!input.trim()}
-                      className={`inline-flex items-center justify-center h-7 w-7 rounded-lg transition-all ${
+                      className={`inline-flex items-center justify-center h-8 w-8 rounded-lg transition-all ${
                         input.trim()
-                          ? 'bg-gradient-to-r from-blue-600 to-sky-500 text-white hover:opacity-95 active:scale-95 cursor-pointer shadow-xs shadow-blue-500/30'
+                          ? 'bg-gradient-to-r from-[#0066FF] to-sky-500 text-white hover:opacity-95 active:scale-95 cursor-pointer shadow-[0_4px_12px_-2px_rgba(0,102,255,0.5)]'
                           : 'bg-sky-100 text-sky-400 cursor-not-allowed'
                       }`}
                       aria-label="Enviar mensagem"

@@ -260,7 +260,7 @@ export const PRODUCTS: Product[] = [
     slug: 'soba-gest',
     name: 'SOBA GEST - Gestão Comercial, POS e Faturação',
     shortName: 'SOBA GEST',
-    category: 'Comércio, Retalho & Restauração',
+    category: 'Comércio, Retalho, Restauração & Hotelaria',
     tag: 'Certificação AGT Nº FE/402/AGT/2026',
     icon: 'pos',
     image: '/products/soba-gest-logo.png',

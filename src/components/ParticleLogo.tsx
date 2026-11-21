@@ -19,9 +19,9 @@ export default function ParticleLogo() {
   useEffect(() => {
     const el = host.current!;
     const isMobile = window.innerWidth < 768;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2.0);
-    // Passo de amostragem: mais denso para maior corpo visual
-    const step = isMobile ? 3 : 3;
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    // Passo de amostragem equilibrado para arranque rápido e 60fps constantes
+    const step = isMobile ? 4 : 3;
 
     // 1) Textura esférica circular anti-aliasing de alta definição
     const particleTexture = (() => {

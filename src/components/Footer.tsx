@@ -134,8 +134,8 @@ export function Footer() {
               <li><a href={href('sobre')}>Sobre nós</a></li>
               <li><a href={href('portfolio')}>Portfólio</a></li>
               <li><a href={href('produtos')}>Produtos</a></li>
+              <li><a href={href('blog')}>Blog &amp; Notícias</a></li>
               <li><a href={href('parceiros')}>Parceiros</a></li>
-              <li><a href={href('noticias')}>Notícias</a></li>
             </ul>
           </nav>
 

@@ -1,84 +1,113 @@
-import { useState } from 'react';
-import { Calendar, Download } from 'lucide-react';
-import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid } from 'recharts';
+import { useEffect, useState } from 'react';
+import { Download, Eye, Users, TrendingUp } from 'lucide-react';
+import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid, Legend } from 'recharts';
+import { apiFetch } from '../lib/api';
+import { BrandLoader } from './BrandLoader';
 
-const data = [
-  { date: "Jan 1", price: 355 }, { date: "Jan 8", price: 358 }, { date: "Jan 15", price: 345 },
-  { date: "Jan 22", price: 365 }, { date: "Jan 29", price: 355 }, { date: "Feb 5", price: 360 },
-  { date: "Feb 12", price: 345 }, { date: "Feb 19", price: 348 }, { date: "Feb 26", price: 320 },
-  { date: "Mar 5", price: 285 }, { date: "Mar 12", price: 305 }, { date: "Mar 19", price: 325 },
-  { date: "Mar 26", price: 328 }, { date: "Apr 2", price: 318 }, { date: "Apr 9", price: 325 },
-  { date: "Apr 16", price: 315 }, { date: "Apr 23", price: 320 }, { date: "Apr 30", price: 345 },
-  { date: "May 7", price: 335 }, { date: "May 14", price: 330 }, { date: "May 21", price: 320 },
-  { date: "May 28", price: 300 }, { date: "Jun 4", price: 315 }, { date: "Jun 11", price: 310 },
-  { date: "Jun 18", price: 318 }, { date: "Jun 25", price: 312 }, { date: "Jul 2", price: 325 },
-  { date: "Jul 9", price: 330 }, { date: "Jul 16", price: 332 }, { date: "Jul 23", price: 305 },
-  { date: "Jul 30", price: 325 }, { date: "Aug 6", price: 315 }, { date: "Aug 13", price: 305 },
-  { date: "Aug 20", price: 312 }, { date: "Aug 27", price: 335 }, { date: "Sep 3", price: 340 },
-  { date: "Sep 10", price: 338 }, { date: "Sep 17", price: 330 }, { date: "Sep 24", price: 335 },
-  { date: "Oct 1", price: 320 }, { date: "Oct 8", price: 340 }, { date: "Oct 15", price: 350 },
-  { date: "Oct 22", price: 345 }, { date: "Oct 29", price: 330 }, { date: "Nov 5", price: 335 },
-  { date: "Nov 12", price: 348 }, { date: "Nov 19", price: 348 }, { date: "Nov 26", price: 380 },
-  { date: "Dec 3", price: 410 }, { date: "Dec 10", price: 420 }, { date: "Dec 17", price: 428 },
-  { date: "Dec 24", price: 415 }, { date: "Dec 31", price: 425 }, { date: "Jan 7", price: 445 },
-  { date: "Jan 14", price: 420 }, { date: "Jan 21", price: 435 }, { date: "Jan 28", price: 450 },
-  { date: "Feb 4", price: 430 }, { date: "Feb 11", price: 455 }, { date: "Feb 18", price: 435 },
-  { date: "Feb 25", price: 440 }, { date: "Mar 4", price: 430 }, { date: "Mar 11", price: 410 },
-  { date: "Mar 18", price: 425 }, { date: "Mar 25", price: 435 }, { date: "Apr 1", price: 428 },
-  { date: "Apr 8", price: 440 }, { date: "Apr 15", price: 450 }, { date: "Apr 22", price: 430 },
-  { date: "Apr 29", price: 460 }, { date: "May 6", price: 460 }, { date: "May 13", price: 440 },
-  { date: "May 20", price: 465 }, { date: "May 27", price: 450 }, { date: "Jun 3", price: 460 },
-  { date: "Jun 10", price: 435 }, { date: "Jun 17", price: 445 }, { date: "Jun 24", price: 430 },
-  { date: "Jul 1", price: 400 }, { date: "Jul 8", price: 405 }, { date: "Jul 15", price: 400 }
-];
+interface TimelinePoint {
+  date: string;
+  visits: number;
+  uniqueVisitors: number;
+}
+
+interface VisitAnalyticsResponse {
+  success: boolean;
+  period: string;
+  summary: {
+    totalVisits: number;
+    uniqueVisitors: number;
+    todayVisits: number;
+    activeNow: number;
+    growthPct: number;
+  };
+  timeline: TimelinePoint[];
+}
 
 interface PerformanceChartProps {
   theme?: 'dark' | 'light';
 }
 
+const PERIOD_MAP: Record<string, string> = {
+  '24H': '24h',
+  '7D': '7d',
+  '30D': '30d',
+  '90D': '90d',
+  '1Y': '1y',
+};
+
 export function PerformanceChart({ theme = 'dark' }: PerformanceChartProps) {
   const isDark = theme === 'dark';
-  const [selectedPeriod, setSelectedPeriod] = useState('6M');
+  const [selectedPeriod, setSelectedPeriod] = useState('30D');
+  const [timeline, setTimeline] = useState<TimelinePoint[]>([]);
+  const [summary, setSummary] = useState<VisitAnalyticsResponse['summary'] | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    const load = async () => {
+      setLoading(true);
+      try {
+        const q = PERIOD_MAP[selectedPeriod] || '30d';
+        const res = await apiFetch<VisitAnalyticsResponse>(`/api/v1/admin/analytics/visits?period=${q}`);
+        if (active && res.success) {
+          setTimeline(res.timeline || []);
+          setSummary(res.summary || null);
+        }
+      } catch {
+        // fallback empty
+      } finally {
+        if (active) setLoading(false);
+      }
+    };
+    load();
+    return () => {
+      active = false;
+    };
+  }, [selectedPeriod]);
+
+  const handleExportCsv = () => {
+    const header = 'Periodo,Visitas Totais,Visitantes Unicos\n';
+    const rows = timeline.map((t) => `"${t.date}",${t.visits},${t.uniqueVisitors}`).join('\n');
+    const blob = new Blob([header + rows], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `jogimil-visitas-${selectedPeriod.toLowerCase()}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   return (
-    <div
-      className={`flex flex-col gap-6 p-6 rounded-2xl border transition-all ${
-        isDark
-          ? 'bg-[#0D0D0D] border-[#1F1F1F] text-white shadow-xl'
-          : 'bg-white border-slate-200 text-slate-900 shadow-md'
-      }`}
-    >
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 md:gap-2 lg:gap-4 flex-wrap">
-        <div className="flex items-center gap-3">
-          <h2 className="text-xl font-bold tracking-tight text-inherit">Performance & Tráfego</h2>
-          <div
-            className={`flex items-center gap-2 px-3 py-1 rounded-full border ${
-              isDark ? 'bg-[#1A1A1A] border-[#333]' : 'bg-slate-100 border-slate-300'
-            }`}
-          >
-            <div className="w-4 h-4 rounded-full bg-blue-600 flex items-center justify-center">
-              <span className="text-[10px] font-bold text-white">J</span>
-            </div>
-            <span className="text-xs font-semibold text-inherit">JOGIMIL (AO)</span>
-          </div>
+    <div className="ds-card flex flex-col gap-5 p-5">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 flex-wrap pb-4 border-b ds-divider">
+        <div className="flex flex-wrap items-center gap-4">
+          <h2 className="ds-title">Tráfego & Monitoramento de Visitas</h2>
+          <span className="inline-flex items-center gap-1.5 text-xs font-mono ds-muted">
+            <Eye className="w-3.5 h-3.5 text-brand" />
+            <strong className="text-[rgb(var(--text))]">{summary?.totalVisits ?? 0}</strong> visitas
+          </span>
+          <span className="inline-flex items-center gap-1.5 text-xs font-mono ds-muted">
+            <Users className="w-3.5 h-3.5 text-emerald-500" />
+            <strong className="text-[rgb(var(--text))]">{summary?.uniqueVisitors ?? 0}</strong> únicos
+          </span>
+          {summary && (
+            <span className="inline-flex items-center gap-1 text-xs font-mono font-semibold text-emerald-500">
+              <TrendingUp className="w-3.5 h-3.5" />
+              {summary.growthPct >= 0 ? `+${summary.growthPct}%` : `${summary.growthPct}%`}
+            </span>
+          )}
         </div>
 
-        <div className="flex items-center gap-4 md:gap-2 lg:gap-4">
-          <div
-            className={`flex items-center rounded-lg p-1 border ${
-              isDark ? 'bg-[#1A1A1A] border-[#333]' : 'bg-slate-100 border-slate-300'
-            }`}
-          >
-            {['1D', '1M', '3M', '6M', '1Y'].map((period) => (
+        <div className="flex items-center gap-2">
+          <div className="flex items-center border ds-divider ds-surface-2">
+            {Object.keys(PERIOD_MAP).map((period) => (
               <button
                 key={period}
                 onClick={() => setSelectedPeriod(period)}
-                className={`px-3 md:px-2 lg:px-3 py-1 text-sm md:text-xs lg:text-sm rounded-md transition-colors ${
+                className={`px-3 py-1.5 text-xs font-mono font-semibold transition-colors ${
                   selectedPeriod === period
-                    ? isDark
-                      ? 'bg-[#2A2A2A] text-white shadow-sm'
-                      : 'bg-white text-blue-600 shadow-sm font-semibold'
-                    : 'text-gray-400 hover:text-inherit'
+                    ? 'bg-brand text-white'
+                    : 'ds-muted hover:text-[rgb(var(--text))]'
                 }`}
               >
                 {period}
@@ -86,77 +115,86 @@ export function PerformanceChart({ theme = 'dark' }: PerformanceChartProps) {
             ))}
           </div>
 
-          <div className="flex items-center gap-2">
-            <button
-              className={`p-2 rounded-lg transition-colors border cursor-pointer ${
-                isDark
-                  ? 'text-gray-400 hover:text-white bg-[#1A1A1A] border-[#333]'
-                  : 'text-gray-600 hover:text-gray-900 bg-slate-100 border-slate-300'
-              }`}
-              title="Calendário"
-            >
-              <Calendar className="h-5 w-5" />
-            </button>
-            <button
-              onClick={() => alert('Relatório analítico exportado com sucesso em CSV.')}
-              className={`p-2 rounded-lg transition-colors border cursor-pointer ${
-                isDark
-                  ? 'text-gray-400 hover:text-white bg-[#1A1A1A] border-[#333]'
-                  : 'text-gray-600 hover:text-gray-900 bg-slate-100 border-slate-300'
-              }`}
-              title="Descarregar relatório"
-            >
-              <Download className="h-5 w-5" />
-            </button>
-          </div>
+          <button
+            onClick={handleExportCsv}
+            className="btn btn-secondary btn-sm"
+            title="Descarregar relatório CSV"
+          >
+            <Download className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">CSV</span>
+          </button>
         </div>
       </div>
 
-      <div className="h-[400px] w-full">
-        <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data}>
-            <defs>
-              <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#0066FF" stopOpacity={0.4} />
-                <stop offset="50%" stopColor="#38BDF8" stopOpacity={0.15} />
-                <stop offset="95%" stopColor="#86efac" stopOpacity={0} />
-              </linearGradient>
-            </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#1F1F1F" vertical={false} />
-            <XAxis dataKey="date" hide />
-            <YAxis
-              domain={[250, 500]}
-              orientation="left"
-              tick={{ fill: '#666' }}
-              axisLine={false}
-              tickLine={false}
-              ticks={[250, 300, 350, 400, 450, 500]}
-            />
-            <Tooltip
-              content={({ active, payload }) => {
-                if (active && payload && payload.length) {
-                  return (
-                    <div className="bg-[#1A1A1A] border border-[#333] p-2.5 rounded-lg shadow-xl text-xs">
-                      <p className="text-white font-medium">
-                        {Number(payload[0].value || 0).toFixed(2)} USD{' '}
-                        <span className="text-gray-400 text-xs ml-2">{payload[0].payload.date}</span>
-                      </p>
-                    </div>
-                  );
-                }
-                return null;
-              }}
-            />
-            <Area
-              type="monotone"
-              dataKey="price"
-              stroke="#38BDF8"
-              strokeWidth={2}
-              fillOpacity={1}
-              fill="url(#colorPrice)"
-            />
-          </AreaChart>
-        </ResponsiveContainer>
+      <div className="h-[340px] w-full">
+        {loading && timeline.length === 0 ? (
+          <div className="h-full flex items-center justify-center">
+            <BrandLoader size="md" theme={theme} />
+          </div>
+        ) : (
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart data={timeline} margin={{ top: 10, right: 12, left: -16, bottom: 0 }}>
+              <defs>
+                <linearGradient id="colorVisits" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#0066FF" stopOpacity={0.4} />
+                  <stop offset="95%" stopColor="#0066FF" stopOpacity={0.0} />
+                </linearGradient>
+                <linearGradient id="colorUnique" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#10B981" stopOpacity={0.35} />
+                  <stop offset="95%" stopColor="#10B981" stopOpacity={0.0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke={isDark ? 'rgba(255,255,255,0.06)' : 'rgba(15,23,42,0.08)'}
+                vertical={false}
+              />
+              <XAxis
+                dataKey="date"
+                stroke="#64748B"
+                fontSize={11}
+                tickLine={false}
+                axisLine={false}
+              />
+              <YAxis
+                stroke="#64748B"
+                fontSize={11}
+                tickLine={false}
+                axisLine={false}
+                allowDecimals={false}
+              />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: isDark ? '#14161A' : '#FFFFFF',
+                  borderColor: isDark ? '#2A2E37' : '#E2E8F0',
+                  borderRadius: '0px',
+                  fontSize: '12px',
+                  color: isDark ? '#F1F3F6' : '#0F172A',
+                  boxShadow: isDark ? '0 10px 28px rgba(0,0,0,0.6)' : '0 8px 20px rgba(15,23,42,0.1)',
+                }}
+              />
+              <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '8px' }} />
+              <Area
+                type="monotone"
+                dataKey="visits"
+                name="Visitas Totais"
+                stroke="#0066FF"
+                strokeWidth={2.5}
+                fillOpacity={1}
+                fill="url(#colorVisits)"
+              />
+              <Area
+                type="monotone"
+                dataKey="uniqueVisitors"
+                name="Visitantes Únicos"
+                stroke="#10B981"
+                strokeWidth={2}
+                fillOpacity={1}
+                fill="url(#colorUnique)"
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+        )}
       </div>
     </div>
   );

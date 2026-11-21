@@ -1,0 +1,29 @@
+{
+  "authMode": "facebook_unified",
+  "appId": "",
+  "appSecret": "",
+  "verifyToken": "jogimil_meta_5c46c597ae10",
+  "redirectUri": "http://localhost:3101/api/v1/meta/auth/callback",
+  "facebook": {
+    "connected": false,
+    "pageId": "",
+    "pageName": "",
+    "pageAccessToken": "",
+    "connectedAt": null
+  },
+  "instagram": {
+    "connected": false,
+    "igUserId": "",
+    "username": "",
+    "accessToken": "",
+    "loginHost": "graph.facebook.com",
+    "connectedAt": null
+  },
+  "threads": {
+    "connected": false,
+    "userId": "",
+    "username": "",
+    "accessToken": "",
+    "connectedAt": null
+  }
+}

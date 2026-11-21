@@ -24,5 +24,5 @@ export const PageHead = ({ eyebrow, title, lead, crumbs }: { eyebrow: string; ti
 );
 
 export const Body = ({ tone = 'a', children, cls = '' }: { tone?: 'a' | 'b'; children: ReactNode; cls?: string }) => (
-  <section data-tone={tone} className={`slope pb-24 ${cls}`}><div className="container-x">{children}</div></section>
+  <section data-tone={tone} style={{ backgroundColor: 'rgb(var(--bg) / 0.78)' }} className={`slope pb-24 ${cls}`}><div className="container-x relative z-10">{children}</div></section>
 );

@@ -1,0 +1,138 @@
+services:
+  # 1. API Gateway & Core Backend (Forms, CRM, Admin, Analytics, Omnichannel)
+  - type: web
+    name: jogimil-api
+    runtime: node
+    rootDir: serviços/core-omnichannel-service
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm run start:gateway
+    healthCheckPath: /health
+    disk:
+      name: jogimil-data
+      mountPath: /opt/render/project/src/serviços/core-omnichannel-service/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: CORS_ORIGIN
+        value: "*"
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: DESTINATION_EMAIL
+        value: geral@jogimiltecnologias.it.ao
+      - key: FROM_EMAIL
+        value: '"JOGIMIL Tecnologias" <geral@jogimiltecnologias.it.ao>'
+      - key: SMTP_HOST
+        value: mx109.angoweb.net
+      - key: SMTP_PORT
+        value: 465
+      - key: SMTP_SECURE
+        value: "true"
+      - key: SMTP_USER
+        value: geral@jogimiltecnologias.it.ao
+      - key: SMTP_PASS
+        sync: false
+      - key: IMAP_HOST
+        value: mx109.angoweb.net
+      - key: IMAP_PORT
+        value: 993
+      - key: EVOLUTION_API_URL
+        sync: false
+      - key: EVOLUTION_API_KEY
+        sync: false
+      - key: EVOLUTION_INSTANCE_NAME
+        value: jogimil-main
+
+  # 2. Microserviço Omnicanal Separado (WhatsApp Evolution API + SMTP/IMAP)
+  - type: web
+    name: jogimil-omnichannel-service
+    runtime: node
+    rootDir: serviços/core-omnichannel-service
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm run start:omnichannel
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CORS_ORIGIN
+        value: "*"
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: SMTP_HOST
+        value: mx109.angoweb.net
+      - key: SMTP_PORT
+        value: 465
+      - key: SMTP_SECURE
+        value: "true"
+      - key: SMTP_USER
+        value: geral@jogimiltecnologias.it.ao
+      - key: SMTP_PASS
+        sync: false
+      - key: IMAP_HOST
+        value: mx109.angoweb.net
+      - key: IMAP_PORT
+        value: 993
+      - key: EVOLUTION_API_URL
+        sync: false
+      - key: EVOLUTION_API_KEY
+        sync: false
+      - key: EVOLUTION_INSTANCE_NAME
+        value: jogimil-main
+
+  # 3. Microserviço de Monitoramento de Visitas & Analytics Separado
+  - type: web
+    name: jogimil-analytics-service
+    runtime: node
+    rootDir: serviços/core-omnichannel-service
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm run start:analytics
+    healthCheckPath: /health
+    disk:
+      name: jogimil-analytics-data
+      mountPath: /opt/render/project/src/serviços/core-omnichannel-service/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CORS_ORIGIN
+        value: "*"
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+
+  # 4. Portal Público JOGIMIL (Static Site)
+  - type: web
+    name: jogimil-portal
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: jogimil-api
+          property: url
+
+  # 5. Painel Administrativo JOGIMIL (Static Site)
+  - type: web
+    name: jogimil-admin
+    runtime: static
+    rootDir: admin
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: jogimil-api
+          property: url

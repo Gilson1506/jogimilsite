@@ -1,0 +1,315 @@
+[
+  {
+    "id": "tkt_1795133033052",
+    "clientName": "Eng. Manuel Bento",
+    "clientContact": "manuel.bento@jogimil.ao",
+    "clientEmail": "manuel.bento@jogimil.ao",
+    "channel": "email",
+    "subject": "Pedido de Orçamento Teste",
+    "status": "aberto",
+    "priority": "alta",
+    "submissionId": "sub_1795133033023_odv9x",
+    "createdAt": "2026-11-20T00:03:53.052Z",
+    "updatedAt": "2026-11-20T00:03:53.052Z",
+    "messages": [
+      {
+        "id": "msg_1795133033048",
+        "sender": "client",
+        "content": "Pedido de Orçamento Teste submetido no portal.",
+        "channel": "portal",
+        "timestamp": "2026-11-20T00:03:53.048Z"
+      }
+    ]
+  },
+  {
+    "id": "tkt_1795091600533",
+    "clientName": "Eng. Manuel Bento",
+    "clientContact": "manuel.bento@jogimil.ao",
+    "clientEmail": "manuel.bento@jogimil.ao",
+    "channel": "email",
+    "subject": "Pedido de Orçamento Teste",
+    "status": "aberto",
+    "priority": "alta",
+    "submissionId": "sub_1795091600325_cf7ds",
+    "createdAt": "2026-11-19T12:33:20.533Z",
+    "updatedAt": "2026-11-19T12:33:20.533Z",
+    "messages": [
+      {
+        "id": "msg_1795091600513",
+        "sender": "client",
+        "content": "Pedido de Orçamento Teste submetido no portal.",
+        "channel": "portal",
+        "timestamp": "2026-11-19T12:33:20.513Z"
+      }
+    ]
+  },
+  {
+    "id": "tkt_1795089473621",
+    "clientName": "Eng. Manuel Bento",
+    "clientContact": "manuel.bento@jogimil.ao",
+    "clientEmail": "manuel.bento@jogimil.ao",
+    "channel": "email",
+    "subject": "Pedido de Orçamento Teste",
+    "status": "aberto",
+    "priority": "alta",
+    "submissionId": "sub_1795089473592_q35in",
+    "createdAt": "2026-11-19T11:57:53.621Z",
+    "updatedAt": "2026-11-19T11:57:53.621Z",
+    "messages": [
+      {
+        "id": "msg_1795089473606",
+        "sender": "client",
+        "content": "Pedido de Orçamento Teste submetido no portal.",
+        "channel": "portal",
+        "timestamp": "2026-11-19T11:57:53.606Z"
+      }
+    ]
+  },
+  {
+    "id": "tkt_1795088214156",
+    "clientName": "Eng. Manuel Bento",
+    "clientContact": "manuel.bento@jogimil.ao",
+    "clientEmail": "manuel.bento@jogimil.ao",
+    "channel": "email",
+    "subject": "Pedido de Orçamento Teste",
+    "status": "aberto",
+    "priority": "alta",
+    "submissionId": "sub_1795088214133_pyaon",
+    "createdAt": "2026-11-19T11:36:54.156Z",
+    "updatedAt": "2026-11-19T11:36:54.156Z",
+    "messages": [
+      {
+        "id": "msg_1795088214154",
+        "sender": "client",
+        "content": "Pedido de Orçamento Teste submetido no portal.",
+        "channel": "portal",
+        "timestamp": "2026-11-19T11:36:54.154Z"
+      }
+    ]
+  },
+  {
+    "id": "tkt_1795087896811",
+    "clientName": "Eng. Manuel Bento",
+    "clientContact": "manuel.bento@jogimil.ao",
+    "clientEmail": "manuel.bento@jogimil.ao",
+    "channel": "email",
+    "subject": "Pedido de Orçamento Teste",
+    "status": "aberto",
+    "priority": "alta",
+    "submissionId": "sub_1795087896775_1cw7v",
+    "createdAt": "2026-11-19T11:31:36.811Z",
+    "updatedAt": "2026-11-19T11:31:36.811Z",
+    "messages": [
+      {
+        "id": "msg_1795087896810",
+        "sender": "client",
+        "content": "Pedido de Orçamento Teste submetido no portal.",
+        "channel": "portal",
+        "timestamp": "2026-11-19T11:31:36.810Z"
+      }
+    ]
+  },
+  {
+    "id": "tkt_1795085546739",
+    "clientName": "Eng. Manuel Bento",
+    "clientContact": "manuel.bento@jogimil.ao",
+    "clientEmail": "manuel.bento@jogimil.ao",
+    "channel": "email",
+    "subject": "Pedido de Orçamento Teste",
+    "status": "aberto",
+    "priority": "alta",
+    "submissionId": "sub_1795085546716_erykd",
+    "createdAt": "2026-11-19T10:52:26.739Z",
+    "updatedAt": "2026-11-19T10:52:26.739Z",
+    "messages": [
+      {
+        "id": "msg_1795085546738",
+        "sender": "client",
+        "content": "Pedido de Orçamento Teste submetido no portal.",
+        "channel": "portal",
+        "timestamp": "2026-11-19T10:52:26.738Z"
+      }
+    ]
+  },
+  {
+    "id": "tkt_1795083869705",
+    "clientName": "Eng. Manuel Bento",
+    "clientContact": "manuel.bento@jogimil.ao",
+    "clientEmail": "manuel.bento@jogimil.ao",
+    "channel": "email",
+    "subject": "Pedido de Orçamento Teste",
+    "status": "aberto",
+    "priority": "alta",
+    "submissionId": "sub_1795083869676_a233e",
+    "createdAt": "2026-11-19T10:24:29.705Z",
+    "updatedAt": "2026-11-19T10:24:29.705Z",
+    "messages": [
+      {
+        "id": "msg_1795083869703",
+        "sender": "client",
+        "content": "Pedido de Orçamento Teste submetido no portal.",
+        "channel": "portal",
+        "timestamp": "2026-11-19T10:24:29.703Z"
+      }
+    ]
+  },
+  {
+    "id": "tkt_1795082942888",
+    "clientName": "Eng. Manuel Bento",
+    "clientContact": "manuel.bento@jogimil.ao",
+    "clientEmail": "manuel.bento@jogimil.ao",
+    "channel": "email",
+    "subject": "Pedido de Orçamento Teste",
+    "status": "aberto",
+    "priority": "alta",
+    "submissionId": "sub_1795082942881_e2cdg",
+    "createdAt": "2026-11-19T10:09:02.888Z",
+    "updatedAt": "2026-11-19T10:09:02.888Z",
+    "messages": [
+      {
+        "id": "msg_1795082942887",
+        "sender": "client",
+        "content": "Pedido de Orçamento Teste submetido no portal.",
+        "channel": "portal",
+        "timestamp": "2026-11-19T10:09:02.887Z"
+      }
+    ]
+  },
+  {
+    "id": "tkt_1795082353092",
+    "clientName": "Eng. Manuel Bento",
+    "clientContact": "manuel.bento@jogimil.ao",
+    "clientEmail": "manuel.bento@jogimil.ao",
+    "channel": "email",
+    "subject": "Pedido de Orçamento Teste",
+    "status": "aberto",
+    "priority": "alta",
+    "submissionId": "sub_1795082353071_54mzy",
+    "createdAt": "2026-11-19T09:59:13.092Z",
+    "updatedAt": "2026-11-19T09:59:13.092Z",
+    "messages": [
+      {
+        "id": "msg_1795082353089",
+        "sender": "client",
+        "content": "Pedido de Orçamento Teste submetido no portal.",
+        "channel": "portal",
+        "timestamp": "2026-11-19T09:59:13.089Z"
+      }
+    ]
+  },
+  {
+    "id": "tkt_1795081248242",
+    "clientName": "Eng. Manuel Bento",
+    "clientContact": "manuel.bento@jogimil.ao",
+    "clientEmail": "manuel.bento@jogimil.ao",
+    "channel": "email",
+    "subject": "Pedido de Orçamento Teste",
+    "status": "aberto",
+    "priority": "alta",
+    "submissionId": "sub_1795081248178_wi4lu",
+    "createdAt": "2026-11-19T09:40:48.242Z",
+    "updatedAt": "2026-11-19T09:40:48.242Z",
+    "messages": [
+      {
+        "id": "msg_1795081248240",
+        "sender": "client",
+        "content": "Pedido de Orçamento Teste submetido no portal.",
+        "channel": "portal",
+        "timestamp": "2026-11-19T09:40:48.240Z"
+      }
+    ]
+  },
+  {
+    "id": "tkt_1795079977138",
+    "clientName": "Eng. Manuel Bento",
+    "clientContact": "manuel.bento@jogimil.ao",
+    "clientEmail": "manuel.bento@jogimil.ao",
+    "channel": "email",
+    "subject": "Pedido de Orçamento Teste",
+    "status": "aberto",
+    "priority": "alta",
+    "submissionId": "sub_1795079977127_s7p88",
+    "createdAt": "2026-11-19T09:19:37.138Z",
+    "updatedAt": "2026-11-19T09:19:37.138Z",
+    "messages": [
+      {
+        "id": "msg_1795079977137",
+        "sender": "client",
+        "content": "Pedido de Orçamento Teste submetido no portal.",
+        "channel": "portal",
+        "timestamp": "2026-11-19T09:19:37.137Z"
+      }
+    ]
+  },
+  {
+    "id": "tkt_1795079826148",
+    "clientName": "Eng. Manuel Bento",
+    "clientContact": "manuel.bento@jogimil.ao",
+    "clientEmail": "manuel.bento@jogimil.ao",
+    "channel": "email",
+    "subject": "Pedido de Orçamento Teste",
+    "status": "aberto",
+    "priority": "alta",
+    "submissionId": "sub_1795079826141_6qa9d",
+    "createdAt": "2026-11-19T09:17:06.148Z",
+    "updatedAt": "2026-11-19T09:17:06.148Z",
+    "messages": [
+      {
+        "id": "msg_1795079826148",
+        "sender": "client",
+        "content": "Pedido de Orçamento Teste submetido no portal.",
+        "channel": "portal",
+        "timestamp": "2026-11-19T09:17:06.148Z"
+      }
+    ]
+  },
+  {
+    "id": "tick_101",
+    "contactName": "Carlos Mendonça",
+    "company": "Supermercados Luanda Sul",
+    "phone": "+244 923 445 566",
+    "email": "carlos.mendonca@sul.ao",
+    "channel": "whatsapp",
+    "subject": "Dúvida sobre parametrização da taxa IVA no POS",
+    "status": "open",
+    "assignedAgent": "Esperança Domingos",
+    "updatedAt": "2026-11-09T23:30:24.893Z",
+    "messages": [
+      {
+        "id": "msg_1",
+        "sender": "client",
+        "content": "Boa tarde, equipa JOGIMIL. Gostaria de saber como atualizar a taxa de IVA nos novos artigos que inserimos hoje no POS.",
+        "timestamp": "2026-11-09T22:30:24.895Z",
+        "channel": "whatsapp"
+      },
+      {
+        "id": "msg_2",
+        "sender": "agent",
+        "content": "Boa tarde, Sr. Carlos! No menu Definições > Artigos do POS, pode alterar a taxa diretamente e gravar. O sistema valida automaticamente o SAF-T.",
+        "timestamp": "2026-11-09T23:00:24.895Z",
+        "channel": "whatsapp"
+      }
+    ]
+  },
+  {
+    "id": "tick_102",
+    "contactName": "Dra. Luísa Fernandes",
+    "company": "Colégio Nova Esperança",
+    "phone": "+244 931 778 899",
+    "email": "secretaria@novaesperanca.edu.ao",
+    "channel": "email",
+    "subject": "Pedido de demonstração do módulo de Propinas Online",
+    "status": "open",
+    "assignedAgent": "Ana Costa",
+    "updatedAt": "2026-11-09T21:30:24.895Z",
+    "messages": [
+      {
+        "id": "msg_3",
+        "sender": "client",
+        "content": "Prezados, gostaríamos de agendar uma demonstração online do módulo de cobrança automática de propinas com Multicaixa Express.",
+        "timestamp": "2026-11-09T21:30:24.895Z",
+        "channel": "email"
+      }
+    ]
+  }
+]

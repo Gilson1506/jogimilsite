@@ -1,0 +1,263 @@
+[
+  {
+    "id": "cont_1795079977156",
+    "name": "Visitante do Portal",
+    "email": "cliente@empresa.ao",
+    "phone": "",
+    "company": "",
+    "status": "novo",
+    "source": "Portal · Subscrição Newsletter",
+    "createdAt": "2026-11-19T09:19:37.156Z",
+    "history": [
+      {
+        "id": "msg_1795079977155",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Subscrição Newsletter] Subscrição Newsletter submetido no portal.",
+        "timestamp": "2026-11-19T09:19:37.155Z"
+      },
+      {
+        "id": "msg_1795081248553",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Subscrição Newsletter] Subscrição Newsletter submetido no portal.",
+        "timestamp": "2026-11-19T09:40:48.553Z"
+      },
+      {
+        "id": "msg_1795082353114",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Subscrição Newsletter] Subscrição Newsletter submetido no portal.",
+        "timestamp": "2026-11-19T09:59:13.114Z"
+      },
+      {
+        "id": "msg_1795082942914",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Subscrição Newsletter] Subscrição Newsletter submetido no portal.",
+        "timestamp": "2026-11-19T10:09:02.914Z"
+      },
+      {
+        "id": "msg_1795083869753",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Subscrição Newsletter] Subscrição Newsletter submetido no portal.",
+        "timestamp": "2026-11-19T10:24:29.753Z"
+      },
+      {
+        "id": "msg_1795079826176",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Subscrição Newsletter] Subscrição Newsletter submetido no portal.",
+        "timestamp": "2026-11-19T09:17:06.176Z"
+      },
+      {
+        "id": "msg_1795085546760",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Subscrição Newsletter] Subscrição Newsletter submetido no portal.",
+        "timestamp": "2026-11-19T10:52:26.760Z"
+      },
+      {
+        "id": "msg_1795087896835",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Subscrição Newsletter] Subscrição Newsletter submetido no portal.",
+        "timestamp": "2026-11-19T11:31:36.835Z"
+      },
+      {
+        "id": "msg_1795088214179",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Subscrição Newsletter] Subscrição Newsletter submetido no portal.",
+        "timestamp": "2026-11-19T11:36:54.179Z"
+      },
+      {
+        "id": "msg_1795089473673",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Subscrição Newsletter] Subscrição Newsletter submetido no portal.",
+        "timestamp": "2026-11-19T11:57:53.673Z"
+      },
+      {
+        "id": "msg_1795091600865",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Subscrição Newsletter] Subscrição Newsletter submetido no portal.",
+        "timestamp": "2026-11-19T12:33:20.865Z"
+      },
+      {
+        "id": "msg_1795133033079",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Subscrição Newsletter] Subscrição Newsletter submetido no portal.",
+        "timestamp": "2026-11-20T00:03:53.079Z"
+      }
+    ],
+    "role": "",
+    "stage": "novo",
+    "interactionStatus": "por_responder",
+    "priority": "media",
+    "value": 0,
+    "tags": [],
+    "owner": "",
+    "notes": "",
+    "nextFollowUp": null,
+    "updatedAt": "2026-11-20T00:03:53.079Z",
+    "lastInteractionAt": "2026-11-20T00:03:53.079Z"
+  },
+  {
+    "id": "cont_1795079977136",
+    "name": "Eng. Manuel Bento",
+    "email": "manuel.bento@jogimil.ao",
+    "phone": "+244 942 775 559",
+    "company": "Empresa em Angola",
+    "status": "novo",
+    "source": "Portal · Pedido de Orçamento Teste",
+    "createdAt": "2026-11-19T09:19:37.136Z",
+    "history": [
+      {
+        "id": "msg_1795079977135",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Pedido de Orçamento Teste] Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T09:19:37.135Z"
+      },
+      {
+        "id": "msg_1795081248188",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Pedido de Orçamento Teste] Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T09:40:48.188Z"
+      },
+      {
+        "id": "msg_1795082353074",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Pedido de Orçamento Teste] Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T09:59:13.074Z"
+      },
+      {
+        "id": "msg_1795082942884",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Pedido de Orçamento Teste] Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T10:09:02.884Z"
+      },
+      {
+        "id": "msg_1795083869699",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Pedido de Orçamento Teste] Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T10:24:29.699Z"
+      },
+      {
+        "id": "msg_1795079826144",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Pedido de Orçamento Teste] Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T09:17:06.144Z"
+      },
+      {
+        "id": "msg_1794256444222_init",
+        "channel": "form",
+        "direction": "inbound",
+        "content": "Teste automatizado de envio",
+        "timestamp": "quinta-feira, 5 de novembro de 2026 às 14:40:35"
+      },
+      {
+        "id": "msg_1794256444222_init",
+        "channel": "form",
+        "direction": "inbound",
+        "content": "Pretendo agendar visita",
+        "timestamp": "quinta-feira, 5 de novembro de 2026 às 14:42:07"
+      },
+      {
+        "id": "msg_1794256444222_init",
+        "channel": "form",
+        "direction": "inbound",
+        "content": "Submissão inicial do formulário: Teste via Proxy Vite",
+        "timestamp": "quinta-feira, 5 de novembro de 2026 às 14:42:13"
+      },
+      {
+        "id": "msg_1794256444222_init",
+        "channel": "form",
+        "direction": "inbound",
+        "content": "Submissão inicial do formulário: Subscrição de Newsletter",
+        "timestamp": "quinta-feira, 5 de novembro de 2026 às 15:51:46"
+      },
+      {
+        "id": "msg_1795085546718",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Pedido de Orçamento Teste] Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T10:52:26.718Z"
+      },
+      {
+        "id": "msg_1795087896801",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Pedido de Orçamento Teste] Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T11:31:36.801Z"
+      },
+      {
+        "id": "msg_1795088214147",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Pedido de Orçamento Teste] Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T11:36:54.147Z"
+      },
+      {
+        "id": "msg_1795089473600",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Pedido de Orçamento Teste] Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T11:57:53.600Z"
+      },
+      {
+        "id": "msg_1795091600395",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Pedido de Orçamento Teste] Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-19T12:33:20.395Z"
+      },
+      {
+        "id": "msg_1795133033034",
+        "channel": "portal",
+        "direction": "inbound",
+        "content": "[Pedido de Orçamento Teste] Pedido de Orçamento Teste submetido no portal.",
+        "timestamp": "2026-11-20T00:03:53.034Z"
+      }
+    ],
+    "role": "",
+    "stage": "novo",
+    "interactionStatus": "por_responder",
+    "priority": "media",
+    "value": 0,
+    "tags": [],
+    "owner": "",
+    "notes": "",
+    "nextFollowUp": null,
+    "updatedAt": "2026-11-20T00:03:53.041Z",
+    "lastInteractionAt": "2026-11-20T00:03:53.041Z"
+  },
+  {
+    "id": "cont_1793886359717_pbcmx",
+    "name": "Mateus Silva",
+    "email": "mateus@parceiro.ao",
+    "phone": "+244923112233",
+    "company": "Empresa em Angola",
+    "status": "novo",
+    "source": "Candidatura a Agente Autorizado",
+    "createdAt": "quinta-feira, 5 de novembro de 2026 às 14:45:59",
+    "history": [
+      {
+        "id": "msg_1794256444222_init",
+        "channel": "form",
+        "direction": "inbound",
+        "content": "Submissão inicial do formulário: Candidatura a Agente Autorizado",
+        "timestamp": "quinta-feira, 5 de novembro de 2026 às 14:45:59"
+      }
+    ]
+  }
+]
