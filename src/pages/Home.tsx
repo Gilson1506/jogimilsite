@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   COMPANY,
   SERVICES,
@@ -17,7 +17,6 @@ import {
   PublicTeamMember,
 } from '../lib/api';
 import { href, useReducedMotion } from '../lib/hooks';
-import { useLateralScroll } from '../hooks/useLateralScroll';
 import { Counter, Icon, Icon3D, Reveal, Typewriter } from '../components/ui';
 import ParticleLogo from '../components/ParticleLogo';
 import { PageScene3D } from '../components/PageScene3D';
@@ -33,17 +32,11 @@ const HOME_SECTIONS = [
   { id: 'sec-contacto', label: 'Contacto' },
 ];
 
-function SectionRail({
-  lateralIndex,
-  onJumpLateral,
-}: {
-  lateralIndex: number | null;
-  onJumpLateral: (idx: number) => void;
-}) {
-  const [verticalActive, setVerticalActive] = useState('sec-inicio');
+function SectionRail() {
+  const [active, setActive] = useState('sec-inicio');
 
   useEffect(() => {
-    const ids = ['sec-produtos', 'sec-portfolio', 'sec-sobre', 'sec-blog', 'sec-contacto'];
+    const ids = HOME_SECTIONS.map((s) => s.id);
     const els = ids.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
     if (els.length === 0) return;
 
@@ -53,7 +46,7 @@ function SectionRail({
           .filter((e) => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
         if (visible[0]?.target.id) {
-          setVerticalActive(visible[0].target.id);
+          setActive(visible[0].target.id);
         }
       },
       { rootMargin: '-30% 0px -45% 0px', threshold: [0.1, 0.35, 0.6] }
@@ -63,19 +56,7 @@ function SectionRail({
     return () => io.disconnect();
   }, []);
 
-  const active =
-    lateralIndex === 0
-      ? 'sec-inicio'
-      : lateralIndex === 1
-      ? 'sec-impacto'
-      : lateralIndex === 2
-      ? 'sec-servicos'
-      : verticalActive;
-
   const jump = (id: string) => {
-    if (id === 'sec-inicio') return onJumpLateral(0);
-    if (id === 'sec-impacto') return onJumpLateral(1);
-    if (id === 'sec-servicos') return onJumpLateral(2);
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
@@ -162,7 +143,7 @@ function Trust() {
       id="sec-impacto"
       data-tone="b"
       aria-label="Factos sobre a JOGIMIL"
-      className="relative overflow-hidden min-h-[100svh] flex flex-col justify-center py-10 lg:py-12"
+      className="slope relative overflow-hidden min-h-[100svh] flex flex-col justify-center py-14 lg:py-16"
     >
       <PageScene3D page="parceiros" positioning="absolute" />
 
@@ -286,7 +267,7 @@ function Services() {
   const displayedServices = SERVICES.filter((s) => s.main).slice(0, 6);
 
   return (
-    <section id="sec-servicos" data-tone="a" className="relative flex min-h-[100svh] flex-col justify-center py-8 lg:py-10 overflow-hidden">
+    <section id="sec-servicos" data-tone="a" className="slope slope-r relative flex min-h-[100svh] flex-col justify-center py-14 lg:py-16 overflow-hidden">
       <PageScene3D page="servicos" positioning="absolute" />
       <div className="container-x relative z-10">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between border-b border-line/60 pb-5">
@@ -719,91 +700,12 @@ function PartnersStrip() {
 }
 
 export default function Home() {
-  const stageRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotion();
-
-  const { isDesktop, lateralActive, jumpToPanel } = useLateralScroll({
-    stageRef,
-    trackRef,
-    panelCount: 3,
-    reducedMotion: reduced,
-  });
-
-  const jumpToLateral = (idx: number) => {
-    jumpToPanel(idx, ['sec-inicio', 'sec-impacto', 'sec-servicos']);
-  };
-
   return (
     <>
-      <SectionRail lateralIndex={lateralActive} onJumpLateral={jumpToLateral} />
-
-      {/* Palco Lateral das 3 Primeiras Secções (GSAP ScrollTrigger pin + scrub GPU-only; mobile usa scroll vertical nativo) */}
-      <div ref={stageRef} data-lateral-stage className="relative w-full overflow-hidden">
-        <div
-          ref={trackRef}
-          className={
-            isDesktop
-              ? 'flex h-screen w-[300vw] will-change-transform'
-              : 'flex flex-col w-full'
-          }
-        >
-          {/* Secção 1: Hero */}
-          <div className={isDesktop ? 'w-screen h-screen shrink-0 overflow-hidden' : 'w-full'}>
-            <Hero />
-          </div>
-
-          {/* Secção 2: Impacto (entra pela lateral direita, sem rolagem interna) */}
-          <div
-            className={
-              isDesktop
-                ? 'w-screen h-screen shrink-0 flex flex-col justify-center overflow-hidden bg-bg/75 border-l border-line/40'
-                : 'w-full'
-            }
-          >
-            <Trust />
-          </div>
-
-          {/* Secção 3: Serviços Especializados (entra pela lateral direita, ajustado ao viewport) */}
-          <div
-            className={
-              isDesktop
-                ? 'w-screen h-screen shrink-0 flex flex-col justify-center overflow-hidden pt-12 bg-bg/75 border-l border-line/40'
-                : 'w-full'
-            }
-          >
-            <Services />
-          </div>
-        </div>
-
-        {/* Barra tipográfica subtil de progresso lateral (sem ícones, apenas em desktop >= 768px) */}
-        {isDesktop && (
-          <div className="pointer-events-auto absolute bottom-5 left-1/2 z-30 -translate-x-1/2 flex items-center gap-6 px-5 py-2 backdrop-blur-xl bg-card/70 border border-line/60">
-            {['01 Início', '02 Impacto', '03 Serviços'].map((label, idx) => {
-              const isCurr = (lateralActive ?? 0) === idx;
-              return (
-                <button
-                  key={label}
-                  type="button"
-                  onClick={() => jumpToLateral(idx)}
-                  className={`relative pb-1 text-[11px] font-mono uppercase tracking-[0.14em] transition-colors ${
-                    isCurr ? 'text-blue font-semibold' : 'text-muted hover:text-fg'
-                  }`}
-                >
-                  {label}
-                  <span
-                    className={`absolute inset-x-0 bottom-0 h-[2px] bg-blue transition-transform duration-300 origin-left ${
-                      isCurr ? 'scale-x-100' : 'scale-x-0'
-                    }`}
-                  />
-                </button>
-              );
-            })}
-          </div>
-        )}
-      </div>
-
-      {/* Liberação para puxar automaticamente as restantes páginas até ao Footer */}
+      <SectionRail />
+      <Hero />
+      <Trust />
+      <Services />
       <ProductsChapter />
       <PortfolioChapter />
       <AboutChapter />
