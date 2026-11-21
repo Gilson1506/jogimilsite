@@ -13,12 +13,12 @@ export const Crumbs = ({ items }: { items: [string, string?][] }) => (
 );
 
 export const PageHead = ({ eyebrow, title, lead, crumbs }: { eyebrow: string; title: string; lead?: ReactNode; crumbs?: [string, string?][] }) => (
-  <section data-tone="hero" className="pb-20 pt-40 sm:pt-48">
+  <section data-tone="hero" className="pb-12 pt-28 sm:pb-20 sm:pt-44">
     <div className="container-x">
       {crumbs && <Crumbs items={crumbs} />}
       <p className="eyebrow">{eyebrow}</p>
-      <h1 className="mt-3 max-w-4xl text-4xl font-semibold leading-[1.05] sm:text-6xl">{title}</h1>
-      {lead && <p className="lead mt-5 max-w-2xl">{lead}</p>}
+      <h1 className="mt-3 max-w-4xl text-3xl font-semibold leading-[1.08] sm:text-5xl lg:text-6xl">{title}</h1>
+      {lead && <p className="lead mt-4 sm:mt-5 max-w-2xl text-sm sm:text-lg">{lead}</p>}
     </div>
   </section>
 );

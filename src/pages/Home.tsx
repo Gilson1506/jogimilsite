@@ -162,7 +162,7 @@ function Trust() {
       id="sec-impacto"
       data-tone="b"
       aria-label="Factos sobre a JOGIMIL"
-      className="relative overflow-hidden min-h-[100svh] flex flex-col justify-center py-8 sm:py-10 lg:py-12"
+      className="relative overflow-hidden min-h-[100svh] flex flex-col justify-start md:justify-center pt-20 pb-20 md:py-10 lg:py-12"
     >
       <PageScene3D page="parceiros" positioning="absolute" />
 
@@ -286,7 +286,7 @@ function Services() {
   const displayedServices = SERVICES.filter((s) => s.main).slice(0, 6);
 
   return (
-    <section id="sec-servicos" data-tone="a" className="relative flex min-h-[100svh] flex-col justify-center py-6 sm:py-8 lg:py-10 overflow-hidden">
+    <section id="sec-servicos" data-tone="a" className="relative flex min-h-[100svh] flex-col justify-start md:justify-center pt-20 pb-20 md:py-8 lg:py-10 overflow-hidden">
       <PageScene3D page="servicos" positioning="absolute" />
       <div className="container-x relative z-10">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between border-b border-line/60 pb-5">
@@ -757,7 +757,7 @@ export default function Home() {
           <div
             className={
               isLateral
-                ? 'w-screen h-[100svh] shrink-0 flex flex-col justify-center overflow-y-auto md:overflow-hidden bg-bg/75 border-l border-line/40'
+                ? 'w-screen h-[100svh] shrink-0 flex flex-col justify-start md:justify-center overflow-y-auto md:overflow-hidden bg-bg/75 border-l border-line/40'
                 : 'w-full'
             }
           >
@@ -768,7 +768,7 @@ export default function Home() {
           <div
             className={
               isLateral
-                ? 'w-screen h-[100svh] shrink-0 flex flex-col justify-center overflow-y-auto md:overflow-hidden pt-12 bg-bg/75 border-l border-line/40'
+                ? 'w-screen h-[100svh] shrink-0 flex flex-col justify-start md:justify-center overflow-y-auto md:overflow-hidden md:pt-12 bg-bg/75 border-l border-line/40'
                 : 'w-full'
             }
           >
